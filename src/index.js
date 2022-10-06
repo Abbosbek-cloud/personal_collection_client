@@ -13,6 +13,7 @@ import MuiTheme from "./theme/MuiTheme";
 import Loader from "./components/loader";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import "./styles/global.css";
 
 i18next
   .use(HttpApi)

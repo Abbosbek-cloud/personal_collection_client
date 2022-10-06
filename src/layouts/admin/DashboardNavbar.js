@@ -1,0 +1,69 @@
+import { Search } from "@mui/icons-material";
+import { Box, useMediaQuery } from "@mui/material";
+import Container from "@mui/material/Container";
+import { FlexBox, FlexRowCenter } from "../../components/flex-box";
+import Globe from "../../components/icons/Globe";
+import Toggle from "../../components/icons/Toggle";
+import {
+  CustomButton,
+  DashboardNavbarRoot,
+  StyledInputBase,
+  StyledToolBar,
+  ToggleWrapper,
+} from "../styled/Components";
+import AccountPopover from "./popovers/AccountPopover";
+import NotificationsPopover from "./popovers/NoficationPopover";
+import { useNavigate } from "react-router-dom";
+
+const DashboardNavbar = ({ handleDrawerToggle }) => {
+  const navigate = useNavigate();
+  const downLg = useMediaQuery((theme) => theme.breakpoints.down("lg"));
+
+  return (
+    <DashboardNavbarRoot position="sticky">
+      <Container maxWidth="xl">
+        <StyledToolBar disableGutters>
+          {downLg && (
+            <ToggleWrapper onClick={handleDrawerToggle}>
+              <Toggle />
+            </ToggleWrapper>
+          )}
+
+          <CustomButton
+            onClick={() => navigate("/")}
+            startIcon={
+              <Globe
+                sx={{
+                  color: "grey.900",
+                }}
+              />
+            }
+          >
+            Browse Website
+          </CustomButton>
+
+          <Box flexGrow={1} />
+
+          <FlexBox alignItems="center" gap={2}>
+            <StyledInputBase
+              placeholder="Search anything..."
+              startAdornment={
+                <Search
+                  sx={{
+                    color: "grey.500",
+                    mr: 1,
+                  }}
+                />
+              }
+            />
+
+            <NotificationsPopover />
+            <AccountPopover />
+          </FlexBox>
+        </StyledToolBar>
+      </Container>
+    </DashboardNavbarRoot>
+  );
+};
+
+export default DashboardNavbar;

@@ -20,7 +20,7 @@ function App() {
     document.title = t("app_title");
   }, [currentLanguage, t]);
 
-  if (pathname.includes("/admin/dashboard")) {
+  if (pathname.includes("/admin/")) {
     return <AdminDashboardLayout>{content}</AdminDashboardLayout>;
   }
 
