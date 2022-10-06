@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
@@ -9,10 +10,9 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import MuiTheme from "./theme/MuiTheme";
-import "bootstrap/dist/css/bootstrap.css";
 import Loader from "./components/loader";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.min.css";
 
 i18next
   .use(HttpApi)
