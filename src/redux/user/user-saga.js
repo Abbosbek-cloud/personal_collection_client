@@ -2,6 +2,7 @@ import { call, takeLatest, put } from "redux-saga/effects";
 import { createAction } from "@reduxjs/toolkit";
 import { BASE_URL } from "../../constants/base";
 import axios from "axios";
+import { setUser } from "./user-slice";
 
 async function getUserDetails() {}
 
