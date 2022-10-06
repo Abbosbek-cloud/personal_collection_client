@@ -1,4 +1,4 @@
-import "./index.scss";
+import React, { Suspense } from "react";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
