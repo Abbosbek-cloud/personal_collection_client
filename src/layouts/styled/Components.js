@@ -14,8 +14,6 @@ export const BodyWrapper = styled(Box)(({ theme, compact }) => ({
   },
 }));
 
-export const NavbarContainer = styled()({});
-
 export const InnerWrapper = styled(Box)(({ theme }) => ({
   transition: "all 0.3s",
   [theme.breakpoints.up("lg")]: {
