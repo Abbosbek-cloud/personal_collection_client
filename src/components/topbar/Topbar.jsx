@@ -122,6 +122,7 @@ const languageList = [
     imgUrl: "/assets/images/flags/in.png",
   },
 ];
+
 const currencyList = [
   {
     title: "USD",
