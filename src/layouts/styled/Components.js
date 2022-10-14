@@ -6,6 +6,19 @@ import InputBase from "@mui/material/InputBase";
 import Toolbar from "@mui/material/Toolbar";
 import { FlexRowCenter } from "../../components/flex-box";
 
+export const StyledFooter = styled(AppBar)(({ theme }) => ({
+  position: "relative",
+  bottom: 0,
+  left: 0,
+  padding: "10px 0",
+}));
+
+export const StyledImageWrapper = styled("Box")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "5px",
+}));
+
 export const BodyWrapper = styled(Box)(({ theme, compact }) => ({
   transition: "margin-left 0.3s",
   marginLeft: compact ? "86px" : "280px",
