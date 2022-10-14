@@ -10,12 +10,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material";
 import DrawerComponent from "./Drawer";
+import { pagesArr } from "./navigationList";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,13 +59,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   const handleOpenNavMenu = (isOpen) => (e) => {
     if (e && e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
@@ -90,7 +89,11 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <Avatar
+            src="/assets/favicon-32x32.png"
+            alt="logo"
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+          />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -103,18 +106,26 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <DrawerComponent open={open} toggleDrawer={handleOpenNavMenu} />
+            <DrawerComponent
+              open={open}
+              toggleDrawer={handleOpenNavMenu}
+              pages={pagesArr}
+            />
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <Avatar
+            src="/assets/favicon-32x32.png"
+            alt="logo"
+            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+          />
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pagesArr.map((page) => (
               <Button
-                key={page}
+                key={page.id}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>
