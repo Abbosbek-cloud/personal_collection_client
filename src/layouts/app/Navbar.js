@@ -16,6 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material";
 import DrawerComponent from "./Drawer";
 import { pagesArr } from "./navigationList";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -62,23 +63,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const navigate = useNavigate();
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-  const handleOpenNavMenu = (isOpen) => (e) => {
+  const toggleNavbar = (isOpen) => (e) => {
     if (e && e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
       return;
     }
 
     setOpen(isOpen);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -101,14 +99,14 @@ const Navbar = () => {
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu(true)}
+              onClick={toggleNavbar(true)}
               color="inherit"
             >
               <MenuIcon />
             </IconButton>
             <DrawerComponent
               open={open}
-              toggleDrawer={handleOpenNavMenu}
+              toggleDrawer={toggleNavbar}
               pages={pagesArr}
             />
           </Box>
@@ -122,7 +120,7 @@ const Navbar = () => {
             {pagesArr.map((page) => (
               <Button
                 key={page.id}
-                onClick={handleCloseNavMenu}
+                onClick={() => navigate(page.url)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page.name}
