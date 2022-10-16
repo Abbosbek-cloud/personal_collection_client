@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import DashboardNavbar from "./admin/DashboardNavbar";
 import DashboardSidebar from "./admin/DashboardSidebar";
-import { BodyWrapper, InnerWrapper } from "./styled/Components";
+import { BodyWrapper, InnerWrapper } from "../styled/Components";
 
 const AdminDashboardLayout = ({ children }) => {
   const [sidebarCompact, setSidebarCompact] = useState(false);

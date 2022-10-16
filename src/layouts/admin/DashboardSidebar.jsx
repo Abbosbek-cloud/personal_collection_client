@@ -15,7 +15,7 @@ import {
   NavWrapper,
   SidebarWrapper,
   StyledText,
-} from "../styled/Components";
+} from "../../styled/Components";
 import { navigations } from "./navigation/NavList";
 import SidebarAccordion from "./SideBarAccordion";
 

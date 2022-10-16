@@ -1,7 +1,7 @@
 import { Avatar, Box, IconButton, Menu, MenuItem, styled } from "@mui/material";
 import { H6, Small } from "../../../components/Typography";
 import { useState } from "react";
-import { Divider } from "../../styled/Components";
+import { Divider } from "../../../styled/Components";
 
 const AccountPopover = () => {
   const [anchorEl, setAnchorEl] = useState(null);

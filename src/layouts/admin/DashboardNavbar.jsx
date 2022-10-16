@@ -10,7 +10,7 @@ import {
   StyledInputBase,
   StyledToolBar,
   ToggleWrapper,
-} from "../styled/Components";
+} from "../../styled/Components";
 import AccountPopover from "./popovers/AccountPopover";
 import NotificationsPopover from "./popovers/NoficationPopover";
 import { useNavigate } from "react-router-dom";

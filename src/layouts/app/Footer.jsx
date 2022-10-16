@@ -7,10 +7,10 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { StyledFooter, StyledImageWrapper } from "../styled/Components";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import MuiList from "../../components/MuiList";
 import { pagesArr } from "./navigationList";
+import { StyledFooter, StyledImageWrapper } from "../../styled/Components";
 
 const Footer = () => {
   return (

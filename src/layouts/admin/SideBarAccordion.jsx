@@ -9,7 +9,7 @@ import {
   NavExpandRoot,
   NavItemButton,
   StyledText,
-} from "../styled/Components";
+} from "../../styled/Components";
 
 const SidebarAccordion = (props) => {
   const { item, children, sidebarCompact } = props;

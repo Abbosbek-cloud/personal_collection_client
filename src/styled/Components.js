@@ -1,10 +1,16 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { alpha, Box, Button, ButtonBase, styled } from "@mui/material";
-import { Paragraph, Span } from "../../components/Typography";
+import { Paragraph, Span } from "../components/Typography";
 import AppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
 import Toolbar from "@mui/material/Toolbar";
-import { FlexRowCenter } from "../../components/flex-box";
+import { FlexRowCenter } from "../components/flex-box";
+
+export const StyledImg = styled("img")({
+  maxWidth: "100%",
+  height: "100%",
+  borderRadius: "10px",
+});
 
 export const StyledFooter = styled(AppBar)(({ theme }) => ({
   position: "relative",

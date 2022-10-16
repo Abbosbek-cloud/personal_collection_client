@@ -15,12 +15,15 @@ import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import Tags from "../Tags";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: "100%",
   },
 });
+
+const arrData = new Array(5);
 
 const ItemCard = () => {
   const classesOfCard = useStyles();
@@ -47,45 +50,7 @@ const ItemCard = () => {
         }
       />
       <CardContent>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <Chip
-            sx={{ my: 1 }}
-            label="Tag1"
-            variant="outlined"
-            color="success"
-          />
-          <Chip
-            sx={{ my: 1 }}
-            label="Tag1"
-            variant="outlined"
-            color="success"
-          />
-          <Chip
-            sx={{ my: 1 }}
-            label="Tag1"
-            variant="outlined"
-            color="success"
-          />
-          <Chip
-            sx={{ my: 1 }}
-            label="Tag1"
-            variant="outlined"
-            color="success"
-          />
-          <Chip
-            sx={{ my: 1 }}
-            label="Tag1"
-            variant="outlined"
-            color="success"
-          />
-        </Box>
+        <Tags data={arrData} />
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
