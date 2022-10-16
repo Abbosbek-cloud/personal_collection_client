@@ -22,6 +22,7 @@ const routes = [
     path: "/collections",
     element: <Collections />,
   },
+
   {
     path: "/admin/dashboard",
     element: <AdminDashboard />,

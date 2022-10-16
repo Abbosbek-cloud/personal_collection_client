@@ -14,6 +14,7 @@ import { makeStyles } from "@mui/styles";
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 const useStyles = makeStyles({
   root: {
@@ -86,12 +87,15 @@ const ItemCard = () => {
           />
         </Box>
       </CardContent>
-      <CardActions>
+      <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
+        </IconButton>
+        <IconButton>
+          <ChevronRightIcon />
         </IconButton>
       </CardActions>
     </Card>

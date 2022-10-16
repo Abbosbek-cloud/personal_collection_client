@@ -16,7 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material";
 import DrawerComponent from "./Drawer";
 import { pagesArr } from "./navigationList";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -87,11 +87,13 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Avatar
-            src="/assets/favicon-32x32.png"
-            alt="logo"
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
-          />
+          <Link to="/">
+            <Avatar
+              src="/assets/favicon-32x32.png"
+              alt="logo"
+              sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
