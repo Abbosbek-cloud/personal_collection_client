@@ -7,6 +7,7 @@ import SectionCreator from "../SectionCreator";
 import ItemWrapper from "../wrappers/ItemWrapper";
 import { Button, TextareaAutosize, Typography } from "@mui/material";
 import Comment from "../comments/Comment";
+import { useTranslation } from "react-i18next";
 
 function a11yProps(index) {
   return {
@@ -24,6 +25,7 @@ export default function CustomTab({
   collection = false,
 }) {
   const [value, setValue] = React.useState(0);
+  const { t } = useTranslation();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -42,7 +44,7 @@ export default function CustomTab({
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <SectionCreator title="Collection's items">
+        <SectionCreator title={t("collItems")}>
           <ItemWrapper data={arrData} />
         </SectionCreator>
       </TabPanel>

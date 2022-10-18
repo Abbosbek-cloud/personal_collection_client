@@ -1,3 +1,14 @@
 {
-  "app_title": "Shaxsiy to'plamlar"
+  "app_title": "Shaxsiy to'plamlar",
+  "collections": "To'plamlar",
+  "items": "Buyumlar",
+  "users": "Foydalanuvchilar",
+  "footerAbout": "Bu kollektsiyalaringizni saqlash uchun eng yaxshi joy. Ularning barchasi oddiy. Profilingizni ro'yxatdan o'tkazing va kollektsiyalaringizni saqlang! To'plamlaringizni barcha foydalanuvchilar uchun ochiq qiling!",
+  "contactUs": "Biz bilan bog'lanish",
+  "review": "Fikrlaringizni shu yerda qoldiring!",
+  "send": "Yuborish",
+  "collItems": "To'plam buyumlari",
+  "create": "Yaratish",
+  "watch": "Ko'rish",
+  "search": "Qidirish"
 }

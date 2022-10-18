@@ -13,6 +13,7 @@ import CollectionsIcon from "@mui/icons-material/Collections";
 import PermMediaIcon from "@mui/icons-material/PermMedia";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const StyledH3 = styled("h3")({
   fontWeight: 700,
@@ -34,6 +35,7 @@ const renderIcons = (pageId) => {
 
 const DrawerComponent = ({ open, toggleDrawer, pages }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const list = () => (
     <Box
@@ -53,7 +55,7 @@ const DrawerComponent = ({ open, toggleDrawer, pages }) => {
           <ListItem key={id} disablePadding>
             <ListItemButton onClick={() => navigate(url)}>
               <ListItemIcon>{renderIcons(id)}</ListItemIcon>
-              <ListItemText primary={name} />
+              <ListItemText primary={t(name)} />
             </ListItemButton>
           </ListItem>
         ))}

@@ -2,7 +2,7 @@ const languages = [
   {
     id: 100,
     code: "uz",
-    name: "O'zbekcha",
+    name: "O'zbek",
     country_code: "uz",
   },
   {
@@ -10,12 +10,6 @@ const languages = [
     code: "en",
     name: "English",
     country_code: "gb",
-  },
-  {
-    id: 102,
-    code: "ru",
-    name: "Русский",
-    country_code: "ru",
   },
 ];
 

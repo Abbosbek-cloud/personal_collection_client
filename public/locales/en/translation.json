@@ -1,3 +1,14 @@
 {
-  "app_title": "Personal Collections"
+  "app_title": "Personal Collections",
+  "collections": "Collections",
+  "items": "Items",
+  "users": "Users",
+  "footerAbout": "It is the best place to save your collections. All of them is simple. Register your profile and save your collections! Make your collections public for all users!",
+  "contactUs": "Contact us",
+  "review": "Write your thoughts here!",
+  "send": "Send",
+  "collItems": "Collection's items",
+  "create": "Create",
+  "watch": "Watch",
+  "search": "Search"
 }

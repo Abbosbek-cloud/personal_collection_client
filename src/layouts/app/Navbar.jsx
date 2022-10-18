@@ -17,6 +17,10 @@ import { alpha, styled } from "@mui/material";
 import DrawerComponent from "./Drawer";
 import { pagesArr } from "./navigationList";
 import { useNavigate, Link } from "react-router-dom";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
+import cookies from "js-cookie";
+import languages from "../../i-18/resources";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,6 +68,25 @@ const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
+
+  const currentLanguageCode = cookies.get("i18next") || "uz";
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const isOpen = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const dispatchers = (code) => {
+    i18next.changeLanguage(code);
+  };
 
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -125,9 +148,77 @@ const Navbar = () => {
                 onClick={() => navigate(page.url)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page.name}
+                {t(page.name)}
               </Button>
             ))}
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <Tooltip title="Change Language">
+                <IconButton
+                  onClick={handleClick}
+                  size="small"
+                  aria-controls={open ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                >
+                  <Avatar
+                    sx={{ width: 32, height: 32 }}
+                    src={`/assets/flags/${currentLanguageCode}.png`}
+                  />
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <Menu
+              anchorEl={anchorEl}
+              id="account-menu"
+              open={isOpen}
+              onClose={handleClose}
+              onClick={handleClose}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: "visible",
+                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                  mt: 1.5,
+                  "& .MuiAvatar-root": {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  "&:before": {
+                    content: '""',
+                    display: "block",
+                    position: "absolute",
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: "background.paper",
+                    transform: "translateY(-50%) rotate(45deg)",
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            >
+              {languages?.map((lang) => (
+                <MenuItem key={lang.id} onClick={() => dispatchers(lang.code)}>
+                  <Avatar
+                    src={`/assets/flags/${lang.code}.png`}
+                    alt="Menyu tili"
+                  />{" "}
+                  {lang.name}
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
@@ -136,7 +227,7 @@ const Navbar = () => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
-                placeholder="Search…"
+                placeholder={t("search")}
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>

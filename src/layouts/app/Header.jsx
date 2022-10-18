@@ -1,6 +1,8 @@
 import { Box, Button, Container, styled } from "@mui/material";
 import React from "react";
+import cookies from "js-cookie";
 import { FlexRowCenter } from "../../components/flex-box";
+import { useTranslation } from "react-i18next";
 
 const HeaderWrapper = styled(Box)({
   width: "100%",
@@ -33,7 +35,8 @@ const HeaderWrapper = styled(Box)({
 });
 
 const Header = () => {
-  const currLang = "en";
+  const currLang = cookies.get("i18next") || "en";
+  const { t } = useTranslation();
   return (
     <HeaderWrapper
       sx={{ backgroundImage: `url('/assets/images/banner1_${currLang}.png')` }}
@@ -47,10 +50,10 @@ const Header = () => {
             color="error"
             sx={{ margin: "0 10px 0 0" }}
           >
-            Create
+            {t("create")}
           </Button>
           <Button variant="contained" color="info">
-            Watch
+            {t("watch")}
           </Button>
         </FlexRowCenter>
       </Container>

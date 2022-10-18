@@ -1,17 +1,17 @@
 export const pagesArr = [
   {
     url: "/collections",
-    name: "Collections",
+    name: "collections",
     id: "page1",
   },
   {
     url: "/items",
-    name: "Items",
+    name: "items",
     id: "page2",
   },
   {
     url: "/users",
-    name: "Users",
+    name: "users",
     id: "page3",
   },
 ];
