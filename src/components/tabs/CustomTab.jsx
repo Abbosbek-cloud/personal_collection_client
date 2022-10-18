@@ -17,7 +17,12 @@ function a11yProps(index) {
 
 const arrData = [1, 2, 3, 4, 5, 6];
 
-export default function CustomTab({ data = null }) {
+export default function CustomTab({
+  data = null,
+  comments = null,
+  item = false,
+  collection = false,
+}) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -32,7 +37,7 @@ export default function CustomTab({ data = null }) {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Items" {...a11yProps(0)} />
+          <Tab label={item ? "Similar items" : "Items"} {...a11yProps(0)} />
           <Tab label="Comments" {...a11yProps(1)} />
         </Tabs>
       </Box>
