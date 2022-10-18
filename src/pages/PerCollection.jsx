@@ -1,5 +1,6 @@
-import { Container, Box, Typography, Grid } from "@mui/material";
+import { Container, Box, Typography, Grid, Avatar } from "@mui/material";
 import React from "react";
+import Comment from "../components/comments/Comment";
 import SectionCreator from "../components/SectionCreator";
 import CustomTab from "../components/tabs/CustomTab";
 import Tags from "../components/Tags";
@@ -8,36 +9,6 @@ import { StyledImg } from "../styled/Components";
 
 const arrData = [1, 2, 3, 4, 5, 6, 7];
 
-const tabData = {
-  pages: [
-    {
-      label: "Items",
-      id: 1,
-    },
-    {
-      label: "Comments",
-      id: 2,
-    },
-  ],
-  nodes: [
-    {
-      id: 1,
-      node: (
-        <SectionCreator title="Collection's items">
-          <ItemWrapper data={arrData} />
-        </SectionCreator>
-      ),
-    },
-    {
-      id: 2,
-      node: (
-        <SectionCreator title="Collection's items">
-          <ItemWrapper data={arrData} />
-        </SectionCreator>
-      ),
-    },
-  ],
-};
 const PerCollection = () => {
   return (
     <Container>
@@ -61,10 +32,18 @@ const PerCollection = () => {
             </Typography>
             <Typography variant="h5">Tags</Typography>
             <Tags data={arrData} />
+            <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
+              <Avatar alt="avatar" sx={{ mr: 1 }}>
+                R
+              </Avatar>
+              <Box component="div">
+                <Typography variant="h6">John Doe</Typography>
+              </Box>
+            </Box>
           </Box>
         </Grid>
       </Grid>
-      <CustomTab data={tabData} />
+      <CustomTab />
     </Container>
   );
 };

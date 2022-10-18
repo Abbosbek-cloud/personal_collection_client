@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 function CollectionCard() {
   return (
@@ -42,6 +43,9 @@ function CollectionCard() {
         </IconButton>
         <IconButton aria-label="share">
           <ShareIcon />
+        </IconButton>
+        <IconButton>
+          <ChevronRightIcon />
         </IconButton>
       </CardActions>
     </Card>

@@ -8,7 +8,6 @@ import { FlexRowCenter } from "../components/flex-box";
 
 export const StyledImg = styled("img")({
   maxWidth: "100%",
-  height: "100%",
   borderRadius: "10px",
 });
 
