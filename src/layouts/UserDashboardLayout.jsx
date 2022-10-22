@@ -5,17 +5,21 @@ import Content from "./user/Content";
 import SideBar from "./user/SideBar";
 
 const UserDashboardLayout = ({ children }) => {
+  const items = {
+    img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+    name: "Abbosbek",
+    username: "Abek_dev",
+  };
   return (
     <AppLayout>
       <Container sx={{ my: 4 }}>
         <Grid container spacing={2}>
           <Grid
             item
-            xs={0}
             md={3}
             sx={{ display: { xs: "none", md: "block" } }}
           >
-            <SideBar />
+            <SideBar items={items} />
           </Grid>
           <Grid item xs={12} md={9}>
             <Content>{children}</Content>

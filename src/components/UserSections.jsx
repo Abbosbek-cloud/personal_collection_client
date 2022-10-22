@@ -16,7 +16,7 @@ const UserSections = ({ header, children, menu = null, handleDrawer }) => {
           {header}
         </Typography>
         {menu ? (
-          <IconButton onClick={handleDrawer}>
+          <IconButton onClick={handleDrawer(true)}>
             <Menu />
           </IconButton>
         ) : undefined}
