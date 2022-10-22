@@ -11,6 +11,34 @@ const PerItem = lazy(() => import("../pages/PerItem"));
 
 // protected routes
 const AdminDashboard = lazy(() => import("../pages/admin/Profile"));
+const AdminUsers = lazy(() => import("../pages/admin/Users"));
+const AdminItems = lazy(() => import("../pages/admin/Items"));
+const AdminCollections = lazy(() => import("../pages/admin/Collections"));
+const AdminPerUser = lazy(() => import("../pages/admin/PerUser"));
+const AdminPerItem = lazy(() => import("../pages/admin/PerItem"));
+const AdminPerCollection = lazy(() => import("../pages/admin/PerCollection"));
+
+// moderator routes
+const ModeratorProfile = lazy(() => import("../pages/moderator/Profile"));
+const ModeratorUsers = lazy(() => import("../pages/moderator/Users"));
+const ModeratorItems = lazy(() => import("../pages/moderator/Items"));
+const ModeratorCollections = lazy(() =>
+  import("../pages/moderator/Collections")
+);
+const ModeratorPerUser = lazy(() =>
+  import("../pages/moderator/ModeratorPerUser")
+);
+const ModeratorPerItem = lazy(() =>
+  import("../pages/moderator/ModeratorPerItem")
+);
+const ModeratorPerCollection = lazy(() =>
+  import("../pages/moderator/ModeratorPerCollection")
+);
+
+// user routes
+const UserProfile = lazy(() => import("../pages/user/Profile"));
+const UserItems = lazy(() => import("../pages/user/Items"));
+const UserCollections = lazy(() => import("../pages/user/Collections"));
 
 const routes = [
   // protected routes
@@ -34,9 +62,63 @@ const routes = [
     path: "/item/:id",
     element: <PerItem />,
   },
+  // moderator pages
+  {
+    path: "/moderator",
+    element: <ModeratorProfile />,
+  },
+  {
+    path: "/moderator/users",
+    element: <ModeratorUsers />,
+  },
+  {
+    path: "/moderator/items",
+    element: <ModeratorItems />,
+  },
+  {
+    path: "/moderator/collections",
+    element: <ModeratorCollections />,
+  },
+  {
+    path: "/moderator/users/:id",
+    element: <ModeratorPerUser />,
+  },
+  {
+    path: "/moderator/items/:id",
+    element: <ModeratorPerItem />,
+  },
+  {
+    path: "/moderator/collections/:id",
+    element: <ModeratorPerCollection />,
+  },
+  // admin pages
   {
     path: "/admin/dashboard",
     element: <AdminDashboard />,
+  },
+  {
+    path: "/admin/users",
+    element: <AdminUsers />,
+  },
+  {
+    path: "/admin/items",
+    element: <AdminItems />,
+  },
+  {
+    path: "/admin/collections",
+    element: <AdminCollections />,
+  },
+  {
+    path: "/admin/users/:id",
+    element: <AdminPerUser />,
+  },
+  {
+    path: "/admin/items/:id",
+    element: <AdminPerItem />,
+  },
+  {
+    path: "/admin/collections/:id",
+    element: <AdminPerCollection />,
   },
 ];
 
