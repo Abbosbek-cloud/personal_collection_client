@@ -23,5 +23,6 @@
   "askPhone": "Enter your phone number...",
   "askPassword": "Enter your password...",
   "askEmail": "Enter your email address...",
-  "saveBtn": "Save"
+  "saveBtn": "Save",
+  "noInfo": "No Data"
 }

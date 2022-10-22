@@ -23,5 +23,6 @@
   "askPhone": "Telefon raqamingizni kiriting...",
   "askPassword": "Parolingizni kiriting...",
   "askEmail": "Elektron pochtanginzni kiriting...",
-  "saveBtn": "Saqlash"
+  "saveBtn": "Saqlash",
+  "noInfo": "Ma'lumotlar mavjud emas"
 }

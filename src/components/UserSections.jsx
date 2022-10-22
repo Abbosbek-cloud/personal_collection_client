@@ -12,7 +12,7 @@ const UserSections = ({ header, children, menu = null, handleDrawer }) => {
   return (
     <Box component="div">
       <StyledWrapper sx={{ justifyContent: menu ? "flex-end" : "" }}>
-        <Typography variant="h4" sx={{ fontWeight: 600 }}>
+        <Typography variant="h5" sx={{ fontWeight: 600 }}>
           {header}
         </Typography>
         {menu ? (
