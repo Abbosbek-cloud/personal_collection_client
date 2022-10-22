@@ -22,7 +22,7 @@ const UserSections = ({ header, children, menu = null, handleDrawer }) => {
         ) : undefined}
       </StyledWrapper>
       <Divider />
-      <StyledWrapper>{children}</StyledWrapper>
+      <StyledWrapper sx={{ display: "block" }}>{children}</StyledWrapper>
     </Box>
   );
 };

@@ -12,5 +12,16 @@
   "watch": "Ko'rish",
   "search": "Qidirish",
   "profile": "Profil",
-  "logout": "Chiqish"
+  "logout": "Chiqish",
+  "statusBlock": "Bloklangan",
+  "statusActive": "Faol",
+  "name": "To'liq ism",
+  "phone": "Telefon raqam",
+  "password": "Parol",
+  "email": "Elektron pochta",
+  "askName": "To'liq ismingizni kiriting...",
+  "askPhone": "Telefon raqamingizni kiriting...",
+  "askPassword": "Parolingizni kiriting...",
+  "askEmail": "Elektron pochtanginzni kiriting...",
+  "saveBtn": "Saqlash"
 }
