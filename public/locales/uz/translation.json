@@ -10,5 +10,7 @@
   "collItems": "To'plam buyumlari",
   "create": "Yaratish",
   "watch": "Ko'rish",
-  "search": "Qidirish"
+  "search": "Qidirish",
+  "profile": "Profil",
+  "logout": "Chiqish"
 }

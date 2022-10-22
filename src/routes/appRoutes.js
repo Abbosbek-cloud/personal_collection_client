@@ -39,6 +39,8 @@ const ModeratorPerCollection = lazy(() =>
 const UserProfile = lazy(() => import("../pages/user/Profile"));
 const UserItems = lazy(() => import("../pages/user/Items"));
 const UserCollections = lazy(() => import("../pages/user/Collections"));
+const UserPerItem = lazy(() => import("../pages/user/PerItem"));
+const UserPerCollection = lazy(() => import("../pages/user/PerCollection"));
 
 const routes = [
   // protected routes
@@ -119,6 +121,27 @@ const routes = [
   {
     path: "/admin/collections/:id",
     element: <AdminPerCollection />,
+  },
+  // user routes
+  {
+    path: "/user/profile",
+    element: <UserProfile />,
+  },
+  {
+    path: "/user/items",
+    element: <UserItems />,
+  },
+  {
+    path: "/user/collections",
+    element: <UserCollections />,
+  },
+  {
+    path: "/user/items/:id",
+    element: <UserPerItem />,
+  },
+  {
+    path: "/user/collections/:id",
+    element: <UserPerCollection />,
   },
 ];
 

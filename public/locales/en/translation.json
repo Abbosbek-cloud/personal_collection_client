@@ -10,5 +10,7 @@
   "collItems": "Collection's items",
   "create": "Create",
   "watch": "Watch",
-  "search": "Search"
+  "search": "Search",
+  "profile": "Profile",
+  "logout": "Logout"
 }

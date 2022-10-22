@@ -24,9 +24,10 @@ function App() {
     return <AdminDashboardLayout>{content}</AdminDashboardLayout>;
   }
 
-  if (pathname.includes("/user/dashboard")) {
+  if (pathname.includes("/user/")) {
     return <UserDashboardLayout>{content}</UserDashboardLayout>;
   }
+
   return <AppLayout>{content}</AppLayout>;
 }
 
