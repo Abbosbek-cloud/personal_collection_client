@@ -12,5 +12,16 @@
   "watch": "Watch",
   "search": "Search",
   "profile": "Profile",
-  "logout": "Logout"
+  "logout": "Logout",
+  "statusBlock": "Blocked",
+  "statusActive": "Active",
+  "name": "Fullname",
+  "phone": "Phone number",
+  "password": "Password",
+  "email": "Email",
+  "askName": "Enter your full name...",
+  "askPhone": "Enter your phone number...",
+  "askPassword": "Enter your password...",
+  "askEmail": "Enter your email address...",
+  "saveBtn": "Save"
 }
