@@ -1,108 +1,136 @@
+import * as React from "react";
 import {
-  Stack,
-  Table,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import TableBody from "@mui/material/TableBody";
-import TableHeader from "../table/TableHeader";
-import TablePagination from "../table/TablePagination";
-import Scrollbar from "components/Scrollbar";
-import useMuiTable from "hooks/useMuiTable";
-import React from "react";
-import { styled } from "@mui/styles";
+  DataGridPremium,
+  GridToolbarContainer,
+  GridToolbarExport,
+} from "@mui/x-data-grid-premium";
+import { useTranslation } from "react-i18next";
 
-const tableHeading = [];
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  fontSize: 14,
-  paddingTop: 10,
-  fontWeight: 600,
-  paddingBottom: 10,
-  color: theme.palette.grey[900],
-  borderBottom: `1px solid ${theme.palette.grey[300]}`,
-}));
-
-const StyledTableRow = styled(TableRow)(() => ({
-  ":last-child .MuiTableCell-root": {
-    border: 0,
+const rows = [
+  {
+    jobTitle: "Head of Human Resources",
+    recruitmentDate: new Date(2020, 8, 12),
+    contract: "full time",
+    id: 0,
   },
-  "&.Mui-selected": {
-    backgroundColor: "transparent",
-    ":hover": {
-      backgroundColor: "transparent",
-    },
+  {
+    jobTitle: "Head of Sales",
+    recruitmentDate: new Date(2017, 3, 4),
+    contract: "full time",
+    id: 1,
   },
-}));
+  {
+    jobTitle: "Sales Person",
+    recruitmentDate: new Date(2020, 11, 20),
+    contract: "full time",
+    id: 2,
+  },
+  {
+    jobTitle: "Sales Person",
+    recruitmentDate: new Date(2020, 10, 14),
+    contract: "part time",
+    id: 3,
+  },
+  {
+    jobTitle: "Sales Person",
+    recruitmentDate: new Date(2017, 10, 29),
+    contract: "part time",
+    id: 4,
+  },
+  {
+    jobTitle: "Sales Person",
+    recruitmentDate: new Date(2020, 7, 21),
+    contract: "full time",
+    id: 5,
+  },
+  {
+    jobTitle: "Sales Person",
+    recruitmentDate: new Date(2020, 7, 20),
+    contract: "intern",
+    id: 6,
+  },
+  {
+    jobTitle: "Sales Person",
+    recruitmentDate: new Date(2019, 6, 28),
+    contract: "full time",
+    id: 7,
+  },
+  {
+    jobTitle: "Head of Engineering",
+    recruitmentDate: new Date(2016, 3, 14),
+    contract: "full time",
+    id: 8,
+  },
+  {
+    jobTitle: "Tech lead front",
+    recruitmentDate: new Date(2016, 5, 17),
+    contract: "full time",
+    id: 9,
+  },
+  {
+    jobTitle: "Front-end developer",
+    recruitmentDate: new Date(2019, 11, 7),
+    contract: "full time",
+    id: 10,
+  },
+  {
+    jobTitle: "Tech lead devops",
+    recruitmentDate: new Date(2021, 7, 1),
+    contract: "full time",
+    id: 11,
+  },
+  {
+    jobTitle: "Tech lead back",
+    recruitmentDate: new Date(2017, 0, 12),
+    contract: "full time",
+    id: 12,
+  },
+  {
+    jobTitle: "Back-end developer",
+    recruitmentDate: new Date(2019, 2, 22),
+    contract: "intern",
+    id: 13,
+  },
+  {
+    jobTitle: "Back-end developer",
+    recruitmentDate: new Date(2018, 4, 19),
+    contract: "part time",
+    id: 14,
+  },
+];
 
-const PaymentGrid = ({ data }) => {
-  const { t } = useTranslation();
-  console.log(data);
-  const {
-    order,
-    orderBy,
-    requests,
-    selected,
-    rowsPerPage = 10,
-    filteredList = [],
-    handleChangePage,
-    handleRequestSort,
-  } = useMuiTable({ listData: data, rowsPerPage: 10 });
+function CustomToolbar() {
   return (
-    <>
-      <Scrollbar>
-        <TableContainer>
-          <Table>
-            <TableHeader
-              order={order}
-              hideSelectBtn
-              orderBy={orderBy}
-              heading={tableHeading}
-              rowCount={requests?.length}
-              numSelected={selected?.length}
-              onRequestSort={handleRequestSort}
-            />
-
-            <TableBody>
-              {filteredList?.length ? (
-                filteredList?.map((item) => (
-                  <StyledTableRow role="checkbox" key={item._id}>
-                    <StyledTableCell align="left">{item}</StyledTableCell>
-                  </StyledTableRow>
-                ))
-              ) : (
-                <StyledTableRow>
-                  <StyledTableCell colSpan={5} style={{ textAlign: "center" }}>
-                    <Typography
-                      sx={{
-                        fontSize: "15px",
-                        color: "red",
-                        padding: "20px 0",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {t("noInfo")}
-                    </Typography>
-                  </StyledTableCell>
-                </StyledTableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Scrollbar>
-
-      <Stack alignItems="center" my={4}>
-        {filteredList?.length > 10 ? (
-          <TablePagination
-            onChange={handleChangePage}
-            count={Math.ceil(requests?.length / rowsPerPage)}
-          />
-        ) : undefined}
-      </Stack>
-    </>
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
   );
-};
+}
 
-export default PaymentGrid;
+export default function ItemTable({ data }) {
+  const { t } = useTranslation();
+  const columns = [
+    { field: "image", headerName: t("tableImg"), width: 100 },
+    {
+      field: "name",
+      headerName: t("tableName"),
+      width: 200,
+    },
+    {
+      field: "collectionId",
+      headerName: t("tableCollectionName"),
+      width: 250,
+    },
+  ];
+  return (
+    <div style={{ height: 300, width: "100%" }}>
+      <DataGridPremium
+        rows={data}
+        columns={columns}
+        components={{
+          Toolbar: CustomToolbar,
+        }}
+      />
+    </div>
+  );
+}

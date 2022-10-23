@@ -24,5 +24,9 @@
   "askPassword": "Parolingizni kiriting...",
   "askEmail": "Elektron pochtanginzni kiriting...",
   "saveBtn": "Saqlash",
-  "noInfo": "Ma'lumotlar mavjud emas"
+  "noInfo": "Ma'lumotlar mavjud emas",
+  "tableImg": "Rasm",
+  "tableName": "Nom",
+  "tableCollectionName": "To'plam nomi",
+  "tableActions": "Harakatlar"
 }

@@ -25,7 +25,7 @@ export function stableSort(array, comparator) {
 const useMuiTable = (props) => {
   const { listData = [], defaultSort = "name", defaultOrder = "asc" } = props;
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [orderBy, setOrderBy] = useState(defaultSort);
   const [selected, setSelected] = useState([]);
   const [order, setOrder] = useState(defaultOrder);
@@ -80,6 +80,7 @@ const useMuiTable = (props) => {
     rowsPerPage,
     filteredList,
     handleRowClick,
+    setRowsPerPage,
     handleChangePage,
     handleRequestSort,
     handleSelectAllClick,

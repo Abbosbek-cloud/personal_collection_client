@@ -24,5 +24,9 @@
   "askPassword": "Enter your password...",
   "askEmail": "Enter your email address...",
   "saveBtn": "Save",
-  "noInfo": "No Data"
+  "noInfo": "No Data",
+  "tableImg": "Image",
+  "tableName": "Name",
+  "tableCollectionName": "Collection name",
+  "tableActions": "Actions"
 }

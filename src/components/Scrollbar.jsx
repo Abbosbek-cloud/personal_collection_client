@@ -20,6 +20,10 @@ const StyledScrollBar = styled(SimpleBar)(({ theme }) => ({
   "& .simplebar-mask": {
     zIndex: "inherit",
   },
+
+  "& .simplebar-placeholder": {
+    height: "0 !important",
+  },
 })); // props type
 
 const Scrollbar = ({ children, sx, ...props }) => {
