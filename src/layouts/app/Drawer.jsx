@@ -1,4 +1,5 @@
 import {
+  ClickAwayListener,
   List,
   ListItem,
   ListItemButton,
@@ -64,14 +65,11 @@ const DrawerComponent = ({ open, toggleDrawer, pages }) => {
   );
 
   return (
-    <SwipeableDrawer
-      anchor="left"
-      open={open}
-      onClose={toggleDrawer(false)}
-      onOpen={toggleDrawer(true)}
-    >
-      {list()}
-    </SwipeableDrawer>
+    <ClickAwayListener onClickAway={toggleDrawer}>
+      <SwipeableDrawer anchor="left" open={open} onOpen={toggleDrawer(true)}>
+        {list()}
+      </SwipeableDrawer>
+    </ClickAwayListener>
   );
 };
 
