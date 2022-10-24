@@ -15,7 +15,12 @@ const SideBarDrawer = ({ open, toggleDrawer, items }) => {
   );
   return (
     <ClickAwayListener onClickAway={toggleDrawer}>
-      <Drawer anchor="left" open={open} onOpen={toggleDrawer(true)}>
+      <Drawer
+        anchor="left"
+        open={open}
+        onOpen={toggleDrawer(true)}
+        onClose={toggleDrawer(false)}
+      >
         {list()}
       </Drawer>
     </ClickAwayListener>
