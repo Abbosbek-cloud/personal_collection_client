@@ -10,7 +10,7 @@ const SideBarDrawer = ({ open, toggleDrawer, items }) => {
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
-      <SideBarItems {...items} />
+      <SideBarItems {...items} toggleDrawer={toggleDrawer} />
     </Box>
   );
   return (

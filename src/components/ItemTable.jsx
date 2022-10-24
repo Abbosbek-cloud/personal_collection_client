@@ -1,107 +1,17 @@
 import * as React from "react";
 import {
-  DataGridPremium,
+  DataGrid,
   GridToolbarContainer,
   GridToolbarExport,
-} from "@mui/x-data-grid-premium";
+} from "@mui/x-data-grid";
+import { Edit, Delete } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-
-const rows = [
-  {
-    jobTitle: "Head of Human Resources",
-    recruitmentDate: new Date(2020, 8, 12),
-    contract: "full time",
-    id: 0,
-  },
-  {
-    jobTitle: "Head of Sales",
-    recruitmentDate: new Date(2017, 3, 4),
-    contract: "full time",
-    id: 1,
-  },
-  {
-    jobTitle: "Sales Person",
-    recruitmentDate: new Date(2020, 11, 20),
-    contract: "full time",
-    id: 2,
-  },
-  {
-    jobTitle: "Sales Person",
-    recruitmentDate: new Date(2020, 10, 14),
-    contract: "part time",
-    id: 3,
-  },
-  {
-    jobTitle: "Sales Person",
-    recruitmentDate: new Date(2017, 10, 29),
-    contract: "part time",
-    id: 4,
-  },
-  {
-    jobTitle: "Sales Person",
-    recruitmentDate: new Date(2020, 7, 21),
-    contract: "full time",
-    id: 5,
-  },
-  {
-    jobTitle: "Sales Person",
-    recruitmentDate: new Date(2020, 7, 20),
-    contract: "intern",
-    id: 6,
-  },
-  {
-    jobTitle: "Sales Person",
-    recruitmentDate: new Date(2019, 6, 28),
-    contract: "full time",
-    id: 7,
-  },
-  {
-    jobTitle: "Head of Engineering",
-    recruitmentDate: new Date(2016, 3, 14),
-    contract: "full time",
-    id: 8,
-  },
-  {
-    jobTitle: "Tech lead front",
-    recruitmentDate: new Date(2016, 5, 17),
-    contract: "full time",
-    id: 9,
-  },
-  {
-    jobTitle: "Front-end developer",
-    recruitmentDate: new Date(2019, 11, 7),
-    contract: "full time",
-    id: 10,
-  },
-  {
-    jobTitle: "Tech lead devops",
-    recruitmentDate: new Date(2021, 7, 1),
-    contract: "full time",
-    id: 11,
-  },
-  {
-    jobTitle: "Tech lead back",
-    recruitmentDate: new Date(2017, 0, 12),
-    contract: "full time",
-    id: 12,
-  },
-  {
-    jobTitle: "Back-end developer",
-    recruitmentDate: new Date(2019, 2, 22),
-    contract: "intern",
-    id: 13,
-  },
-  {
-    jobTitle: "Back-end developer",
-    recruitmentDate: new Date(2018, 4, 19),
-    contract: "part time",
-    id: 14,
-  },
-];
+import { Avatar, Box, Button, IconButton } from "@mui/material";
+import { FlexBetween } from "./flex-box";
 
 function CustomToolbar() {
   return (
-    <GridToolbarContainer>
+    <GridToolbarContainer sx={{ mx: 0 }}>
       <GridToolbarExport />
     </GridToolbarContainer>
   );
@@ -110,27 +20,68 @@ function CustomToolbar() {
 export default function ItemTable({ data }) {
   const { t } = useTranslation();
   const columns = [
-    { field: "image", headerName: t("tableImg"), width: 100 },
+    {
+      field: "image",
+      headerName: t("tableImg"),
+      maxWidth: 70,
+      disableColumnSelector: true,
+      disableColumnFilter: true,
+      disableColumnMenu: true,
+      sortble: false,
+      renderCell: (row) => {
+        console.log(row);
+        return (
+          <Box sx={{ width: 45, display: "flex", justifyContent: "center" }}>
+            <Avatar src={row.image} variant="square" />
+          </Box>
+        );
+      },
+    },
     {
       field: "name",
       headerName: t("tableName"),
-      width: 200,
+      minWidth: 150,
     },
     {
       field: "collectionId",
       headerName: t("tableCollectionName"),
-      width: 250,
+      minWidth: 150,
+    },
+    {
+      field: "actions",
+      headerName: t("tableActions"),
+      width: 150,
+      disableColumnSelector: true,
+      disableColumnFilter: true,
+      disableColumnMenu: true,
+      renderCell: () => {
+        return (
+          <React.Fragment>
+            <IconButton variant="contained">
+              <Edit />
+            </IconButton>
+            <IconButton variant="contained">
+              <Delete />
+            </IconButton>
+          </React.Fragment>
+        );
+      },
     },
   ];
   return (
-    <div style={{ height: 300, width: "100%" }}>
-      <DataGridPremium
-        rows={data}
-        columns={columns}
-        components={{
-          Toolbar: CustomToolbar,
-        }}
-      />
+    <div style={{ height: 550, width: "auto", marginInline: "auto" }}>
+      <div style={{ display: "flex", height: "100%" }}>
+        <div style={{ flexGrow: 1 }}>
+          <DataGrid
+            rows={data}
+            columns={columns}
+            getRowId={(row) => row._id}
+            components={{
+              Toolbar: CustomToolbar,
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }

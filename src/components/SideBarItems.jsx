@@ -41,7 +41,7 @@ const StyledNavList = styled(ListItem)({
   },
 });
 
-const SideBarItems = ({ name, img, username }) => {
+const SideBarItems = ({ name, img, username, toggleDrawer }) => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -90,7 +90,12 @@ const SideBarItems = ({ name, img, username }) => {
           disablePadding
           className={pathname === "/user/profile" ? "active" : ""}
         >
-          <ListItemButton onClick={() => navigate("/user/profile")}>
+          <ListItemButton
+            onClick={() => {
+              navigate("/user/profile");
+              toggleDrawer(false);
+            }}
+          >
             <ListItemIcon>
               <UserProfile />
             </ListItemIcon>
@@ -101,7 +106,12 @@ const SideBarItems = ({ name, img, username }) => {
           disablePadding
           className={pathname === "/user/collections" ? "active" : ""}
         >
-          <ListItemButton onClick={() => navigate("/user/collections")}>
+          <ListItemButton
+            onClick={() => {
+              navigate("/user/collections");
+              toggleDrawer(false);
+            }}
+          >
             <ListItemIcon>
               <PermMediaIcon />
             </ListItemIcon>
@@ -112,7 +122,12 @@ const SideBarItems = ({ name, img, username }) => {
           disablePadding
           className={pathname === "/user/items" ? "active" : ""}
         >
-          <ListItemButton onClick={() => navigate("/user/items")}>
+          <ListItemButton
+            onClick={() => {
+              navigate("/user/items");
+              toggleDrawer(false);
+            }}
+          >
             <ListItemIcon>
               <ExtensionIcon />
             </ListItemIcon>
@@ -120,7 +135,12 @@ const SideBarItems = ({ name, img, username }) => {
           </ListItemButton>
         </StyledNavList>
         <StyledNavList disablePadding>
-          <ListItemButton onClick={() => navigate("/user/items")}>
+          <ListItemButton
+            onClick={() => {
+              navigate("/user/items");
+              toggleDrawer(false);
+            }}
+          >
             <ListItemIcon>
               <Logout />
             </ListItemIcon>
