@@ -1,5 +1,5 @@
 import { Box, FormHelperText, styled } from "@mui/material";
-import dynamic from "next/dynamic";
+
 //react quill
 const CustomQuill = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -29,6 +29,8 @@ const ReactQuill = ({ error, box_height, ...props }) => {
     </Container>
   );
 };
+
+// need to be read using react-html-parser library
 
 const modules = {
   toolbar: [
