@@ -6,12 +6,15 @@ import { setUser } from "./user-slice";
 
 async function getUserDetails(token) {
   const res = await axios({
-    url: `${BASE_URL}/api/v1/user/profile`,
+    url: `${BASE_URL}/user/profile`,
     method: "get",
     headers: {
       authorization: `1234567${token}`,
     },
   });
+
+  console.log(res.data);
+  console.log(token);
 
   return res.data;
 }
@@ -21,7 +24,8 @@ export const getUserData = createAction("user/getAsync");
 function* getUserSaga({ payload }) {
   try {
     const user = yield call(getUserDetails, payload.token);
-    yield put(setUser(user));
+    console.log(user);
+    yield put(setUser({ ...user, token: payload?.token }));
   } catch (error) {
     console.log(error);
   }

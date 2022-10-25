@@ -1,9 +1,9 @@
-import { Box, Checkbox, FormControlLabel } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
 import CustomTextField from "../../components/CustomTextField";
 import { FlexBox } from "../../components/flex-box";
 import { H3, H6, Small } from "../../components/Typography";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
@@ -34,7 +34,6 @@ const Signup = () => {
       .oneOf([yup.ref("password"), null], t("notMatchPassword"))
       .required(t("askPassword")),
   });
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
@@ -48,28 +47,17 @@ const Signup = () => {
     setrePasswordVisibility((visible) => !visible);
   }, []);
 
-  const session = useSelector((state) => state?.user?.user);
-
-  useEffect(() => {
-    if (session?.user && session?.user?.role === "MODERATOR") {
-      dispatch(getUserData({ token: session.token }));
-      navigate("/moderator");
-    } else if (session?.user && session?.user?.role === "ADMIN") {
-      dispatch(getUserData({ token: session?.token }));
-      navigate("/admin/dashboard");
-    } else if (session?.user && session?.user?.role === "USER") {
-      dispatch(getUserData({ token: session?.token }));
-      navigate("/user/profile");
-    }
-  }, [session]);
-
   const handleFormSubmit = async (values) => {
     values.email = values.email.toLowerCase();
 
     try {
       setLoading(true);
       await axios.post(`${BASE_URL}/user/auth/signup`, values).then((res) => {
-        dispatch(getUserData({ token: res.data.token }));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.newUser));
+
+        navigate("/user/profile");
+        setLoading(false);
       });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -188,7 +176,12 @@ const Signup = () => {
         {loading ? (
           <LoadingButton
             loading={loading}
-            sx={{ padding: "20px", width: "100%", backgroundColor: "#ddd" }}
+            sx={{
+              padding: "20px",
+              width: "100%",
+              backgroundColor: "#ddd",
+              mt: 2,
+            }}
           ></LoadingButton>
         ) : (
           <FormButton
@@ -204,6 +197,12 @@ const Signup = () => {
             {t("register")}
           </FormButton>
         )}
+        <Typography sx={{ mt: 1, textAlign: "center" }}>
+          {t("toLogin")}{" "}
+          <Link to="/signin" sx={{ color: "red", fontWeight: 600 }}>
+            Login
+          </Link>{" "}
+        </Typography>
       </form>
     </AuthWrapper>
   );

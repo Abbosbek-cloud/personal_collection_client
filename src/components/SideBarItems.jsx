@@ -45,13 +45,15 @@ const SideBarItems = ({ name, img, username }) => {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <React.Fragment>
       <StyledImgBox>
         {name ? (
           <img
-            src={img}
-            alt={name}
+            src={user.avatar}
+            alt={user.name}
             style={{ width: "100%", height: "100%", borderRadius: "50%" }}
           />
         ) : (
@@ -61,12 +63,12 @@ const SideBarItems = ({ name, img, username }) => {
           />
         )}
       </StyledImgBox>
-      {name && username ? (
+      {user.name && user.email ? (
         <StyledInfo>
           <Typography
             sx={{ fontSize: "20px", fontWeight: 600, textAlign: "center" }}
           >
-            {name}
+            {user.name}
           </Typography>
           <Typography
             sx={{
@@ -76,7 +78,7 @@ const SideBarItems = ({ name, img, username }) => {
               textAlign: "center",
             }}
           >
-            {username}
+            {user.email}
           </Typography>
         </StyledInfo>
       ) : (

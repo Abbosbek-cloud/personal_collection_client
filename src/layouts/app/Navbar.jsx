@@ -68,6 +68,7 @@ const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const { t } = useTranslation();
 
@@ -88,7 +89,14 @@ const Navbar = () => {
     i18next.changeLanguage(code);
   };
 
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = [
+    { path: user ? "/user/profile" : "/signup", page: t("profile") },
+    {
+      path: user ? "/user/collections" : "/collections",
+      page: t("Collections"),
+    },
+    { path: user ? "/user/items" : "/items", page: t("items") },
+  ];
 
   const toggleNavbar = (isOpen) => (e) => {
     if (e && e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
@@ -102,8 +110,15 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (path) => {
     setAnchorElUser(null);
+    navigate(path);
+  };
+
+  const handleCloseProfile = () => {
+    localStorage.clear();
+    setAnchorElUser(null);
+    navigate("/");
   };
 
   return (
@@ -112,8 +127,8 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <Link to="/">
             <Avatar
-              src="/assets/favicon-32x32.png"
-              alt="logo"
+              src={user?.avatar}
+              alt={user?.name}
               sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
             />
           </Link>
@@ -231,9 +246,12 @@ const Navbar = () => {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Tooltip title="Open settings">
+            <Tooltip title={t("settingsOpen")}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt={user ? user?.name : "A"}
+                  src={user ? user?.avatar : "/static/images/avatar/2.jpg"}
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -253,10 +271,16 @@ const Navbar = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem
+                  key={setting.page}
+                  onClick={() => handleCloseUserMenu(setting.path)}
+                >
+                  <Typography textAlign="center">{setting.page}</Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={handleCloseProfile}>
+                <Typography textAlign="center">{t("logout")}</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

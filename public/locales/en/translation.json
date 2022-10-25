@@ -35,5 +35,7 @@
   "logPage": "Login form",
   "logText": "Enter your email and password to log in!",
   "register": "Registration",
-  "correctAnswers": "Enter valid values, please!"
+  "correctAnswers": "Enter valid values, please!",
+  "toLogin": "Do you have account? Then ",
+  "settingsOpen": "Open settings"
 }

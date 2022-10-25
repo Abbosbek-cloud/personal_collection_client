@@ -35,5 +35,7 @@
   "logPage": "Kirish sahifasi",
   "logText": "Kirish uchun Email va parolingizni kiriting",
   "register": "Ro'yxatdan o'tish",
-  "correctAnswers": "Iltimos ma'lumotarni to'g'ri kiriting!"
+  "correctAnswers": "Iltimos ma'lumotarni to'g'ri kiriting!",
+  "toLogin": "Akkountingiz bormi? Unda ",
+  "settingsOpen": "Sozlamalarni ochish"
 }
