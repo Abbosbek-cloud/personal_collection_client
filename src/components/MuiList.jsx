@@ -9,7 +9,7 @@ const MuiList = (props) => {
   return (
     <List sx={{ width: "100%" }}>
       {props?.list?.map((listItem) => (
-        <ListItem>
+        <ListItem key={listItem.url}>
           <Link to={listItem.url}>{t(listItem.name)}</Link>
         </ListItem>
       ))}

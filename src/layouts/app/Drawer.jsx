@@ -66,7 +66,12 @@ const DrawerComponent = ({ open, toggleDrawer, pages }) => {
 
   return (
     <ClickAwayListener onClickAway={toggleDrawer}>
-      <SwipeableDrawer anchor="left" open={open} onOpen={toggleDrawer(true)}>
+      <SwipeableDrawer
+        anchor="left"
+        open={open}
+        onOpen={toggleDrawer(true)}
+        onClose={toggleDrawer(false)}
+      >
         {list()}
       </SwipeableDrawer>
     </ClickAwayListener>

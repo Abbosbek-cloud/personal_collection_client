@@ -1,9 +1,8 @@
 import { Box, FormHelperText, styled } from "@mui/material";
 
 //react quill
-const CustomQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-});
+import Quill from "react-quill";
+
 const Container = styled(Box)(({ theme, box_height }) => ({
   "& .ql-toolbar": {
     borderColor: "transparent",
@@ -24,7 +23,7 @@ const Container = styled(Box)(({ theme, box_height }) => ({
 const ReactQuill = ({ error, box_height, ...props }) => {
   return (
     <Container box_height={box_height}>
-      <CustomQuill theme="snow" modules={modules} {...props} />
+      <Quill theme="snow" modules={modules} {...props} />
       {error && <FormHelperText error>{error}</FormHelperText>}
     </Container>
   );

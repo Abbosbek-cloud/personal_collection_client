@@ -7,6 +7,7 @@ import AdminDashboardLayout from "./layouts/AdminDashboardLayout";
 import AppLayout from "./layouts/AppLayout";
 import UserDashboardLayout from "./layouts/UserDashboardLayout";
 import routes from "./routes/appRoutes";
+import "react-quill/dist/quill.snow.css";
 
 function App() {
   const content = useRoutes(routes);

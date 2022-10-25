@@ -1,5 +1,8 @@
 import { lazy } from "react";
 
+const Signin = lazy(() => import("../pages/auth/Signin"));
+const Signup = lazy(() => import("../pages/auth/Signup"));
+
 // main page routes
 const Main = lazy(() => import("../pages/Main"));
 const Items = lazy(() => import("../pages/Items"));
@@ -43,7 +46,14 @@ const UserPerItem = lazy(() => import("../pages/user/PerItem"));
 const UserPerCollection = lazy(() => import("../pages/user/PerCollection"));
 
 const routes = [
-  // protected routes
+  {
+    path: "/signin",
+    element: <Signin />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
   {
     path: "/",
     element: <Main />,

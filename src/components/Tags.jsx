@@ -14,6 +14,7 @@ const Tags = ({ data = null }) => {
         ? data?.map((tag) => (
             <Chip
               sx={{ my: 1, mr: 1 }}
+              key={tag._id}
               label="Tag1"
               variant="outlined"
               color="success"

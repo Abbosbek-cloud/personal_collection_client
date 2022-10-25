@@ -1,10 +1,57 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-import { alpha, Box, Button, ButtonBase, styled } from "@mui/material";
+import { alpha, Box, Button, ButtonBase, styled, Card } from "@mui/material";
 import { Paragraph, Span } from "../components/Typography";
 import AppBar from "@mui/material/AppBar";
 import InputBase from "@mui/material/InputBase";
 import Toolbar from "@mui/material/Toolbar";
 import { FlexRowCenter } from "../components/flex-box";
+
+const fbStyle = {
+  background: "#3B5998",
+  color: "white",
+};
+
+const googleStyle = {
+  background: "#4285F4",
+  color: "white",
+};
+
+export const FormButton = styled(Button)({
+  minWidth: 0,
+  minHeight: 0,
+});
+
+export const AuthWrapper = styled(
+  ({ children, passwordVisibility, ...rest }) => (
+    <Card {...rest}>{children}</Card>
+  )
+)(({ theme, passwordVisibility }) => ({
+  width: 500,
+  padding: "2rem 3rem",
+
+  "@media screen and (max-width: 600px)": {
+    padding: "0.8rem 1rem",
+  },
+
+  [theme.breakpoints.down("sm")]: {
+    width: "100%",
+  },
+  ".passwordEye": {
+    color: passwordVisibility
+      ? theme.palette.grey[600]
+      : theme.palette.grey[400],
+  },
+  ".facebookButton": {
+    marginBottom: 10,
+    ...fbStyle,
+    "&:hover": fbStyle,
+  },
+  ".googleButton": { ...googleStyle, "&:hover": googleStyle },
+  ".agreement": {
+    marginTop: 12,
+    marginBottom: 24,
+  },
+}));
 
 export const StyledImg = styled("img")({
   maxWidth: "100%",

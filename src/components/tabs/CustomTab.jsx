@@ -51,7 +51,9 @@ export default function CustomTab({
       <TabPanel value={value} index={1}>
         <Typography variant="h5">Comments</Typography>
         <Box component="div" sx={{ maxHeight: "100vh", overflowY: "auto" }}>
-          {arrData ? arrData.map((comment) => <Comment />) : undefined}
+          {arrData
+            ? arrData.map((comment) => <Comment key={comment._id} />)
+            : undefined}
         </Box>
         <form style={{ margin: "10px 0" }}>
           <TextareaAutosize
