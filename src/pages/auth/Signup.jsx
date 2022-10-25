@@ -14,10 +14,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthWrapper, FormButton } from "../../styled/Components";
 import { BASE_URL } from "../../constants/base";
 import { getUserData } from "../../redux/user/user-saga";
+import { useTranslation } from "react-i18next";
+
+const initialValues = {
+  name: "",
+  email: "",
+  password: "",
+  re_password: "",
+};
 
 const Signup = () => {
+  const { t } = useTranslation();
+  const formSchema = yup.object().shape({
+    name: yup.string().required(t("askName")),
+    email: yup.string().required(t("askEmail")),
+    password: yup.string().required(t("askPassword")),
+    re_password: yup
+      .string()
+      .oneOf([yup.ref("password"), null], t("notMatchPassword"))
+      .required(t("askPassword")),
+  });
   const dispatch = useDispatch();
-  const router = useNavigate();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [rePasswordVisibility, setrePasswordVisibility] = useState(false);
@@ -30,17 +48,20 @@ const Signup = () => {
     setrePasswordVisibility((visible) => !visible);
   }, []);
 
-  const session = useSelector((state) => state.user.user);
-
-  const { redirect } = router.query;
+  const session = useSelector((state) => state?.user?.user);
 
   useEffect(() => {
-    if (session?.user && session?.user?.isAdmin) {
-      router.push(redirect || "/admin/vendor/dashboard");
-    } else if (session?.user && !session?.user?.isAdmin) {
-      router.push(redirect || "/profile");
+    if (session?.user && session?.user?.role === "MODERATOR") {
+      dispatch(getUserData({ token: session.token }));
+      navigate("/moderator");
+    } else if (session?.user && session?.user?.role === "ADMIN") {
+      dispatch(getUserData({ token: session?.token }));
+      navigate("/admin/dashboard");
+    } else if (session?.user && session?.user?.role === "USER") {
+      dispatch(getUserData({ token: session?.token }));
+      navigate("/user/profile");
     }
-  }, [router, session, redirect]);
+  }, [session]);
 
   const handleFormSubmit = async (values) => {
     values.email = values.email.toLowerCase();
@@ -64,10 +85,14 @@ const Signup = () => {
     });
 
   return (
-    <AuthWrapper elevation={3} passwordVisibility={passwordVisibility}>
+    <AuthWrapper
+      elevation={3}
+      passwordVisibility={passwordVisibility}
+      sx={{ margin: "30px auto" }}
+    >
       <form onSubmit={handleSubmit}>
         <H3 textAlign="center" mb={1}>
-          Ro'yhatdan o'tish
+          {t("register")}
         </H3>
         <Small
           mb={4.5}
@@ -77,7 +102,7 @@ const Signup = () => {
           color="grey.800"
           textAlign="center"
         >
-          Iltimos barcha malumotlarni to'gri kiriting.
+          {t("correctAnswers")}
         </Small>
 
         <CustomTextField
@@ -85,12 +110,12 @@ const Signup = () => {
           fullWidth
           name="name"
           size="small"
-          label="Ism va Familiya"
+          label="Name"
           variant="outlined"
           onBlur={handleBlur}
           value={values.name}
           onChange={handleChange}
-          placeholder="Ism"
+          placeholder={t("askName")}
           error={!!touched.name && !!errors.name}
           helperText={touched.name && errors.name}
         />
@@ -105,8 +130,8 @@ const Signup = () => {
           onBlur={handleBlur}
           value={values.email}
           onChange={handleChange}
-          label="Login"
-          placeholder="Login"
+          label={t("email")}
+          placeholder={t("askEmail")}
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
         />
@@ -116,10 +141,10 @@ const Signup = () => {
           fullWidth
           size="small"
           name="password"
-          label="Parol"
+          label={t("password")}
           variant="outlined"
           autoComplete="on"
-          placeholder="*********"
+          placeholder={t("askPassword")}
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.password}
@@ -142,8 +167,8 @@ const Signup = () => {
           autoComplete="on"
           name="re_password"
           variant="outlined"
-          label="Parolni qayta kiriting"
-          placeholder="*********"
+          label={t("rePassword")}
+          placeholder={t("rePasswordCap")}
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.re_password}
@@ -160,42 +185,6 @@ const Signup = () => {
           }}
         />
 
-        <FormControlLabel
-          name="agreement"
-          className="agreement"
-          onChange={handleChange}
-          control={
-            <Checkbox
-              size="small"
-              color="secondary"
-              checked={values.agreement || false}
-            />
-          }
-          label={
-            <FlexBox
-              flexWrap="wrap"
-              alignItems="center"
-              justifyContent="flex-start"
-            >
-              <Box
-                component="a"
-                href="/privacy-policy"
-                rel="noreferrer noopener"
-              >
-                <H6
-                  ml={1}
-                  borderBottom="1px solid"
-                  sx={{
-                    color: errors.agreement && touched.agreement ? "red" : "",
-                  }}
-                  borderColor="grey.900"
-                >
-                  Qonun va qoidalar
-                </H6>
-              </Box>
-            </FlexBox>
-          }
-        />
         {loading ? (
           <LoadingButton
             loading={loading}
@@ -209,9 +198,10 @@ const Signup = () => {
             variant="contained"
             sx={{
               height: 44,
+              mt: 2,
             }}
           >
-            Ro'yhatdan o'tish
+            {t("register")}
           </FormButton>
         )}
       </form>
@@ -219,21 +209,4 @@ const Signup = () => {
   );
 };
 
-const initialValues = {
-  name: "",
-  email: "",
-  password: "",
-  re_password: "",
-  agreement: false,
-};
-
-const formSchema = yup.object().shape({
-  name: yup.string().required("Ism va familiya kiritilishi shart!"),
-  email: yup.string().required("Login kiriting!"),
-  password: yup.string().required("Parol kiriting!"),
-  re_password: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Parol yuqoridagi bilan mos kelmadi!")
-    .required("Iltimos parolni qayta kiriting!"),
-});
 export default Signup;

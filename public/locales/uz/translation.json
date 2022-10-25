@@ -23,10 +23,17 @@
   "askPhone": "Telefon raqamingizni kiriting...",
   "askPassword": "Parolingizni kiriting...",
   "askEmail": "Elektron pochtanginzni kiriting...",
+  "notMatchPassword": "Parol mos kelmadi",
+  "rePassword": "Re password",
+  "rePasswordCap": "Enter password again",
   "saveBtn": "Saqlash",
   "noInfo": "Ma'lumotlar mavjud emas",
   "tableImg": "Rasm",
   "tableName": "Nom",
   "tableCollectionName": "To'plam nomi",
-  "tableActions": "Harakatlar"
+  "tableActions": "Harakatlar",
+  "logPage": "Kirish sahifasi",
+  "logText": "Kirish uchun Email va parolingizni kiriting",
+  "register": "Ro'yxatdan o'tish",
+  "correctAnswers": "Iltimos ma'lumotarni to'g'ri kiriting!"
 }

@@ -23,10 +23,17 @@
   "askPhone": "Enter your phone number...",
   "askPassword": "Enter your password...",
   "askEmail": "Enter your email address...",
+  "notMatchPassword": "Password is not matched!",
+  "rePassword": "Re password",
+  "rePasswordCap": "Enter password again",
   "saveBtn": "Save",
   "noInfo": "No Data",
   "tableImg": "Image",
   "tableName": "Name",
   "tableCollectionName": "Collection name",
-  "tableActions": "Actions"
+  "tableActions": "Actions",
+  "logPage": "Login form",
+  "logText": "Enter your email and password to log in!",
+  "register": "Registration",
+  "correctAnswers": "Enter valid values, please!"
 }

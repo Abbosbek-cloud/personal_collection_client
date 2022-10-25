@@ -13,13 +13,24 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { AuthWrapper, FormButton } from "../../styled/Components";
 import { BASE_URL } from "../../constants/base";
+import { useTranslation } from "react-i18next";
+
+const initialValues = {
+  email: "",
+  password: "",
+};
 
 const Login = () => {
+  const { t } = useTranslation();
+  const formSchema = yup.object().shape({
+    password: yup.string().required(t("pswdReq")),
+    email: yup.string().required(""),
+  });
   const dispatch = useDispatch();
   const session = useSelector((state) => state?.user?.user);
   const [loading, setLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
-  const router = useNavigate();
+  const navigate = useNavigate();
   const togglePasswordVisibility = useCallback(() => {
     setPasswordVisibility((visible) => !visible);
   }, []);
@@ -49,12 +60,15 @@ const Login = () => {
     });
 
   useEffect(() => {
-    if (session?.user && session?.user?.isAdmin) {
+    if (session?.user && session?.user?.role === "MODERATOR") {
       dispatch(getUserData({ token: session.token }));
-      router.push("/admin/vendor/dashboard");
-    } else if (session?.user && !session?.user?.isAdmin) {
+      navigate("/moderator");
+    } else if (session?.user && session?.user?.role === "ADMIN") {
       dispatch(getUserData({ token: session?.token }));
-      router.push("/profile");
+      navigate("/admin/dashboard");
+    } else if (session?.user && session?.user?.role === "USER") {
+      dispatch(getUserData({ token: session?.token }));
+      navigate("/user/profile");
     }
   }, [session]);
 
@@ -66,10 +80,7 @@ const Login = () => {
     >
       <form onSubmit={handleSubmit}>
         <H3 textAlign="center" mb={1}>
-          <span style={{ textTransform: "capitalize" }}>
-            {process.env.NEXT_PUBLIC_APP_NAME}
-          </span>{" "}
-          ga xush kelibsiz.
+          {t("logPage")}
         </H3>
         <Small
           display="block"
@@ -78,7 +89,7 @@ const Login = () => {
           color="grey.800"
           textAlign="center"
         >
-          Kirish uchun Login yoki Telefon raqamingiz va parolingizni kiriting
+          {t("logText")}
         </Small>
         <CustomTextField
           mb={1.5}
@@ -90,8 +101,8 @@ const Login = () => {
           onBlur={handleBlur}
           value={values.email}
           onChange={handleChange}
-          label="Email"
-          placeholder="Email"
+          label={t("email")}
+          placeholder={t("askEmail")}
           error={!!touched.email && !!errors.email}
           helperText={touched.email && errors.email}
         />
@@ -101,13 +112,13 @@ const Login = () => {
           fullWidth
           size="small"
           name="password"
-          label="Parol"
+          label={t("password")}
           autoComplete="on"
           variant="outlined"
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.password}
-          placeholder="*********"
+          placeholder={t("askPassword")}
           type={passwordVisibility ? "text" : "password"}
           error={!!touched.password && !!errors.password}
           helperText={touched.password && errors.password}
@@ -137,11 +148,11 @@ const Login = () => {
               height: 44,
             }}
           >
-            Kirish
+            {t("send")}
           </FormButton>
         )}
       </form>
-      <Box component="a" href="/auth/signup" rel="noreferrer noopener">
+      <Box component="a" href="/signup" rel="noreferrer noopener">
         <H6
           ml={1}
           borderBottom="1px solid"
@@ -157,12 +168,4 @@ const Login = () => {
   );
 };
 
-const initialValues = {
-  email: "",
-  password: "",
-};
-const formSchema = yup.object().shape({
-  password: yup.string().required("Parol kiritilishi shart!"),
-  email: yup.string().required("Login kiritilishi shart!"),
-});
 export default Login;

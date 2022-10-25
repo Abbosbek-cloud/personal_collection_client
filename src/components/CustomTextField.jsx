@@ -33,22 +33,15 @@ const spacePropList = [
   "paddingY",
 ];
 
-const boxProps = {};
+const CustomTextField = ({ label, InputProps, ...props }) => {
+  const boxProps = {};
+  const textFieldProps = {};
 
-const textFieldProps = {};
-
-const iterate = (props) => {
   for (const key in props) {
     if (spacePropList.includes(key)) {
       boxProps[key] = props[key];
     } else textFieldProps[key] = props[key];
   }
-};
-
-const CustomTextField = ({ label, InputProps, ...props }) => {
-  React.useEffect(() => {
-    iterate(props);
-  }, []);
   return (
     <Box {...boxProps}>
       {label ? (
