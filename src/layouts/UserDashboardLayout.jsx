@@ -10,6 +10,8 @@ const UserDashboardLayout = ({ children }) => {
     name: "Abbosbek",
     username: "Abek_dev",
   };
+  const user = JSON.parse(localStorage.getItem("user"));
+  
   return (
     <AppLayout>
       <Container sx={{ my: 4 }}>

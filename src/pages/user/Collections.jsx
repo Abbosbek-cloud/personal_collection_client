@@ -187,7 +187,7 @@ const Collections = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const handler = () => {
-    navigate("/user/items/create");
+    navigate("/user/collections/create");
   };
   return (
     <UserSections

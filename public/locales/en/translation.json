@@ -37,5 +37,6 @@
   "register": "Registration",
   "correctAnswers": "Enter valid values, please!",
   "toLogin": "Do you have account? Then ",
-  "settingsOpen": "Open settings"
+  "settingsOpen": "Open settings",
+  "editMessage": "Profile edited successfully!"
 }

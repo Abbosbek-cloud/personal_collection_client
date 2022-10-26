@@ -34,6 +34,10 @@ const PerItem = () => {
     onSubmit: onSendData,
   });
 
+  React.useEffect(()=> {
+    
+  }, [])
+
   return (
     <UserSections header={t("profile")}>
       <Grid container spacing={1}>
