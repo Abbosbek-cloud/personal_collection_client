@@ -43,7 +43,12 @@ const CreateCollection = () => {
     uzbdesc: "",
     engdesc: "",
   });
-  const [topics, setTopics] = React.useState([]);
+  const [topics, setTopics] = React.useState([
+    {
+      name: { uz: "Boshlangich ma'lumot", en: "Default info" },
+      _id: "1w1oejiu3",
+    },
+  ]);
 
   const handler = () => {
     navigate(-1);
@@ -68,6 +73,8 @@ const CreateCollection = () => {
   React.useState(() => {
     getAllTopics(setTopics);
   }, []);
+
+  console.log(topics);
 
   return (
     <UserSections
@@ -109,7 +116,7 @@ const CreateCollection = () => {
                 id="combo-box-demo"
                 options={topics}
                 sx={{ width: "100%" }}
-                onChange={(e, val) => setFieldValue("topic", val)}
+                onChange={(e, val) => setFieldValue("topic", val._id)}
                 getOptionLabel={(option) =>
                   option?.name[currentLanguageCode]?.toString()
                 }

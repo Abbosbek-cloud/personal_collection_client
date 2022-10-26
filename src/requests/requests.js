@@ -53,8 +53,6 @@ export async function getUserCollections(setData) {
   }
 }
 
-export async function getUserItems() {}
-
 // delete actions
 
 export async function deleteCollection(collectionId) {
@@ -82,12 +80,25 @@ export async function getAllTopics(setData) {
         authorization: `1234567${token}`,
       },
     });
-    setData(result.data.getAllTopics);
-  } catch (error) {}
+    console.log(result.data);
+    console.log(result);
+    setData(result.data);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function getUserItems(setData) {
   try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/user/items`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    setData(res.data.userData);
   } catch (error) {
     console.log(error);
   }
