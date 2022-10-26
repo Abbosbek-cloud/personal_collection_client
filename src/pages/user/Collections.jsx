@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import CollectionTable from "../../components/CollectionTable";
 import UserSections from "../../components/UserSections";
+import { getUserCollections } from "../../requests/requests";
 
 const data = [
   {
@@ -184,11 +185,16 @@ const data = [
 ];
 
 const Collections = () => {
+  const [data, setData] = React.useState([]);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const handler = () => {
     navigate("/user/collections/create");
   };
+
+  React.useEffect(() => {
+    getUserCollections(setData);
+  }, []);
   return (
     <UserSections
       header={t("collections")}

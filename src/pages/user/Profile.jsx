@@ -35,7 +35,6 @@ const imageUploadStyles = {
 const Profile = ({ handleDrawer }) => {
   const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
-  const [pr, setPr] = React.useState(null);
 
   const initialValues = {
     avatar: "",
@@ -73,72 +72,6 @@ const Profile = ({ handleDrawer }) => {
                   alignItems: "center",
                 }}
               >
-                {/* <Box
-                  component="div"
-                  sx={{
-                    width: "200px",
-                    height: "200px",
-                    borderRadius: "50%",
-                    position: "relative",
-                  }}
-                >
-                  <label htmlFor="avatar-photo">
-                    <img
-                      src={values.avatar}
-                      alt={values.name}
-                      style={{
-                        width: "200px",
-                        height: "200px",
-                        borderRadius: "50%",
-                        position: "absolute",
-                      }}
-                    />
-                  </label>
-                  <IconButton
-                    sx={{
-                      position: "absolute",
-                      bottom: "10px",
-                      right: "10px",
-                      background: "light",
-                    }}
-                  >
-                    <label htmlFor="avatar-photo">
-                      <CameraAltIcon fontSize="50px" />
-                    </label>
-                  </IconButton>
-                  <input
-                    id="avatar-photo"
-                    style={{ display: "none" }}
-                    accept="image/*"
-                    type="file"
-                    name="avatar"
-                    onChange={(e) => {
-                      const metadata = {
-                        contentType: "image/jpeg",
-                      };
-                      const file = e.target.files[0];
-                      const storageRef = ref(storage, "images/" + file.name);
-                      const uploadTask = uploadBytesResumable(
-                        storageRef,
-                        file,
-                        metadata
-                      );
-                      uploadTask.on(
-                        "state_changed",
-                        (error) => {
-                          console.log(error);
-                        },
-                        () => {
-                          getDownloadURL(uploadTask.snapshot.ref).then(
-                            (downloadURL) => {
-                              setFieldValue("avatar", downloadURL);
-                            }
-                          );
-                        }
-                      );
-                    }}
-                  />
-                </Box> */}
                 <ImageUploader
                   boxSx={imageUploadStyles.boxSx}
                   imgSx={imageUploadStyles.imgSx}

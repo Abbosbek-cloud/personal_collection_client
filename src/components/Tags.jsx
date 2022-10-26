@@ -1,7 +1,7 @@
 import { Box, Chip } from "@mui/material";
 import React from "react";
 
-const Tags = ({ data = null }) => {
+const Tags = ({ data = null, isOwner, deleteTag }) => {
   return (
     <Box
       sx={{
@@ -10,12 +10,23 @@ const Tags = ({ data = null }) => {
         flexWrap: "wrap",
       }}
     >
-      {data
+      {data && isOwner
         ? data?.map((tag) => (
             <Chip
               sx={{ my: 1, mr: 1 }}
               key={tag._id}
-              label="Tag1"
+              label={tag.name}
+              variant="outlined"
+              color="success"
+              onDelete={() => deleteTag(tag._id)}
+            />
+          ))
+        : data
+        ? data?.map((tag) => (
+            <Chip
+              sx={{ my: 1, mr: 1 }}
+              key={tag._id}
+              label={tag.name}
               variant="outlined"
               color="success"
             />

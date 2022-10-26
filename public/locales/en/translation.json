@@ -38,5 +38,14 @@
   "correctAnswers": "Enter valid values, please!",
   "toLogin": "Do you have account? Then ",
   "settingsOpen": "Open settings",
-  "editMessage": "Profile edited successfully!"
+  "editMessage": "Profile edited successfully!",
+  "newCollection": "New Collection",
+  "newItem": "New Item",
+  "goBack": "Go Back",
+  "tagAsk": "Enter tag name!",
+  "entName": "Enter name",
+  "itemAsk": "Enter name of the item!",
+  "tag": "Tag",
+  "chooseTopic": "Choose topic",
+  "topic": "Topic"
 }

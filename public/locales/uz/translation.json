@@ -24,8 +24,8 @@
   "askPassword": "Parolingizni kiriting...",
   "askEmail": "Elektron pochtanginzni kiriting...",
   "notMatchPassword": "Parol mos kelmadi",
-  "rePassword": "Re password",
-  "rePasswordCap": "Enter password again",
+  "rePassword": "Qayta parol",
+  "rePasswordCap": "Parolni qaytadan kiriting",
   "saveBtn": "Saqlash",
   "noInfo": "Ma'lumotlar mavjud emas",
   "tableImg": "Rasm",
@@ -38,5 +38,14 @@
   "correctAnswers": "Iltimos ma'lumotarni to'g'ri kiriting!",
   "toLogin": "Akkountingiz bormi? Unda ",
   "settingsOpen": "Sozlamalarni ochish",
-  "editMessage": "Profil muvaffaqiyatli o'zgartirildi!"
+  "editMessage": "Profil muvaffaqiyatli o'zgartirildi!",
+  "newCollection": "Yangi to'plam",
+  "newItem": "Yangi buyum",
+  "goBack": "Ortga",
+  "itemAsk": "Buyum nomini kiriting!",
+  "tag": "Tag",
+  "tagAsk": "Tag kiriting!",
+  "entName": "Nom kiriting",
+  "chooseTopic": "Mavzu tanlang",
+  "topic": "Mavzu"
 }
