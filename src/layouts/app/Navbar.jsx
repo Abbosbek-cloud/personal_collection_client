@@ -127,8 +127,8 @@ const Navbar = () => {
         <Toolbar disableGutters>
           <Link to="/">
             <Avatar
-              src={user?.avatar}
-              alt={user?.name}
+              src="/assets/favicon-32x32.png"
+              alt="logo"
               sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
             />
           </Link>
