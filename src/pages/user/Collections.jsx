@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import CollectionTable from "../../components/CollectionTable";
 import UserSections from "../../components/UserSections";
 
@@ -184,7 +185,15 @@ const data = [
 
 const Collections = () => {
   const { t } = useTranslation();
-  return <UserSections header={t("collections")}></UserSections>;
+  const navigate = useNavigate();
+  return (
+    <UserSections
+      header={t("collections")}
+      button
+      buttonText={t("create")}
+      onClick={navigate("/user/collections/create")}
+    ></UserSections>
+  );
 };
 
 export default Collections;

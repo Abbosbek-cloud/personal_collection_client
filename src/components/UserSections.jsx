@@ -8,7 +8,15 @@ const StyledWrapper = styled(Box)({
   display: "flex",
 });
 
-const UserSections = ({ header, children, menu = null, handleDrawer }) => {
+const UserSections = ({
+  header,
+  children,
+  menu = null,
+  handleDrawer,
+  button,
+  onClick,
+  buttonText,
+}) => {
   return (
     <Box component="div">
       <StyledWrapper sx={{ justifyContent: menu ? "flex-end" : "" }}>
@@ -19,6 +27,11 @@ const UserSections = ({ header, children, menu = null, handleDrawer }) => {
           <IconButton onClick={handleDrawer(true)}>
             <Menu />
           </IconButton>
+        ) : undefined}
+        {button ? (
+          <Button variant="contained" onClick={onClick}>
+            {buttonText}
+          </Button>
         ) : undefined}
       </StyledWrapper>
       <Divider />

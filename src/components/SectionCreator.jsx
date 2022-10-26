@@ -1,4 +1,4 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import React from "react";
 
 const SectionCreator = ({ children, title }) => {
@@ -7,6 +7,7 @@ const SectionCreator = ({ children, title }) => {
       <Typography variant="h4" sx={{ textAlign: "center", mb: 2 }}>
         {title}
       </Typography>
+
       {children}
     </Container>
   );
