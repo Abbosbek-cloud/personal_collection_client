@@ -1,5 +1,4 @@
-import { Box, Button, Grid, IconButton, TextField } from "@mui/material";
-import { styled } from "@mui/styles";
+import { Box, Grid, IconButton } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import CustomTextField from "../../components/CustomTextField";
@@ -9,6 +8,7 @@ import SectionSubmit from "../../components/SectionSubmit";
 import { useFormik } from "formik";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../utils/firebase";
+import { editProfile } from "../../requests/requests";
 
 const Profile = ({ handleDrawer }) => {
   const { t } = useTranslation();
@@ -24,8 +24,8 @@ const Profile = ({ handleDrawer }) => {
 
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
     initialValues,
-    onSubmit: () => {
-      console.log(values);
+    onSubmit: (values) => {
+      editProfile(values, t("editMessage"));
     },
   });
 
@@ -62,72 +62,68 @@ const Profile = ({ handleDrawer }) => {
                     position: "relative",
                   }}
                 >
-                  <img
-                    src={values.avatar}
-                    alt={values.name}
-                    style={{
-                      width: "200px",
-                      height: "200px",
-                      borderRadius: "50%",
-                      position: "absolute",
-                    }}
-                  />
-                  <label
-                    htmlFor="avatar-photo"
-                    style={{
+                  <label htmlFor="avatar-photo">
+                    <img
+                      src={values.avatar}
+                      alt={values.name}
+                      style={{
+                        width: "200px",
+                        height: "200px",
+                        borderRadius: "50%",
+                        position: "absolute",
+                      }}
+                    />
+                  </label>
+                  <IconButton
+                    sx={{
                       position: "absolute",
                       bottom: "10px",
                       right: "10px",
+                      background: "light",
                     }}
                   >
-                    <IconButton
-                      sx={{
-                        background: "light",
-                      }}
-                    >
+                    <label htmlFor="avatar-photo">
                       <CameraAltIcon fontSize="50px" />
-                    </IconButton>
-                  </label>
-                  <Box display="none">
-                    <input
-                      id="avatar-photo"
-                      accept="image/*"
-                      type="file"
-                      name="avatar"
-                      onChange={(e) => {
-                        const metadata = {
-                          contentType: "image/jpeg",
-                        };
-                        const file = e.target.files[0];
-                        const storageRef = ref(storage, "images/" + file.name);
-                        const uploadTask = uploadBytesResumable(
-                          storageRef,
-                          file,
-                          metadata
-                        );
-                        uploadTask.on(
-                          "state_changed",
-                          (snapshot) => {
-                            const progress =
-                              (snapshot.bytesTransferred /
-                                snapshot.totalBytes) *
-                              100;
-                            setPr(progress.toFixed(1));
-                          },
-                          (error) => {
-                            console.log(error);
-                          },
-                          () => {
-                            getDownloadURL(uploadTask.snapshot.ref).then(
-                              (downloadURL) => {
-                                setFieldValue("avatar", downloadURL);
-                              }
-                            );
-                          }
-                        );
-                      }}
-                    />
-                  </Box>
+                    </label>
+                  </IconButton>
+                  <input
+                    id="avatar-photo"
+                    style={{ display: "none" }}
+                    accept="image/*"
+                    type="file"
+                    name="avatar"
+                    onChange={(e) => {
+                      const metadata = {
+                        contentType: "image/jpeg",
+                      };
+                      const file = e.target.files[0];
+                      const storageRef = ref(storage, "images/" + file.name);
+                      const uploadTask = uploadBytesResumable(
+                        storageRef,
+                        file,
+                        metadata
+                      );
+                      uploadTask.on(
+                        "state_changed",
+                        (snapshot) => {
+                          const progress =
+                            (snapshot.bytesTransferred / snapshot.totalBytes) *
+                            100;
+                          setPr(progress.toFixed(1));
+                        },
+                        (error) => {
+                          console.log(error);
+                        },
+                        () => {
+                          getDownloadURL(uploadTask.snapshot.ref).then(
+                            (downloadURL) => {
+                              setFieldValue("avatar", downloadURL);
+                            }
+                          );
+                        }
+                      );
+                    }}
+                  />
                 </Box>
               </Box>
             </Grid>

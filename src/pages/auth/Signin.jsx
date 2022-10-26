@@ -26,8 +26,6 @@ const Login = () => {
     password: yup.string().required(t("pswdReq")),
     email: yup.string().required(""),
   });
-  const dispatch = useDispatch();
-  const session = useSelector((state) => state?.user?.user);
   const [loading, setLoading] = useState(false);
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const navigate = useNavigate();
@@ -43,7 +41,17 @@ const Login = () => {
         method: "POST",
         data: values,
       }).then((res) => {
-        dispatch(getUserData({ token: res?.data?.token }));
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        const { role } = res.data.user;
+
+        if (role === "MODERATOR") {
+          navigate("/moderator");
+        } else if (role === "ADMIN") {
+          navigate("/admin/dashboard");
+        } else if (role === "USER") {
+          navigate("/user/profile");
+        }
       });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -58,19 +66,6 @@ const Login = () => {
       onSubmit: handleFormSubmit,
       validationSchema: formSchema,
     });
-
-  useEffect(() => {
-    if (session?.user && session?.user?.role === "MODERATOR") {
-      dispatch(getUserData({ token: session.token }));
-      navigate("/moderator");
-    } else if (session?.user && session?.user?.role === "ADMIN") {
-      dispatch(getUserData({ token: session?.token }));
-      navigate("/admin/dashboard");
-    } else if (session?.user && session?.user?.role === "USER") {
-      dispatch(getUserData({ token: session?.token }));
-      navigate("/user/profile");
-    }
-  }, [session]);
 
   return (
     <AuthWrapper
@@ -161,7 +156,7 @@ const Login = () => {
           }}
           borderColor="grey.900"
         >
-          Ro'yhatdan o'tish!
+          {t("logPage")}
         </H6>
       </Box>
     </AuthWrapper>
