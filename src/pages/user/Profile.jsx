@@ -9,6 +9,28 @@ import { useFormik } from "formik";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { storage } from "../../utils/firebase";
 import { editProfile } from "../../requests/requests";
+import ImageUploader from "../../components/ImageUploader";
+
+const imageUploadStyles = {
+  boxSx: {
+    width: "200px",
+    height: "200px",
+    borderRadius: "50%",
+    position: "relative",
+  },
+  imgSx: {
+    width: "200px",
+    height: "200px",
+    borderRadius: "50%",
+    position: "absolute",
+  },
+  buttonSx: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    background: "light",
+  },
+};
 
 const Profile = ({ handleDrawer }) => {
   const { t } = useTranslation();
@@ -35,8 +57,6 @@ const Profile = ({ handleDrawer }) => {
     setFieldValue("email", user.email);
     setFieldValue("password", "*****");
   }, []);
-
-  console.log(user);
   return (
     <UserSections header={t("profile")}>
       <Box>
@@ -53,7 +73,7 @@ const Profile = ({ handleDrawer }) => {
                   alignItems: "center",
                 }}
               >
-                <Box
+                {/* <Box
                   component="div"
                   sx={{
                     width: "200px",
@@ -105,12 +125,6 @@ const Profile = ({ handleDrawer }) => {
                       );
                       uploadTask.on(
                         "state_changed",
-                        (snapshot) => {
-                          const progress =
-                            (snapshot.bytesTransferred / snapshot.totalBytes) *
-                            100;
-                          setPr(progress.toFixed(1));
-                        },
                         (error) => {
                           console.log(error);
                         },
@@ -124,7 +138,16 @@ const Profile = ({ handleDrawer }) => {
                       );
                     }}
                   />
-                </Box>
+                </Box> */}
+                <ImageUploader
+                  boxSx={imageUploadStyles.boxSx}
+                  imgSx={imageUploadStyles.imgSx}
+                  buttonSx={imageUploadStyles.buttonSx}
+                  alt={values.name}
+                  src={values.avatar}
+                  setFieldValue={setFieldValue}
+                  field="avatar"
+                />
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
