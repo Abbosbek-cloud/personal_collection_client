@@ -186,12 +186,15 @@ const data = [
 const Collections = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const handler = () => {
+    navigate("/user/items/create");
+  };
   return (
     <UserSections
       header={t("collections")}
       button
       buttonText={t("create")}
-      onClick={navigate("/user/collections/create")}
+      onClick={handler}
     ></UserSections>
   );
 };

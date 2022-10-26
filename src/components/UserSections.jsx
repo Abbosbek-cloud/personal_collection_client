@@ -1,5 +1,5 @@
 import Menu from "@mui/icons-material/Menu";
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Typography, Button } from "@mui/material";
 import { styled } from "@mui/styles";
 import React from "react";
 
@@ -19,7 +19,11 @@ const UserSections = ({
 }) => {
   return (
     <Box component="div">
-      <StyledWrapper sx={{ justifyContent: menu ? "flex-end" : "" }}>
+      <StyledWrapper
+        sx={{
+          justifyContent: menu ? "flex-end" : button ? "space-between" : "",
+        }}
+      >
         <Typography variant="h5" sx={{ fontWeight: 600 }}>
           {header}
         </Typography>

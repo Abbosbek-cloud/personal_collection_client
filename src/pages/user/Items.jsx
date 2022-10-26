@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import ItemTable from "../../components/ItemTable";
 import UserSections from "../../components/UserSections";
 
@@ -272,9 +273,17 @@ const data = [
 
 const Items = () => {
   const { t } = useTranslation();
-
+  const navigate = useNavigate();
+  const handler = () => {
+    navigate("/user/items/create");
+  };
   return (
-    <UserSections header={t("items")}>
+    <UserSections
+      header={t("items")}
+      button
+      buttonText={t("create")}
+      onClick={handler}
+    >
       <ItemTable data={data} />
     </UserSections>
   );

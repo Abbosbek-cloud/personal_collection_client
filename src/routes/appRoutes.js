@@ -44,6 +44,8 @@ const UserItems = lazy(() => import("../pages/user/Items"));
 const UserCollections = lazy(() => import("../pages/user/Collections"));
 const UserPerItem = lazy(() => import("../pages/user/PerItem"));
 const UserPerCollection = lazy(() => import("../pages/user/PerCollection"));
+const CreateCollection = lazy(() => import("../pages/user/CreateCollection"));
+const CreateItem = lazy(() => import("../pages/user/CreateItem"));
 
 const routes = [
   {
@@ -144,6 +146,14 @@ const routes = [
   {
     path: "/user/collections",
     element: <UserCollections />,
+  },
+  {
+    path: "/user/collections/create",
+    element: <CreateCollection />,
+  },
+  {
+    path: "/user/items/create",
+    element: <CreateItem />,
   },
   {
     path: "/user/items/:id",
