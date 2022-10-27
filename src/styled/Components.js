@@ -28,6 +28,10 @@ export const AuthWrapper = styled(
 )(({ theme, passwordVisibility }) => ({
   width: 500,
   padding: "2rem 3rem",
+  minHeight: "100vh",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 
   "@media screen and (max-width: 600px)": {
     padding: "0.8rem 1rem",

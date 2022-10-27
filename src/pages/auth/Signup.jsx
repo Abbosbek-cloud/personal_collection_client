@@ -50,9 +50,13 @@ const Signup = () => {
   const handleFormSubmit = async (values) => {
     values.email = values.email.toLowerCase();
 
+    setLoading(true);
     try {
-      setLoading(true);
-      await axios.post(`${BASE_URL}/user/auth/signup`, values).then((res) => {
+      await axios({
+        url: `${BASE_URL}/user/auth/signup`,
+        data: values,
+        method: "post",
+      }).then((res) => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.newUser));
 
