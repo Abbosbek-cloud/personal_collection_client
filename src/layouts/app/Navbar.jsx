@@ -112,7 +112,7 @@ const Navbar = () => {
 
   const handleCloseUserMenu = (path) => {
     setAnchorElUser(null);
-    navigate(path);
+    path ? navigate(path) : null;
   };
 
   const handleCloseProfile = () => {
