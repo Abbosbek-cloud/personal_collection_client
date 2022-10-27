@@ -8,7 +8,7 @@ import ImageUploader from "../../components/ImageUploader";
 import ReactQuill from "../../components/ReactQuill";
 import UserSections from "../../components/UserSections";
 import cookies from "js-cookie";
-import { getAllTopics } from "../../requests/requests";
+import { getAllTopics, getOneCollection } from "../../requests/requests";
 import SectionSubmit from "../../components/SectionSubmit";
 
 const imageUploadStyles = {
@@ -70,7 +70,7 @@ const PerCollection = () => {
   });
 
   React.useState(() => {
-    getAllTopics(setTopics);
+    getAllTopics(id, setDescription);
     getOneCollection(id, setFieldValue, setDescription);
   }, []);
 
