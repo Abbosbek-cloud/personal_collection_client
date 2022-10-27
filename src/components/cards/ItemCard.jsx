@@ -38,9 +38,7 @@ const ItemCard = () => {
         subheader={
           <>
             <Chip
-              avatar={
-                <Avatar alt="Natacha" src="/static/images/avatar/1.jpg" />
-              }
+              avatar={<Avatar alt="Natacha" src="img" />}
               label="Avatar"
               variant="outlined"
             />
