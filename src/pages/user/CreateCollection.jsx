@@ -62,7 +62,7 @@ const CreateCollection = () => {
       en: description.engdesc,
     },
     topic: "",
-    tags: [{ name: "lorem", _id: "23123hu" }],
+    name: "",
   };
 
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
