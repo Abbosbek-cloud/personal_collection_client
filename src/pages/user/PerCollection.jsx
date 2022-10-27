@@ -81,7 +81,7 @@ const PerCollection = () => {
       buttonText={t("goBack")}
       onClick={handler}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={4}>
             <Box component="div" sx={{ mb: 1 }}>
