@@ -54,6 +54,9 @@ const Signup = () => {
     try {
       await axios({
         url: `${BASE_URL}/user/auth/signup`,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
         data: values,
         method: "post",
       }).then((res) => {
