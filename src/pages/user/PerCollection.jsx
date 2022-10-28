@@ -39,7 +39,10 @@ const PerCollection = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const [description, setDescription] = React.useState({
+    uzbdesc: "",
+    engdesc: "",
+  });
   const [topics, setTopics] = React.useState([
     {
       name: { uz: "Boshlangich ma'lumot", en: "Default info" },
@@ -55,8 +58,8 @@ const PerCollection = () => {
     image: "",
     user: user._id,
     description: {
-      uz: "",
-      en: "",
+      uz: description.uzbdesc,
+      en: description.engdesc,
     },
     topic: "",
     name: "",
@@ -69,7 +72,7 @@ const PerCollection = () => {
 
   React.useState(() => {
     getAllTopics(setTopics);
-    getOneCollection(id, setFieldValue);
+    getOneCollection(id, setFieldValue, setDescription);
   }, []);
 
   return (
@@ -111,7 +114,6 @@ const PerCollection = () => {
                 disablePortal
                 id="combo-box-demo"
                 options={topics}
-                value={values.topic}
                 sx={{ width: "100%" }}
                 onChange={(event, values) => setFieldValue("topic", values._id)}
                 getOptionLabel={(option) =>

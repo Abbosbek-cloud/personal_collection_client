@@ -59,7 +59,7 @@ export async function deleteCollection(collectionId, callBack) {
 
 // get all topics
 
-export async function getAllTopics(setData) {
+export async function getAllTopics(setTopic) {
   try {
     const result = await axios({
       url: `${BASE_URL}/user/topics`,
@@ -68,9 +68,7 @@ export async function getAllTopics(setData) {
         authorization: `1234567${token}`,
       },
     });
-    console.log(result.data);
-    console.log(result);
-    setData(result.data.topics);
+    setTopic(result.data.topics);
   } catch (error) {
     console.log(error);
   }
@@ -118,8 +116,6 @@ export async function getOneCollection(id, setFieldValue) {
         authorization: `1234567${token}`,
       },
     });
-
-    const { description, image, name, topic } = res.data;
 
     setFieldValue("image", res?.data?.image);
     setFieldValue("name", res?.data?.name);
