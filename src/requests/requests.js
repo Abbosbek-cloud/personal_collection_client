@@ -125,3 +125,20 @@ export async function getOneCollection(id, setFieldValue) {
     console.log(err);
   }
 }
+
+export async function editCollection(id, data) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/collections/${id}`,
+      method: "put",
+      data,
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    toast.success(res.data.message);
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+}

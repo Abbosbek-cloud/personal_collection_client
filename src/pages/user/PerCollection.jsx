@@ -8,7 +8,11 @@ import ImageUploader from "../../components/ImageUploader";
 import ReactQuill from "../../components/ReactQuill";
 import UserSections from "../../components/UserSections";
 import cookies from "js-cookie";
-import { getAllTopics, getOneCollection } from "../../requests/requests";
+import {
+  editCollection,
+  getAllTopics,
+  getOneCollection,
+} from "../../requests/requests";
 import SectionSubmit from "../../components/SectionSubmit";
 
 const imageUploadStyles = {
@@ -67,7 +71,9 @@ const PerCollection = () => {
 
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
     initialValues,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      editCollection(id, values);
+    },
   });
 
   React.useState(() => {
@@ -77,7 +83,7 @@ const PerCollection = () => {
 
   return (
     <UserSections
-      header={t("newCollection")}
+      header={t("editc")}
       button
       buttonText={t("goBack")}
       onClick={handler}
@@ -137,21 +143,21 @@ const PerCollection = () => {
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
                   name="uz"
+                  box_height={200}
                   placeholder="To'plam haqida o'zbek tilida yozing!"
                   theme="snow"
                   value={values.description.uz}
                   onChange={handleChange}
-                  sx={{ height: 50 }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
                   name="en"
+                  box_height={200}
                   placeholder="Write about collection in English!"
                   theme="snow"
                   value={values.description.en}
                   onChange={handleChange}
-                  sx={{ height: 50 }}
                 />
               </Grid>
             </Grid>
