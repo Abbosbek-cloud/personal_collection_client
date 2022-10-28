@@ -38,7 +38,7 @@ export async function editProfile(data, message) {
 
 // delete actions
 
-export async function deleteCollection(collectionId) {
+export async function deleteCollection(collectionId, callBack) {
   try {
     const res = await axios({
       url: `${BASE_URL}/admin/collections/${collectionId}`,
@@ -47,6 +47,11 @@ export async function deleteCollection(collectionId) {
         authorization: `1234567${token}`,
       },
     });
+
+    console.log(res);
+
+    callBack();
+    toast.success(res.data.message);
   } catch (error) {
     console.log(error);
   }
@@ -65,7 +70,7 @@ export async function getAllTopics(setData) {
     });
     console.log(result.data);
     console.log(result);
-    setData(result.data);
+    setData(result.data.topics);
   } catch (error) {
     console.log(error);
   }
@@ -87,32 +92,39 @@ export async function getUserItems(setData) {
   }
 }
 
-export async function getUserCollections(setData) {
+export async function getUserCollections() {
   try {
     const res = await axios({
-      url: `${BASE_URL}/collecctions/user`,
+      url: `${BASE_URL}/collections/user`,
       method: "get",
       headers: {
         authorization: `1234567${token}`,
       },
     });
-    setData(res.data.userCollections);
+    console.log(res.data);
+    return res.data.userCollections;
   } catch (error) {
     console.log(error);
+    return [];
   }
 }
 
-export async function getOneCollection(id, setFieldValue, setDescription) {
+export async function getOneCollection(id, setFieldValue) {
   try {
     const res = await axios({
-      url: `${BASE_URL}/collections/$${id}`,
+      url: `${BASE_URL}/collections/${id}`,
       method: "get",
       headers: {
         authorization: `1234567${token}`,
       },
     });
 
-    console.log(res.data);
+    const { description, image, name, topic } = res.data;
+
+    setFieldValue("image", res?.data?.image);
+    setFieldValue("name", res?.data?.name);
+    setFieldValue("description", res?.data?.description);
+    setFieldValue("topic", res?.data?.topic);
   } catch (err) {
     console.log(err);
   }

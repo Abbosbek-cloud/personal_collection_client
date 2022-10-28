@@ -32,16 +32,14 @@ const imageUploadStyles = {
     background: "light",
   },
 };
+
 const PerCollection = () => {
   const { id } = useParams();
   const currentLanguageCode = cookies.get("i18next") || "uz";
   const user = JSON.parse(localStorage.getItem("user"));
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [description, setDescription] = React.useState({
-    uzbdesc: "",
-    engdesc: "",
-  });
+
   const [topics, setTopics] = React.useState([
     {
       name: { uz: "Boshlangich ma'lumot", en: "Default info" },
@@ -57,8 +55,8 @@ const PerCollection = () => {
     image: "",
     user: user._id,
     description: {
-      uz: description.uzbdesc,
-      en: description.engdesc,
+      uz: "",
+      en: "",
     },
     topic: "",
     name: "",
@@ -70,8 +68,8 @@ const PerCollection = () => {
   });
 
   React.useState(() => {
-    getAllTopics(id, setDescription);
-    getOneCollection(id, setFieldValue, setDescription);
+    getAllTopics(setTopics);
+    getOneCollection(id, setFieldValue);
   }, []);
 
   return (
@@ -113,8 +111,9 @@ const PerCollection = () => {
                 disablePortal
                 id="combo-box-demo"
                 options={topics}
+                value={values.topic}
                 sx={{ width: "100%" }}
-                onChange={(e, val) => setFieldValue("topic", val._id)}
+                onChange={(event, values) => setFieldValue("topic", values._id)}
                 getOptionLabel={(option) =>
                   option?.name[currentLanguageCode]?.toString()
                 }
@@ -135,25 +134,21 @@ const PerCollection = () => {
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
-                  name="uzbdesc"
+                  name="uz"
                   placeholder="To'plam haqida o'zbek tilida yozing!"
                   theme="snow"
-                  value={description.uzbdesc}
-                  onChange={(data) =>
-                    setDescription({ ...description, uzbdesc: data })
-                  }
+                  value={values.description.uz}
+                  onChange={handleChange}
                   sx={{ height: 50 }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
-                  name="engdesc"
+                  name="en"
                   placeholder="Write about collection in English!"
                   theme="snow"
-                  value={description.engdesc}
-                  onChange={(data) =>
-                    setDescription({ ...description, engdesc: data })
-                  }
+                  value={values.description.en}
+                  onChange={handleChange}
                   sx={{ height: 50 }}
                 />
               </Grid>

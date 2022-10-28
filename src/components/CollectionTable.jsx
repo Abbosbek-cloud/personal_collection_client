@@ -20,7 +20,7 @@ function CustomToolbar() {
   );
 }
 
-export default function CollectionTable({ data }) {
+export default function CollectionTable({ data, callBack }) {
   const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
   const preRouter = getUserRoleRoute(user.role);
@@ -28,18 +28,21 @@ export default function CollectionTable({ data }) {
   const currentLanguageCode = cookies.get("i18next") || "uz";
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 200 },
+    { field: "_id", headerName: "ID", width: 220 },
     {
       field: "image",
       headerName: t("tableImg"),
-      renderCell: (row) => {
+      renderCell: (data) => {
         return (
           <Box sx={{ width: 45, display: "flex", justifyContent: "center" }}>
-            <Avatar src={row.image} variant="square" />
+            <Avatar
+              src={data?.row?.image}
+              variant="square"
+              sx={{ width: "100%", height: "45px", objectFit: "cover" }}
+            />
           </Box>
         );
       },
-
       maxWidth: 70,
       disableColumnSelector: true,
       disableColumnFilter: true,
@@ -56,7 +59,6 @@ export default function CollectionTable({ data }) {
       headerName: t("tableCollectionName"),
       width: 250,
       renderCell: (data) => {
-        console.log(data.row);
         return (
           <Chip
             label={data.row.topic.name[currentLanguageCode]}
@@ -70,18 +72,20 @@ export default function CollectionTable({ data }) {
       field: "actions",
       headerName: t("tableName"),
       width: 100,
-      renderCell: (row) => {
+      renderCell: (data) => {
         return (
           <React.Fragment>
             <IconButton
               variant="contained"
-              onClick={() => navigate(`${preRouter}/collections/${row._id}`)}
+              onClick={() =>
+                navigate(`${preRouter}/collections/${data.row._id}`)
+              }
             >
               <Edit />
             </IconButton>
             <IconButton
               variant="contained"
-              onCick={() => deleteCollection(row.id)}
+              onClick={() => deleteCollection(data.row._id, callBack)}
             >
               <Delete />
             </IconButton>
