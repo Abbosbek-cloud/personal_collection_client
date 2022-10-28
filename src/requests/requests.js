@@ -36,23 +36,6 @@ export async function editProfile(data, message) {
   }
 }
 
-export async function getUserCollections(setData) {
-  try {
-    const result = await axios({
-      url: `${BASE_URL}/collections/user`,
-      method: "get",
-      headers: {
-        authorization: `1234567${token}`,
-      },
-    });
-
-    console.log(result.data);
-    setData(result.data.userCollections);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 // delete actions
 
 export async function deleteCollection(collectionId) {
@@ -104,8 +87,32 @@ export async function getUserItems(setData) {
   }
 }
 
+export async function getUserCollections(setData) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/collecctions/user`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+    setData(res.data.userCollections);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getOneCollection(id, setFieldValue, setDescription) {
   try {
+    const res = await axios({
+      url: `${BASE_URL}/collections/$${id}`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    console.log(res.data);
   } catch (err) {
     console.log(err);
   }

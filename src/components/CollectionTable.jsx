@@ -5,11 +5,12 @@ import {
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, IconButton } from "@mui/material";
+import { Avatar, Box, Chip, IconButton } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { deleteCollection, getUserCollections } from "../requests/requests";
 import { getUserRoleRoute } from "../utils/functions";
 import { useNavigate } from "react-router-dom";
+import cookies from "js-cookie";
 
 function CustomToolbar() {
   return (
@@ -20,18 +21,17 @@ function CustomToolbar() {
 }
 
 export default function CollectionTable({ data }) {
-  const [collection, setCollection] = React.useState([]);
   const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
   const preRouter = getUserRoleRoute(user.role);
   const navigate = useNavigate();
+  const currentLanguageCode = cookies.get("i18next") || "uz";
 
   const columns = [
     { field: "_id", headerName: "ID", width: 200 },
     {
       field: "image",
       headerName: t("tableImg"),
-      width: 100,
       renderCell: (row) => {
         return (
           <Box sx={{ width: 45, display: "flex", justifyContent: "center" }}>
@@ -39,21 +39,37 @@ export default function CollectionTable({ data }) {
           </Box>
         );
       },
+
+      maxWidth: 70,
+      disableColumnSelector: true,
+      disableColumnFilter: true,
+      disableColumnMenu: true,
+      sortble: false,
     },
     {
       field: "name",
       headerName: t("tableName"),
-      width: 200,
+      width: 125,
     },
     {
       field: "topic",
       headerName: t("tableCollectionName"),
       width: 250,
+      renderCell: (data) => {
+        console.log(data.row);
+        return (
+          <Chip
+            label={data.row.topic.name[currentLanguageCode]}
+            variant="outlined"
+            onClick={() => navigate(`/search?id=${data.row.topic._id}`)}
+          />
+        );
+      },
     },
     {
       field: "actions",
       headerName: t("tableName"),
-      width: 200,
+      width: 100,
       renderCell: (row) => {
         return (
           <React.Fragment>
@@ -75,19 +91,21 @@ export default function CollectionTable({ data }) {
     },
   ];
 
-  React.useEffect(() => {
-    getUserCollections(setCollection);
-  }, []);
   return (
-    <div style={{ height: 300, width: "100%" }}>
-      <DataGrid
-        rows={collection}
-        columns={columns}
-        getRowId={(row) => row._id}
-        components={{
-          Toolbar: CustomToolbar,
-        }}
-      />
+    <div style={{ height: 550, width: "auto", marginInline: "auto" }}>
+      <div style={{ display: "flex", height: "100%" }}>
+        <div style={{ flexGrow: 1 }}>
+          <DataGrid
+            sx={{ minHeight: 300 }}
+            rows={data}
+            columns={columns}
+            getRowId={(row) => row._id}
+            components={{
+              Toolbar: CustomToolbar,
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
