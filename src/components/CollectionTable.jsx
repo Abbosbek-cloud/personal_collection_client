@@ -103,7 +103,7 @@ export default function CollectionTable({ data, callBack }) {
             sx={{ minHeight: 300 }}
             rows={data}
             columns={columns}
-            getRowId={(row) => row._id}
+            getRowId={(row) => row?._id}
             components={{
               Toolbar: CustomToolbar,
               NoRowsOverlay: () => (

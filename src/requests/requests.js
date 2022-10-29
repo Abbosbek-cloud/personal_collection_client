@@ -66,7 +66,7 @@ export async function getOneItem(id, setFieldValue) {}
 export async function createItem(data) {
   try {
     const res = await axios({
-      url: `${BASE_URL}/admin/items`,
+      url: `http://localhost:8080/api/v1/admin/items`,
       method: "post",
       headers: {
         authorization: `1234567${token}`,
@@ -76,7 +76,24 @@ export async function createItem(data) {
 
     toast.success(res.data.message);
   } catch (error) {
-    toast.error(error.response.data.message);
+    console.log(error);
+    // toast.error(error.response.data.message);
+  }
+}
+
+export async function deleteItem(id, callBack) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/items/${id}`,
+      method: "delete",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    callBack();
+  } catch (error) {
+    console.log(error);
   }
 }
 

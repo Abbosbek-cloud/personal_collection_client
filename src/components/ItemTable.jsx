@@ -6,8 +6,18 @@ import {
 } from "@mui/x-data-grid";
 import { Edit, Delete } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, Button, IconButton, Stack } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Chip,
+  CircularProgress,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { FlexBetween } from "./flex-box";
+import { useNavigate } from "react-router-dom";
+import { deleteItem } from "../requests/requests";
 
 function CustomToolbar() {
   return (
@@ -17,8 +27,9 @@ function CustomToolbar() {
   );
 }
 
-export default function ItemTable({ data }) {
+export default function ItemTable({ data, callBack }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const columns = [
     {
       field: "image",
@@ -28,11 +39,10 @@ export default function ItemTable({ data }) {
       disableColumnFilter: true,
       disableColumnMenu: true,
       sortble: false,
-      renderCell: (row) => {
-        console.log(row);
+      renderCell: (data) => {
         return (
           <Box sx={{ width: 45, display: "flex", justifyContent: "center" }}>
-            <Avatar src={row.image} variant="square" />
+            <Avatar src={data.row.image} variant="square" />
           </Box>
         );
       },
@@ -40,12 +50,31 @@ export default function ItemTable({ data }) {
     {
       field: "name",
       headerName: t("tableName"),
-      minWidth: 150,
+      minWidth: 200,
     },
     {
       field: "collectionId",
       headerName: t("tableCollectionName"),
       minWidth: 150,
+      renderCell: ({ row }) => {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyConent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Chip
+              variant="outlined"
+              label={row.collectionId.name}
+              onClick={() =>
+                navigate(`/user/collections/${row.collectionId._id}`)
+              }
+            />
+          </Box>
+        );
+      },
     },
     {
       field: "actions",
@@ -54,13 +83,19 @@ export default function ItemTable({ data }) {
       disableColumnSelector: true,
       disableColumnFilter: true,
       disableColumnMenu: true,
-      renderCell: () => {
+      renderCell: ({ row }) => {
         return (
           <React.Fragment>
-            <IconButton variant="contained">
+            <IconButton
+              variant="contained"
+              onClick={() => navigate(`/user/items/${row._id}`)}
+            >
               <Edit />
             </IconButton>
-            <IconButton variant="contained">
+            <IconButton
+              variant="contained"
+              onClick={() => deleteItem(row._id, callBack)}
+            >
               <Delete />
             </IconButton>
           </React.Fragment>
@@ -75,7 +110,7 @@ export default function ItemTable({ data }) {
           <DataGrid
             rows={data}
             columns={columns}
-            // getRowId={(row) => row._id}
+            getRowId={(row) => row?._id}
             components={{
               Toolbar: CustomToolbar,
               NoRowsOverlay: () => (
@@ -87,6 +122,7 @@ export default function ItemTable({ data }) {
                   {t()}
                 </Stack>
               ),
+              LoadingOverlay: CircularProgress,
             }}
           />
         </div>
