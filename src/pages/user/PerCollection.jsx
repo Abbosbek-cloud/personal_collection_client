@@ -43,9 +43,9 @@ const PerCollection = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [description, setDescription] = React.useState({
-    uzbdesc: "",
-    engdesc: "",
+  const [desc, setDescription] = React.useState({
+    uz: "",
+    en: "",
   });
   const [topics, setTopics] = React.useState([
     {
@@ -62,8 +62,8 @@ const PerCollection = () => {
     image: "",
     user: user._id,
     description: {
-      uz: description.uzbdesc,
-      en: description.engdesc,
+      uz: "",
+      en: "",
     },
     topic: "",
     name: "",
@@ -72,13 +72,15 @@ const PerCollection = () => {
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (values) => {
+      console.log(values);
       editCollection(id, values);
     },
   });
 
-  React.useState(() => {
+  React.useEffect(() => {
     getAllTopics(setTopics);
-    getOneCollection(id, setFieldValue, setDescription);
+    getOneCollection(id, setFieldValue);
+    // setDescription(values.description);
   }, []);
 
   return (
@@ -125,7 +127,7 @@ const PerCollection = () => {
                 getOptionLabel={(option) =>
                   option?.name[currentLanguageCode]?.toString()
                 }
-                getOptionSelected={(option) => option._id === values.topic}
+                getoptionselected={(option) => option._id === values.topic}
                 renderInput={(params) => {
                   return (
                     <CustomTextField
@@ -142,22 +144,26 @@ const PerCollection = () => {
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
-                  name="uz"
+                  name="description.uz"
                   box_height={200}
                   placeholder="To'plam haqida o'zbek tilida yozing!"
                   theme="snow"
                   value={values.description.uz}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setFieldValue("description.uz", e);
+                  }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
-                  name="en"
+                  name="description.en"
                   box_height={200}
                   placeholder="Write about collection in English!"
                   theme="snow"
                   value={values.description.en}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setFieldValue("description.en", e);
+                  }}
                 />
               </Grid>
             </Grid>

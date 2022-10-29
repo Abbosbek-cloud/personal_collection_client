@@ -5,7 +5,7 @@ import {
   GridToolbarExport,
 } from "@mui/x-data-grid";
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, Chip, IconButton } from "@mui/material";
+import { Avatar, Box, Chip, IconButton, Stack } from "@mui/material";
 import { Edit, Delete } from "@mui/icons-material";
 import { deleteCollection, getUserCollections } from "../requests/requests";
 import { getUserRoleRoute } from "../utils/functions";
@@ -106,6 +106,15 @@ export default function CollectionTable({ data, callBack }) {
             getRowId={(row) => row._id}
             components={{
               Toolbar: CustomToolbar,
+              NoRowsOverlay: () => (
+                <Stack
+                  height="100%"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  {t("noInfo")}
+                </Stack>
+              ),
             }}
           />
         </div>

@@ -10,12 +10,6 @@ async function getLastItems() {
   });
 }
 
-async function getOneItem() {
-  const res = await axios({
-    url: `${BASE_URL}`,
-  });
-}
-
 export async function editProfile(data, message) {
   try {
     const res = await axios({
@@ -36,29 +30,6 @@ export async function editProfile(data, message) {
   }
 }
 
-// delete actions
-
-export async function deleteCollection(collectionId, callBack) {
-  try {
-    const res = await axios({
-      url: `${BASE_URL}/admin/collections/${collectionId}`,
-      method: "delete",
-      headers: {
-        authorization: `1234567${token}`,
-      },
-    });
-
-    console.log(res);
-
-    callBack();
-    toast.success(res.data.message);
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-// get all topics
-
 export async function getAllTopics(setTopic) {
   try {
     const result = await axios({
@@ -74,19 +45,38 @@ export async function getAllTopics(setTopic) {
   }
 }
 
-export async function getUserItems(setData) {
+export async function getUserItems() {
   try {
     const res = await axios({
-      url: `${BASE_URL}/admin/user/items`,
+      url: `${BASE_URL}/items/user`,
       method: "get",
       headers: {
         authorization: `1234567${token}`,
       },
     });
 
-    setData(res.data.userData);
+    return res.data.items;
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getOneItem(id, setFieldValue) {}
+
+export async function createItem(data) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/items`,
+      method: "post",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+      data,
+    });
+
+    toast.success(res.data.message);
+  } catch (error) {
+    toast.error(error.response.data.message);
   }
 }
 
@@ -126,6 +116,25 @@ export async function getOneCollection(id, setFieldValue) {
   }
 }
 
+export async function createCollection(data) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/collections`,
+      method: "post",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+      data,
+    });
+
+    console.log(res.data);
+
+    toast.success(res.data.message);
+  } catch (error) {
+    toast.success(error.response.data.message);
+  }
+}
+
 export async function editCollection(id, data) {
   try {
     const res = await axios({
@@ -140,5 +149,24 @@ export async function editCollection(id, data) {
     toast.success(res.data.message);
   } catch (error) {
     toast.error(error.response.data.message);
+  }
+}
+
+export async function deleteCollection(collectionId, callBack) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/collections/${collectionId}`,
+      method: "delete",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    console.log(res);
+
+    callBack();
+    toast.success(res.data.message);
+  } catch (error) {
+    console.log(error);
   }
 }

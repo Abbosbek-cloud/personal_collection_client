@@ -6,7 +6,7 @@ import {
 } from "@mui/x-data-grid";
 import { Edit, Delete } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, Button, IconButton } from "@mui/material";
+import { Avatar, Box, Button, IconButton, Stack } from "@mui/material";
 import { FlexBetween } from "./flex-box";
 
 function CustomToolbar() {
@@ -75,9 +75,18 @@ export default function ItemTable({ data }) {
           <DataGrid
             rows={data}
             columns={columns}
-            getRowId={(row) => row._id}
+            // getRowId={(row) => row._id}
             components={{
               Toolbar: CustomToolbar,
+              NoRowsOverlay: () => (
+                <Stack
+                  height="100%"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  {t()}
+                </Stack>
+              ),
             }}
           />
         </div>

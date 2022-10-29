@@ -89,8 +89,13 @@ const CreateItem = () => {
     onSubmit: (values) => {},
   });
 
+  const getAutoCompleteCollections = async () => {
+    const list = await getUserCollections();
+    setCollections(list);
+  };
+
   React.useEffect(() => {
-    getUserCollections(setCollections);
+    getAutoCompleteCollections();
   }, []);
 
   return (
@@ -150,14 +155,14 @@ const CreateItem = () => {
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={autoComplete}
+            options={collections}
             sx={{ width: "100%" }}
             onChange={(e, val) => console.log(val)}
-            getOptionLabel={(option) => option.year.toString()}
+            getOptionLabel={(option) => option.name.toString()}
             renderInput={(params) => {
               console.log(params);
               console.log(collections);
-              return <CustomTextField {...params} label="Movie" />;
+              return <CustomTextField {...params} label={t("collections")} />;
             }}
           />
         </Grid>

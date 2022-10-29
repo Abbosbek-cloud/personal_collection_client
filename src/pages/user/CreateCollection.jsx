@@ -9,7 +9,7 @@ import ImageUploader from "../../components/ImageUploader";
 import ReactQuill from "../../components/ReactQuill";
 import UserSections from "../../components/UserSections";
 import cookies from "js-cookie";
-import { getAllTopics } from "../../requests/requests";
+import { createCollection, getAllTopics } from "../../requests/requests";
 import SectionSubmit from "../../components/SectionSubmit";
 
 const imageUploadStyles = {
@@ -40,8 +40,8 @@ const CreateCollection = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [description, setDescription] = React.useState({
-    uzbdesc: "",
-    engdesc: "",
+    uz: "",
+    en: "",
   });
   const [topics, setTopics] = React.useState([
     {
@@ -58,8 +58,8 @@ const CreateCollection = () => {
     image: "",
     user: user._id,
     description: {
-      uz: description.uzbdesc,
-      en: description.engdesc,
+      uz: description.uz,
+      en: description.en,
     },
     topic: "",
     name: "",
@@ -67,7 +67,10 @@ const CreateCollection = () => {
 
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
     initialValues,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      values.description = description;
+      createCollection(values);
+    },
   });
 
   React.useState(() => {
@@ -83,7 +86,7 @@ const CreateCollection = () => {
       buttonText={t("goBack")}
       onClick={handler}
     >
-      <form>
+      <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={4}>
             <Box component="div" sx={{ mb: 1 }}>
@@ -136,24 +139,24 @@ const CreateCollection = () => {
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
-                  name="uzbdesc"
+                  name="uz"
                   placeholder="To'plam haqida o'zbek tilida yozing!"
                   theme="snow"
-                  value={description.uzbdesc}
+                  value={description.uz}
                   onChange={(data) =>
-                    setDescription({ ...description, uzbdesc: data })
+                    setDescription({ ...description, uz: data })
                   }
                   sx={{ height: 50 }}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={6}>
                 <ReactQuill
-                  name="engdesc"
+                  name="en"
                   placeholder="Write about collection in English!"
                   theme="snow"
-                  value={description.engdesc}
+                  value={description.en}
                   onChange={(data) =>
-                    setDescription({ ...description, engdesc: data })
+                    setDescription({ ...description, en: data })
                   }
                   sx={{ height: 50 }}
                 />
