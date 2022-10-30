@@ -18,7 +18,18 @@ const ImageUploader = ({
       <label htmlFor="avatar-photo">
         <img src={src} alt={alt} style={imgSx} />
       </label>
-      <IconButton sx={buttonSx}>
+      <IconButton
+        sx={{
+          ...buttonSx,
+          minWidth: "30px",
+          minHeight: "30px",
+          maxWidth: "30px",
+          maxHeight: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <label htmlFor="avatar-photo">
           <CameraAltIcon fontSize="50px" />
         </label>

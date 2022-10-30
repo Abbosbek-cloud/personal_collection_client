@@ -1,5 +1,12 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Autocomplete, Box, Button, Grid, IconButton } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  Divider,
+  Grid,
+  IconButton,
+} from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +16,7 @@ import ImageUploader from "../../components/ImageUploader";
 import SectionSubmit from "../../components/SectionSubmit";
 import Tags from "../../components/Tags";
 import {
-  createItem,
+  editItem,
   getOneItem,
   getUserCollections,
 } from "../../requests/requests";
@@ -17,14 +24,15 @@ import {
 const imageUploadStyles = {
   boxSx: {
     width: "100%",
-    minHeight: "200px",
     maxHeight: "300px",
+    minHeight: "300px",
     position: "relative",
+    display: "block",
   },
   imgSx: {
     width: "100%",
     minHeight: "200px",
-    maxHeight: "300px",
+    maxHeight: "100%",
     objectFit: "cover",
     position: "absolute",
   },
@@ -77,14 +85,14 @@ const PerItem = () => {
     image: "",
     collectionId: "",
     user: user._id,
-    tags: [{ name: "lorem", _id: "23123hu" }],
+    tags: [],
   };
 
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (values) => {
       values.tags = tags;
-      createItem(values);
+      editItem(id, values);
     },
   });
 
@@ -119,70 +127,78 @@ const PerItem = () => {
           {t("goBack")}
         </Button>
       </Box>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={4} md={6} lg={4}>
-            <Box component="div" sx={{ mb: 1 }}>
-              <ImageUploader
-                boxSx={imageUploadStyles.boxSx}
-                imgSx={imageUploadStyles.imgSx}
-                buttonSx={imageUploadStyles.buttonSx}
-                alt={values.name}
-                src={values.image}
-                setFieldValue={setFieldValue}
-                field="image"
-              />
-            </Box>
-            <Box component="div" sx={{ mt: 1 }}>
-              <CustomTextField
-                label={t("tableName")}
-                mb={1.5}
-                name="name"
-                placeholder={t("entName")}
-                variant="outlined"
-                fullWidth
-                value={values.name}
-                onChange={handleChange}
+      <Divider />
+      <Box sx={{ p: 2 }}>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4} md={6} lg={4}>
+              <Box component="div" sx={{ mb: 1 }}>
+                <ImageUploader
+                  boxSx={imageUploadStyles.boxSx}
+                  imgSx={imageUploadStyles.imgSx}
+                  buttonSx={imageUploadStyles.buttonSx}
+                  alt={values.name}
+                  src={values.image}
+                  setFieldValue={setFieldValue}
+                  field="image"
+                />
+              </Box>
+              <Box component="div" sx={{ mt: 1 }}>
+                <CustomTextField
+                  label={t("tableName")}
+                  mb={1.5}
+                  name="name"
+                  placeholder={t("entName")}
+                  variant="outlined"
+                  fullWidth
+                  value={values.name}
+                  onChange={handleChange}
+                  sx={{ width: "100%" }}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={8} md={6} lg={4}>
+              <Tags data={tags} isOwner deleteTag={deleteTag} />
+              <Box
+                component="div"
+                sx={{ display: "flex", alignItems: "center" }}
+              >
+                <CustomTextField
+                  label={t("tag")}
+                  mb={1.5}
+                  name="tag"
+                  placeholder={t("tagAsk")}
+                  variant="outlined"
+                  fullWidth
+                  value={tag}
+                  onChange={(e) => setTag(e.target.value)}
+                  sx={{ width: "100%" }}
+                />
+                <IconButton onClick={addTags} sx={{ ml: 1 }}>
+                  <AddIcon />
+                </IconButton>
+              </Box>
+            </Grid>
+            <Grid item xs={12} sm={8} md={6} lg={4}>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={collections}
                 sx={{ width: "100%" }}
+                defaultValue={values.collectionId}
+                onChange={(e, val) => setFieldValue("collectionId", val._id)}
+                getOptionLabel={(option) => option?.name?.toString()}
+                renderInput={(params) => {
+                  return (
+                    <CustomTextField {...params} label={t("collections")} />
+                  );
+                }}
               />
-            </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={8} md={6} lg={4}>
-            <Tags data={tags} isOwner deleteTag={deleteTag} />
-            <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
-              <CustomTextField
-                label={t("tag")}
-                mb={1.5}
-                name="tag"
-                placeholder={t("tagAsk")}
-                variant="outlined"
-                fullWidth
-                value={tag}
-                onChange={(e) => setTag(e.target.value)}
-                sx={{ width: "100%" }}
-              />
-              <IconButton onClick={addTags} sx={{ ml: 1 }}>
-                <AddIcon />
-              </IconButton>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={8} md={6} lg={4}>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={collections}
-              sx={{ width: "100%" }}
-              defaultValue={{ name: "Choose one of the collections", _id: 0 }}
-              onChange={(e, val) => setFieldValue("collectionId", val._id)}
-              getOptionLabel={(option) => option.name.toString()}
-              renderInput={(params) => {
-                return <CustomTextField {...params} label={t("collections")} />;
-              }}
-            />
-          </Grid>
-        </Grid>
-        <SectionSubmit />
-      </form>
+          <SectionSubmit />
+        </form>
+      </Box>
     </Box>
   );
 };

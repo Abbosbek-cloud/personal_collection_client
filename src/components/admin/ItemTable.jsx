@@ -25,7 +25,7 @@ function CustomToolbar() {
   );
 }
 
-const center = {
+export const center = {
   display: "flex",
   justifyConent: "center",
   alignItems: "center",

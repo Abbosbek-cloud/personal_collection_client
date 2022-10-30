@@ -50,5 +50,8 @@
   "topic": "Topic",
   "editc": "Edit collection!",
   "editi": "Edit item!",
-  "user": "User"
+  "user": "User",
+  "noExistUser": "User is not exist!",
+  "noExistColl": "Collection is not exist!",
+  "noExistItem": "Item is not exist!"
 }

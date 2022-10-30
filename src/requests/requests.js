@@ -4,10 +4,15 @@ import { BASE_URL } from "../constants/base";
 
 const token = localStorage.getItem("token");
 
-async function getLastItems() {
-  const res = await axios({
-    url: `${BASE_URL}/`,
-  });
+export async function getLastItems() {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/`,
+    });
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function editProfile(data, message) {
@@ -17,6 +22,8 @@ export async function editProfile(data, message) {
       method: "put",
       headers: {
         authorization: `1234567${token}`,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       },
       data,
     });
@@ -94,6 +101,28 @@ export async function createItem(data) {
   }
 }
 
+export async function editItem(id, data) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/items/${id}`,
+      method: "put",
+      headers: {
+        authorization: `1234567${token}`,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      },
+      data,
+    });
+
+    console.log(res);
+
+    toast.success(res.data.message);
+  } catch (error) {
+    console.log(error);
+    // toast.error(err.response.data.message);
+  }
+}
+
 export async function deleteItem(id, callBack) {
   try {
     const res = await axios({
@@ -104,7 +133,10 @@ export async function deleteItem(id, callBack) {
       },
     });
 
+    console.log(res);
+
     callBack();
+    toast.success("Item deleted successfully!");
   } catch (error) {
     console.log(error);
   }
@@ -173,6 +205,8 @@ export async function editCollection(id, data) {
       data,
       headers: {
         authorization: `1234567${token}`,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       },
     });
 
@@ -192,8 +226,6 @@ export async function deleteCollection(collectionId, callBack) {
       },
     });
 
-    console.log(res);
-
     callBack();
     toast.success(res.data.message);
   } catch (error) {
@@ -202,7 +234,7 @@ export async function deleteCollection(collectionId, callBack) {
 }
 
 // admin requests
-export async function getAllItemsForAdmin(req, res) {
+export async function getAllItemsForAdmin() {
   try {
     const res = await axios({
       url: `${BASE_URL}/admin/items`,
@@ -212,10 +244,96 @@ export async function getAllItemsForAdmin(req, res) {
       },
     });
 
-    console.log(res.data);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getAllCollectionsForAdminn() {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/collections/all`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
 
     return res.data;
   } catch (err) {
     console.log(err);
+  }
+}
+
+export async function getAllUsersForAdmin() {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/users/all`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    return res.data.usersList;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deleteUser(id, callBack) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/users/${id}`,
+      method: "delete",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    callBack();
+    toast.success("User deleted successfully!");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function adminEditOrBlockUser(id, values, callBack, isBlocked) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/users/${id}`,
+      method: "put",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+      data: values,
+    });
+    if (isBlocked) {
+      toast.success(
+        `User ${res.data.savedUser ? "unblocked" : "locked"} successfully!`
+      );
+      callBack();
+    } else {
+      toast.success("User edited successfully!");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getOneUserById(id) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/users/${id}`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
 }

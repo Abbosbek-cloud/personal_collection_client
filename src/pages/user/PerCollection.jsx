@@ -43,10 +43,7 @@ const PerCollection = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [desc, setDescription] = React.useState({
-    uz: "",
-    en: "",
-  });
+
   const [topics, setTopics] = React.useState([
     {
       name: { uz: "Boshlangich ma'lumot", en: "Default info" },

@@ -32,11 +32,12 @@ const Items = () => {
           sx={{ color: "#fff" }}
           onClick={handler}
         >
-          {t("create")}
+          {t("saveBtn")}
         </Button>
       </Box>
       <Divider />
-      <AdminItemTable data={data} callBack={getData} isAdmin />;
+
+      <AdminItemTable data={data} callBack={getData} isAdmin />
     </Box>
   );
 };

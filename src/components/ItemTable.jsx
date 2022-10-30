@@ -117,7 +117,7 @@ export default function ItemTable({ data, callBack, isAdmin }) {
                   alignItems="center"
                   justifyContent="center"
                 >
-                  {t()}
+                  {t("noInfo")}
                 </Stack>
               ),
               LoadingOverlay: CircularProgress,

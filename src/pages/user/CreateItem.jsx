@@ -14,7 +14,7 @@ import { createItem, getUserCollections } from "../../requests/requests";
 const imageUploadStyles = {
   boxSx: {
     width: "100%",
-    minHeight: "200px",
+    minHeight: "300px",
     maxHeight: "300px",
     position: "relative",
   },

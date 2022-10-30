@@ -51,5 +51,7 @@
   "editc": "To'plamni tahrirlash!",
   "editi": "Buyumni tahrirlash!",
   "user": "Foydalanuvchi",
-  "noExistUser": "Foydalanuvchi mavjud emas!"
+  "noExistUser": "Foydalanuvchi mavjud emas!",
+  "noExistColl": "To'plam mavjud emas!",
+  "noExistItem": "Buyum mavjud emas!"
 }

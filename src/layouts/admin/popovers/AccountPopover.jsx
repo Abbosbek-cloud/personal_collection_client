@@ -11,6 +11,8 @@ const AccountPopover = () => {
 
   const handleClick = (event) => setAnchorEl(event.currentTarget);
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <Box>
       <IconButton
@@ -22,7 +24,7 @@ const AccountPopover = () => {
         aria-expanded={open ? "true" : undefined}
         aria-controls={open ? "account-menu" : undefined}
       >
-        <Avatar alt="Remy Sharp" src="/assets/images/avatars/001-man.svg" />
+        <Avatar alt="Remy Sharp" src={user ? user?.avatar : ""} />
       </IconButton>
 
       <Menu
