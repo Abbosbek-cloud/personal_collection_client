@@ -47,5 +47,8 @@
   "itemAsk": "Enter name of the item!",
   "tag": "Tag",
   "chooseTopic": "Choose topic",
-  "topic": "Topic"
+  "topic": "Topic",
+  "editc": "Edit collection!",
+  "editi": "Edit item!",
+  "user": "User"
 }

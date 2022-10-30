@@ -14,8 +14,8 @@ import {
   IconButton,
   Stack,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { deleteItem } from "../requests/requests";
+import { Link, useNavigate } from "react-router-dom";
+import { deleteItem } from "../../requests/requests";
 
 function CustomToolbar() {
   return (
@@ -25,7 +25,13 @@ function CustomToolbar() {
   );
 }
 
-export default function ItemTable({ data, callBack, isAdmin }) {
+const center = {
+  display: "flex",
+  justifyConent: "center",
+  alignItems: "center",
+};
+
+export default function AdminItemTable({ data, callBack }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const columns = [
@@ -56,20 +62,38 @@ export default function ItemTable({ data, callBack, isAdmin }) {
       minWidth: 200,
       renderCell: ({ row }) => {
         return (
-          <Box
-            sx={{
-              display: "flex",
-              justifyConent: "center",
-              alignItems: "center",
-            }}
-          >
+          <Box sx={center}>
             <Chip
               variant="outlined"
               label={row?.collectionId?.name || "Collection is not exist!"}
               onClick={() =>
-                navigate(`/user/collections/${row?.collectionId?._id}`)
+                navigate(
+                  row?.collectionId?._id
+                    ? `/user/collections/${row?.collectionId?._id}`
+                    : `/admin/items/${row?._id}`
+                )
               }
             />
+          </Box>
+        );
+      },
+    },
+    {
+      field: "user",
+      headerName: t("user"),
+      width: 250,
+      renderCell: ({ row }) => {
+        return (
+          <Box sx={center}>
+            <Link
+              to={
+                row?.user?._id
+                  ? `/admin/users/${row?.user?._id}`
+                  : `/admin/items/${row._id}`
+              }
+            >
+              {row?.user?.name ? row?.user?.name : t("noExistUser")}
+            </Link>
           </Box>
         );
       },
@@ -86,7 +110,7 @@ export default function ItemTable({ data, callBack, isAdmin }) {
           <React.Fragment>
             <IconButton
               variant="contained"
-              onClick={() => navigate(`/user/items/${row._id}`)}
+              onClick={() => navigate(`/admin/items/${row._id}`)}
             >
               <Edit />
             </IconButton>

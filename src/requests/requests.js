@@ -200,3 +200,22 @@ export async function deleteCollection(collectionId, callBack) {
     console.log(error);
   }
 }
+
+// admin requests
+export async function getAllItemsForAdmin(req, res) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/items`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    console.log(res.data);
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}

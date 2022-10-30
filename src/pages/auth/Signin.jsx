@@ -44,7 +44,7 @@ const Login = () => {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("user", JSON.stringify(res.data.user));
         const { role } = res.data.user;
-
+        console.log(res.data);
         if (role === "MODERATOR") {
           navigate("/moderator");
         } else if (role === "ADMIN") {

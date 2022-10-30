@@ -14,6 +14,7 @@ const PerItem = lazy(() => import("../pages/PerItem"));
 
 // protected routes
 const AdminDashboard = lazy(() => import("../pages/admin/Profile"));
+const EditProfile = lazy(() => import("../pages/admin/EditProfil"));
 const AdminUsers = lazy(() => import("../pages/admin/Users"));
 const AdminItems = lazy(() => import("../pages/admin/Items"));
 const AdminCollections = lazy(() => import("../pages/admin/Collections"));
@@ -111,16 +112,24 @@ const routes = [
     element: <AdminDashboard />,
   },
   {
+    path: "/admin/profile",
+    element: <EditProfile />,
+  },
+  {
     path: "/admin/users",
     element: <AdminUsers />,
   },
   {
-    path: "/admin/items",
-    element: <AdminItems />,
-  },
-  {
     path: "/admin/collections",
     element: <AdminCollections />,
+  },
+  {
+    path: "/admin/collections/:id",
+    element: <AdminPerCollection />,
+  },
+  {
+    path: "/admin/items",
+    element: <AdminItems />,
   },
   {
     path: "/admin/users/:id",
@@ -130,18 +139,10 @@ const routes = [
     path: "/admin/items/:id",
     element: <AdminPerItem />,
   },
-  {
-    path: "/admin/collections/:id",
-    element: <AdminPerCollection />,
-  },
   // user routes
   {
     path: "/user/profile",
     element: <UserProfile />,
-  },
-  {
-    path: "/user/items",
-    element: <UserItems />,
   },
   {
     path: "/user/collections",
@@ -152,16 +153,20 @@ const routes = [
     element: <CreateCollection />,
   },
   {
+    path: "/user/collections/:id",
+    element: <UserPerCollection />,
+  },
+  {
+    path: "/user/items",
+    element: <UserItems />,
+  },
+  {
     path: "/user/items/create",
     element: <CreateItem />,
   },
   {
     path: "/user/items/:id",
     element: <UserPerItem />,
-  },
-  {
-    path: "/user/collections/:id",
-    element: <UserPerCollection />,
   },
 ];
 

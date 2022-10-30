@@ -49,5 +49,7 @@
   "chooseTopic": "Mavzu tanlang",
   "topic": "Mavzu",
   "editc": "To'plamni tahrirlash!",
-  "editi": "Buyumni tahrirlash!"
+  "editi": "Buyumni tahrirlash!",
+  "user": "Foydalanuvchi",
+  "noExistUser": "Foydalanuvchi mavjud emas!"
 }
