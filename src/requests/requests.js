@@ -61,12 +61,25 @@ export async function getUserItems() {
   }
 }
 
-export async function getOneItem(id, setFieldValue) {}
+export async function getOneItem(id) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/items/${id}`,
+      method: "get",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+    return res.data[0];
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function createItem(data) {
   try {
     const res = await axios({
-      url: `http://localhost:8080/api/v1/admin/items`,
+      url: `${BASE_URL}/admin/items`,
       method: "post",
       headers: {
         authorization: `1234567${token}`,
@@ -77,7 +90,7 @@ export async function createItem(data) {
     toast.success(res.data.message);
   } catch (error) {
     console.log(error);
-    // toast.error(error.response.data.message);
+    toast.error(error.response.data.message);
   }
 }
 
