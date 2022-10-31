@@ -8,7 +8,7 @@ const ItemWrapper = ({ data = null }) => {
       {data
         ? data?.map((item) => (
             <Grid key={item._id} item xs={12} sm={6} md={4} lg={3}>
-              <ItemCard />
+              <ItemCard {...item} />
             </Grid>
           ))
         : undefined}

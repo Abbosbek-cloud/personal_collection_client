@@ -74,7 +74,7 @@ const routes = [
     element: <PerCollection />,
   },
   {
-    path: "/item/:id",
+    path: "/items/:id",
     element: <PerItem />,
   },
   // moderator pages

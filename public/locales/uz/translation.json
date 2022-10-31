@@ -53,5 +53,6 @@
   "user": "Foydalanuvchi",
   "noExistUser": "Foydalanuvchi mavjud emas!",
   "noExistColl": "To'plam mavjud emas!",
-  "noExistItem": "Buyum mavjud emas!"
+  "noExistItem": "Buyum mavjud emas!",
+  "copySuccess": "Link muvaffaqiyatli nusxalandi!"
 }

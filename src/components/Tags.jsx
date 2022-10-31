@@ -1,7 +1,9 @@
 import { Box, Chip } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Tags = ({ data = null, isOwner, deleteTag }) => {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -29,6 +31,7 @@ const Tags = ({ data = null, isOwner, deleteTag }) => {
               label={tag.name}
               variant="outlined"
               color="success"
+              onClick={() => navigate(`/items/search?tag=${tag?._id}`)}
             />
           ))
         : undefined}

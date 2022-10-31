@@ -58,8 +58,10 @@ export const AuthWrapper = styled(
 }));
 
 export const StyledImg = styled("img")({
-  maxWidth: "100%",
+  width: "100%",
+  maxHeight: "400px",
   borderRadius: "10px",
+  objectFit: "cover",
 });
 
 export const StyledFooter = styled(AppBar)(({ theme }) => ({

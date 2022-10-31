@@ -39,7 +39,7 @@ export default function CustomTab({
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label={item ? "Similar items" : "Items"} {...a11yProps(0)} />
+          <Tab label={item ? "Items in one collection!" : "Items"} {...a11yProps(0)} />
           <Tab label="Comments" {...a11yProps(1)} />
         </Tabs>
       </Box>

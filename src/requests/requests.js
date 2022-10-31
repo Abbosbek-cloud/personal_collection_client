@@ -7,7 +7,8 @@ const token = localStorage.getItem("token");
 export async function getLastItems() {
   try {
     const res = await axios({
-      url: `${BASE_URL}/`,
+      url: `${BASE_URL}/items/latest`,
+      method: "get",
     });
     return res.data;
   } catch (error) {

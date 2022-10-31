@@ -15,6 +15,10 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Tags from "../Tags";
+import { useNavigate } from "react-router-dom";
+import { SITE_URL } from "../../constants/base";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles({
   root: {
@@ -24,39 +28,48 @@ const useStyles = makeStyles({
 
 const arrData = new Array(5);
 
-const ItemCard = () => {
+const ItemCard = ({ name, collectionId, user, tags, image, _id }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const classesOfCard = useStyles();
+  const handleCopyUrl = () => {
+    navigator.clipboard.writeText(`${SITE_URL}/items/${_id}`);
+    toast.success(t("copySuccess"));
+  };
   return (
     <Card className={classesOfCard}>
       <CardHeader
         avatar={
-          <Avatar width={50} height={50} aria-label="recipe" variant="square">
-            A
-          </Avatar>
+          <Avatar
+            width={50}
+            height={50}
+            src={image}
+            aria-label="recipe"
+            variant="square"
+          />
         }
-        title="It is an item"
+        title={name}
         subheader={
-          <>
+          <Box>
             <Chip
-              avatar={<Avatar alt="Natacha" src="img" />}
-              label="Avatar"
+              avatar={<Avatar alt="Natacha" src={user?.avatar} />}
+              label={user?.name}
               variant="outlined"
             />
-            <Typography variant="p">20 Jan, 2022</Typography>
-          </>
+          </Box>
         }
       />
       <CardContent>
-        <Tags data={arrData} />
+        <Tags data={tags?.slice(0, 3)} />
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton aria-label="share" onClick={handleCopyUrl}>
           <ShareIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => navigate(`/items/${_id}`)}>
           <ChevronRightIcon />
         </IconButton>
       </CardActions>
