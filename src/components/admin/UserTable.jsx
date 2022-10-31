@@ -43,7 +43,7 @@ const UserTable = ({ data, callBack }) => {
       renderCell: ({ row }) => {
         return (
           <Box sx={{ width: 45, display: "flex", justifyContent: "center" }}>
-            <Avatar src={row.avatar} variant="square" />
+            <Avatar src={row?.avatar || "A"} variant="square" />
           </Box>
         );
       },

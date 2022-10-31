@@ -27,7 +27,7 @@ function CustomToolbar() {
   );
 }
 
-export default function CollectionTable({ data, callBack }) {
+export default function CollectionTable({ data = [], callBack }) {
   const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
   const preRouter = getUserRoleRoute(user.role);
@@ -65,16 +65,16 @@ export default function CollectionTable({ data, callBack }) {
       field: "topic",
       headerName: t("topic"),
       width: 150,
-      renderCell: ({ row }) => {
+      renderCell: ({ rows }) => {
         return (
           <Chip
             label={
-              row?.topic?.name
-                ? row?.topic?.name[currentLanguageCode]
+              rows?.topic?.name
+                ? rows?.topic?.name[currentLanguageCode]
                 : t("noExistColl")
             }
             variant="outlined"
-            onClick={() => navigate(`/search?id=${row?.topic?._id}`)}
+            onClick={() => navigate(`/search?id=${rows?.topic?._id}`)}
           />
         );
       },
@@ -89,7 +89,7 @@ export default function CollectionTable({ data, callBack }) {
             <IconButton
               variant="contained"
               onClick={() =>
-                navigate(`${preRouter}/collections/${data?.row?._id || 1}`)
+                navigate(`${preRouter}/collections/${data?.rows?._id || 1}`)
               }
             >
               <Edit />
