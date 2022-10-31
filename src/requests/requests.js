@@ -108,15 +108,13 @@ export async function editItem(id, data) {
       method: "put",
       headers: {
         authorization: `1234567${token}`,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
       },
       data,
     });
 
     console.log(res);
 
-    toast.success(res.data.message);
+    toast.success("Saved successfully!");
   } catch (error) {
     console.log(error);
     // toast.error(err.response.data.message);

@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import React from "react";
 import AppLayout from "./AppLayout";
 import Content from "./user/Content";
@@ -11,20 +11,18 @@ const UserDashboardLayout = ({ children }) => {
     username: "Abek_dev",
   };
   const user = JSON.parse(localStorage.getItem("user"));
-  
+
   return (
     <AppLayout>
       <Container sx={{ my: 4 }}>
         <Grid container spacing={2}>
-          <Grid
-            item
-            md={3}
-            sx={{ display: { xs: "none", md: "block" } }}
-          >
+          <Grid item md={3} sx={{ display: { xs: "none", md: "block" } }}>
             <SideBar items={items} />
           </Grid>
           <Grid item xs={12} md={9}>
-            <Content>{children}</Content>
+            <Box sx={{ minHeight: "70vh" }}>
+              <Content>{children}</Content>
+            </Box>
           </Grid>
         </Grid>
       </Container>

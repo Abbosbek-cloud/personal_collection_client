@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Box, Paper } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SideBarDrawer from "../../components/SideBarDrawer";
@@ -18,11 +18,11 @@ const Content = ({ children }) => {
     username: "Abek_dev",
   };
   return (
-    <Paper elevation={3}>
+    <Paper elevation={3} sx={{ height: "auto" }}>
       {windowSize < 959 ? (
         <UserSections menu handleDrawer={handleDrawer} />
       ) : undefined}
-      {children}
+      <Box>{children}</Box>
       <SideBarDrawer open={isOpen} toggleDrawer={handleDrawer} items={items} />
     </Paper>
   );

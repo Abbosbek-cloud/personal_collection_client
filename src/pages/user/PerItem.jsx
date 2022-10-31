@@ -11,6 +11,7 @@ import Tags from "../../components/Tags";
 import UserSections from "../../components/UserSections";
 import {
   createItem,
+  editItem,
   getOneItem,
   getUserCollections,
 } from "../../requests/requests";
@@ -47,12 +48,7 @@ const PerItem = () => {
       },
     },
   ]);
-  const [tags, setTags] = useState([
-    { name: "lorem", _id: "awdawd" },
-    { name: "lem", _id: "awdaw23d" },
-    { name: "loremwad", _id: "23awdawd" },
-    { name: "lorem213", _id: "awdawawdaw" },
-  ]);
+  const [tags, setTags] = useState([]);
   const [tag, setTag] = useState("");
 
   const deleteTag = (id) => {
@@ -90,7 +86,7 @@ const PerItem = () => {
     initialValues,
     onSubmit: (values) => {
       values.tags = tags;
-      createItem(values);
+      editItem(id, values);
     },
   });
 

@@ -102,7 +102,7 @@ export default function ItemTable({ data, callBack, isAdmin }) {
     },
   ];
   return (
-    <div style={{ height: 550, width: "auto", marginInline: "auto" }}>
+    <div style={{ height: 550, width: "100%", marginInline: "auto" }}>
       <div style={{ display: "flex", height: "100%" }}>
         <div style={{ flexGrow: 1 }}>
           <DataGrid
