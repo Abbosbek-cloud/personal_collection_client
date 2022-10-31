@@ -54,5 +54,6 @@
   "noExistUser": "Foydalanuvchi mavjud emas!",
   "noExistColl": "To'plam mavjud emas!",
   "noExistItem": "Buyum mavjud emas!",
-  "copySuccess": "Link muvaffaqiyatli nusxalandi!"
+  "copySuccess": "Link muvaffaqiyatli nusxalandi!",
+  "parentColl": "Buyum to'plami"
 }

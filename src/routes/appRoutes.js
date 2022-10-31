@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import ProtectedRoutes from "./ProtectedRoutes";
 
 const Signin = lazy(() => import("../pages/auth/Signin"));
 const Signup = lazy(() => import("../pages/auth/Signup"));
@@ -80,19 +81,35 @@ const routes = [
   // moderator pages
   {
     path: "/moderator",
-    element: <ModeratorProfile />,
+    element: (
+      <ProtectedRoutes>
+        <ModeratorProfile />
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/moderator/users",
-    element: <ModeratorUsers />,
+    element: (
+      <ProtectedRoutes>
+        <ModeratorUsers />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/moderator/items",
-    element: <ModeratorItems />,
+    element: (
+      <ProtectedRoutes>
+        <ModeratorItems />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/moderator/collections",
-    element: <ModeratorCollections />,
+    element: (
+      <ProtectedRoutes>
+        <ModeratorCollections />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/moderator/users/:id",

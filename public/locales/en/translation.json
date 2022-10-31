@@ -54,5 +54,6 @@
   "noExistUser": "User is not exist!",
   "noExistColl": "Collection is not exist!",
   "noExistItem": "Item is not exist!",
-  "copySuccess": "Copied to clipboard successfully!"
+  "copySuccess": "Copied to clipboard successfully!",
+  "parentColl": "Item's collection"
 }

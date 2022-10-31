@@ -5,13 +5,14 @@ import Tags from "../components/Tags";
 import { StyledImg } from "../styled/Components";
 import { useParams } from "react-router-dom";
 import { getOneItem } from "../requests/requests";
-
-const arrData = [1, 2, 3, 4, 5, 6, 7];
+import { useTranslation } from "react-i18next";
+import cookies from "js-cookie";
 
 const PerItem = () => {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [item, setItem] = React.useState({});
-
+  const currentLanguageCode = cookies.get("i18next") || "uz";
   const getData = async () => {
     const data = await getOneItem(id);
     setItem(data);
@@ -30,18 +31,33 @@ const PerItem = () => {
         <Grid item xs={12} sm={6}>
           <Box>
             <Typography variant="h4">{item?.name}</Typography>
-            <Typography variant="h5">Description</Typography>
-            <Typography variant="p">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur
-              amet beatae dolor. Corporis autem placeat, officiis voluptate
-              culpa facere non accusamus ab ullam, obcaecati voluptatibus
-              officia quia? Cupiditate, rem inventore. Rerum, dolorem illo nobis
-              mollitia, illum ab voluptas quisquam recusandae incidunt labore
-              doloremque reiciendis voluptatem natus! Velit dolorum neque ut.
-              Corporis voluptatibus sit eveniet totam ipsum voluptatum
-              necessitatibus id nobis?
-            </Typography>
-            <Typography variant="h5">Tags</Typography>
+            <Typography variant="h5">{t("parentColl")}</Typography>
+            <Box sx={{ height: "100px", my: 2 }}>
+              <Grid container spacing={1} sx={{ height: "100%" }}>
+                <Grid item xs={3} sm={2} md={1}>
+                  <img
+                    src={item?.collectionId?.image}
+                    alt={item?.collectionId?.name}
+                    style={{ width: "100%" }}
+                  />
+                </Grid>
+                <Grid item xs={9} sm={10} md={11}>
+                  <Box
+                    component="div"
+                    sx={{
+                      height: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "14px", fontWeight: 700 }}>
+                      {item?.collectionId?.name}
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Box>
+            <Typography variant="h5">{t("tag")}</Typography>
             <Tags data={item?.tags} />
             <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
               <Avatar
@@ -56,7 +72,7 @@ const PerItem = () => {
           </Box>
         </Grid>
       </Grid>
-      <CustomTab item />
+      <CustomTab item collectionId={item?.collectionId} />
     </Container>
   );
 };

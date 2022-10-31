@@ -31,7 +31,7 @@ const Tags = ({ data = null, isOwner, deleteTag }) => {
               label={tag.name}
               variant="outlined"
               color="success"
-              onClick={() => navigate(`/items/search?tag=${tag?._id}`)}
+              onClick={() => navigate(`/items/search?tag=${tag?.name}`)}
             />
           ))
         : undefined}
