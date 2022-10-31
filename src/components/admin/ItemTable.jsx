@@ -36,6 +36,11 @@ export default function AdminItemTable({ data, callBack }) {
   const navigate = useNavigate();
   const columns = [
     {
+      field: "_id",
+      headerName: "ID",
+      width: 220,
+    },
+    {
       field: "image",
       headerName: t("tableImg"),
       maxWidth: 70,
@@ -46,7 +51,7 @@ export default function AdminItemTable({ data, callBack }) {
       renderCell: (data) => {
         return (
           <Box sx={{ width: 45, display: "flex", justifyContent: "center" }}>
-            <Avatar src={data.row.image} variant="square" />
+            <Avatar src={data?.row?.image || "A"} variant="square" />
           </Box>
         );
       },
@@ -132,9 +137,10 @@ export default function AdminItemTable({ data, callBack }) {
           <DataGrid
             rows={data}
             columns={columns}
-            getRowId={(row) => row?._id}
+            getRowId={(row) => row?._id || 1}
             components={{
               Toolbar: CustomToolbar,
+              LoadingOverlay: CircularProgress,
               NoRowsOverlay: () => (
                 <Stack
                   height="100%"
@@ -144,7 +150,6 @@ export default function AdminItemTable({ data, callBack }) {
                   {t()}
                 </Stack>
               ),
-              LoadingOverlay: CircularProgress,
             }}
           />
         </div>
