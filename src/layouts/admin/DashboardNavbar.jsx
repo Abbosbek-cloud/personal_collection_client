@@ -14,6 +14,7 @@ import {
 import AccountPopover from "./popovers/AccountPopover";
 import NotificationsPopover from "./popovers/NoficationPopover";
 import { useNavigate } from "react-router-dom";
+import ChangeLanguage from "../../components/ChangeLanguage";
 
 const DashboardNavbar = ({ handleDrawerToggle }) => {
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ const DashboardNavbar = ({ handleDrawerToggle }) => {
               }
             />
 
-            <NotificationsPopover />
+            <ChangeLanguage />
             <AccountPopover />
           </FlexBox>
         </StyledToolBar>
