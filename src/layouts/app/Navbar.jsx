@@ -2,25 +2,21 @@ import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { alpha, styled } from "@mui/material";
 import DrawerComponent from "./Drawer";
 import { pagesArr } from "./navigationList";
-import { useNavigate, Link } from "react-router-dom";
-import i18next from "i18next";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import cookies from "js-cookie";
-import languages from "../../i-18/resources";
+import ChangeLanguage from "../../components/ChangeLanguage";
+import MenuWithUser from "../../components/MenuWithUser";
+import MenuWithOutUser from "../../components/MenuWithOut";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -66,37 +62,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
 
   const { t } = useTranslation();
-
-  const currentLanguageCode = cookies.get("i18next") || "uz";
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const isOpen = Boolean(anchorEl);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const dispatchers = (code) => {
-    i18next.changeLanguage(code);
-  };
-
-  const settings = [
-    { path: user ? "/user/profile" : "/signup", page: t("profile") },
-    {
-      path: user ? "/user/collections" : "/collections",
-      page: t("Collections"),
-    },
-    { path: user ? "/user/items" : "/items", page: t("items") },
-  ];
 
   const toggleNavbar = (isOpen) => (e) => {
     if (e && e.type === "keydown" && (e.key === "Tab" || e.key === "Shift")) {
@@ -106,24 +75,9 @@ const Navbar = () => {
     setOpen(isOpen);
   };
 
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = (path) => {
-    setAnchorElUser(null);
-    navigate(path);
-  };
-
-  const handleCloseProfile = () => {
-    localStorage.clear();
-    setAnchorElUser(null);
-    navigate("/");
-  };
-
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container>
         <Toolbar disableGutters>
           <Link to="/">
             <Avatar
@@ -141,6 +95,7 @@ const Navbar = () => {
               aria-haspopup="true"
               onClick={toggleNavbar(true)}
               color="inherit"
+              sx={{ p: 0, fontSize: "30px" }}
             >
               <MenuIcon />
             </IconButton>
@@ -150,11 +105,9 @@ const Navbar = () => {
               pages={pagesArr}
             />
           </Box>
-          <Avatar
-            src="/assets/favicon-32x32.png"
-            alt="logo"
-            sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
-          />
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <ChangeLanguage />
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pagesArr.map((page) => (
@@ -167,73 +120,7 @@ const Navbar = () => {
               </Button>
             ))}
 
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                textAlign: "center",
-              }}
-            >
-              <Tooltip title="Change Language">
-                <IconButton
-                  onClick={handleClick}
-                  size="small"
-                  aria-controls={open ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                >
-                  <Avatar
-                    sx={{ width: 32, height: 32 }}
-                    src={`/assets/flags/${currentLanguageCode}.png`}
-                  />
-                </IconButton>
-              </Tooltip>
-            </Box>
-            <Menu
-              anchorEl={anchorEl}
-              id="account-menu"
-              open={isOpen}
-              onClose={handleClose}
-              onClick={handleClose}
-              PaperProps={{
-                elevation: 0,
-                sx: {
-                  overflow: "visible",
-                  filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                  mt: 1.5,
-                  "& .MuiAvatar-root": {
-                    width: 32,
-                    height: 32,
-                    ml: -0.5,
-                    mr: 1,
-                  },
-                  "&:before": {
-                    content: '""',
-                    display: "block",
-                    position: "absolute",
-                    top: 0,
-                    right: 14,
-                    width: 10,
-                    height: 10,
-                    bgcolor: "background.paper",
-                    transform: "translateY(-50%) rotate(45deg)",
-                    zIndex: 0,
-                  },
-                },
-              }}
-              transformOrigin={{ horizontal: "right", vertical: "top" }}
-              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-            >
-              {languages?.map((lang) => (
-                <MenuItem key={lang.id} onClick={() => dispatchers(lang.code)}>
-                  <Avatar
-                    src={`/assets/flags/${lang.code}.png`}
-                    alt="Menyu tili"
-                  />{" "}
-                  {lang.name}
-                </MenuItem>
-              ))}
-            </Menu>
+            <ChangeLanguage />
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
@@ -246,42 +133,7 @@ const Navbar = () => {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
-            <Tooltip title={t("settingsOpen")}>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                  alt={user ? user?.name : "A"}
-                  src={user ? user?.avatar : ""}
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting.page}
-                  onClick={() => handleCloseUserMenu(setting.path)}
-                >
-                  <Typography textAlign="center">{setting.page}</Typography>
-                </MenuItem>
-              ))}
-              <MenuItem onClick={handleCloseProfile}>
-                <Typography textAlign="center">{t("logout")}</Typography>
-              </MenuItem>
-            </Menu>
+            {user ? <MenuWithUser /> : <MenuWithOutUser />}
           </Box>
         </Toolbar>
       </Container>

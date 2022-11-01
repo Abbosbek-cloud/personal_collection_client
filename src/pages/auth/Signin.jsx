@@ -1,15 +1,13 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import CustomTextField from "../../components/CustomTextField";
 import { H3, H6, Small } from "../../components/Typography";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useCallback, useEffect, useState } from "react";
 import * as yup from "yup";
 import EyeToggleButton from "./EyeToggleButton";
 import { toast } from "react-toastify";
 import { LoadingButton } from "@mui/lab";
-import { getUserData } from "../../redux/user/user-saga";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { AuthWrapper, FormButton } from "../../styled/Components";
 import { BASE_URL } from "../../constants/base";
@@ -71,9 +69,12 @@ const Login = () => {
     <AuthWrapper
       elevation={3}
       passwordVisibility={passwordVisibility}
-      sx={{ margin: "30px auto" }}
+      sx={{ margin: "10vh auto" }}
     >
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ width: "90%", marginInline: "auto" }}
+      >
         <H3 textAlign="center" mb={1}>
           {t("logPage")}
         </H3>
@@ -146,19 +147,13 @@ const Login = () => {
             {t("send")}
           </FormButton>
         )}
+        <Typography sx={{ mt: 1, textAlign: "center" }}>
+          {t("toSignUp")}{" "}
+          <Link to="/signup" style={{ color: "red", fontWeight: 600 }}>
+            SignUp
+          </Link>{" "}
+        </Typography>
       </form>
-      <Box component="a" href="/signup" rel="noreferrer noopener">
-        <H6
-          ml={1}
-          borderBottom="1px solid"
-          sx={{
-            color: errors.agreement && touched.agreement ? "red" : "",
-          }}
-          borderColor="grey.900"
-        >
-          {t("logPage")}
-        </H6>
-      </Box>
     </AuthWrapper>
   );
 };

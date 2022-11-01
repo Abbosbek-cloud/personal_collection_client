@@ -8,7 +8,7 @@ const AppLayout = (props) => {
   return (
     <Fragment>
       <Navbar />
-      <Box sx={{ minHeight: "50vh" }}>{props.children}</Box>
+      <Box sx={{ minHeight: "70vh" }}>{props.children}</Box>
       <Footer />
     </Fragment>
   );

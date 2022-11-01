@@ -83,9 +83,12 @@ const Signup = () => {
     <AuthWrapper
       elevation={3}
       passwordVisibility={passwordVisibility}
-      sx={{ margin: "30px auto" }}
+      sx={{ margin: "10vh auto" }}
     >
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        style={{ width: "90%", marginInline: "auto" }}
+      >
         <H3 textAlign="center" mb={1}>
           {t("register")}
         </H3>
@@ -206,7 +209,7 @@ const Signup = () => {
         )}
         <Typography sx={{ mt: 1, textAlign: "center" }}>
           {t("toLogin")}{" "}
-          <Link to="/signin" sx={{ color: "red", fontWeight: 600 }}>
+          <Link to="/signin" style={{ color: "red", fontWeight: 600 }}>
             Login
           </Link>{" "}
         </Typography>

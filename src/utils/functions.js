@@ -13,3 +13,19 @@ export function getUserRoleRoute(role) {
       return "";
   }
 }
+
+export function getUserRoleRouteMenu(role) {
+  switch (role) {
+    case "USER":
+      return "/user/profile";
+
+    case "ADMIN":
+      return "/admin/dashboard";
+
+    case "MODERATOR":
+      return "/moderator";
+
+    default:
+      return "";
+  }
+}

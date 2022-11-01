@@ -27,8 +27,8 @@ export const AuthWrapper = styled(
   )
 )(({ theme, passwordVisibility }) => ({
   width: 500,
-  padding: "2rem 3rem",
-  minHeight: "100vh",
+  padding: "1rem 0.5rem",
+  minHeight: "auto",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",

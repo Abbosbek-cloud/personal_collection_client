@@ -15,6 +15,7 @@ import PermMediaIcon from "@mui/icons-material/PermMedia";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ChangeLanguage from "../../components/ChangeLanguage";
 
 const StyledH3 = styled("h3")({
   fontWeight: 700,
@@ -54,7 +55,12 @@ const DrawerComponent = ({ open, toggleDrawer, pages }) => {
       <List>
         {pages.map(({ name, url, id }) => (
           <ListItem key={id} disablePadding>
-            <ListItemButton onClick={() => navigate(url)}>
+            <ListItemButton
+              onClick={() => {
+                navigate(url);
+                toggleDrawer(false);
+              }}
+            >
               <ListItemIcon>{renderIcons(id)}</ListItemIcon>
               <ListItemText primary={t(name)} />
             </ListItemButton>
