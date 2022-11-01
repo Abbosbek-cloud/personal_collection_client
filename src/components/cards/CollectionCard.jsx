@@ -14,10 +14,12 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useTranslation } from "react-i18next";
 import cookies from "js-cookie";
 import { handleCopyUrl } from "../../utils/functions";
+import { useNavigate } from "react-router-dom";
 
 function CollectionCard({ image, name, topic, user, _id }) {
   const currentLanguageCode = cookies.get("i18next") || "uz";
   const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <Card sx={{ maxWidth: "100%" }}>
       <CardHeader
@@ -49,7 +51,7 @@ function CollectionCard({ image, name, topic, user, _id }) {
         >
           <ShareIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => navigate(`/collections/${_id}`)}>
           <ChevronRightIcon />
         </IconButton>
       </CardActions>

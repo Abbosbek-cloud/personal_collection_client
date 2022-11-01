@@ -51,17 +51,17 @@ export async function getAllItems(setLoading) {
 }
 
 export async function getLatestCollections(setLoader) {
-  setLoader(true)
+  setLoader(true);
   try {
-    setLoader(false)
+    setLoader(false);
     const res = await axios({
       url: `${BASE_URL}/collections/latest`,
       method: "get",
     });
-    
+
     return res.data;
   } catch (error) {
-    setLoader(false)
+    setLoader(false);
     console.log(error);
   }
 }
@@ -238,6 +238,19 @@ export async function getOneCollection(id, setFieldValue) {
     setFieldValue("name", res?.data?.name);
     setFieldValue("description", res?.data?.description);
     setFieldValue("topic", res?.data?.topic);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getOneCollectionGeneral(id) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/collections/${id}`,
+      method: "get",
+    });
+
+    return res.data;
   } catch (err) {
     console.log(err);
   }

@@ -52,14 +52,12 @@ export default function CustomTab({
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab
-            label={item ? "Items in one collection!" : "Items"}
-            {...a11yProps(0)}
-          />
-          <Tab label="Comments" {...a11yProps(1)} />
+          <Tab label={item ? t("itemInone") : t("items")} {...a11yProps(0)} />
+          <Tab label={t("comments")} {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
+        
         <SectionCreator title={t("collItems")}>
           {loading ? (
             <Loader size={40} height="50vh" />

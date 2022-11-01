@@ -51,7 +51,7 @@ const ItemCard = ({ name, collectionId, user, tags, image, _id }) => {
           <Box>
             <Chip
               avatar={<Avatar alt="Natacha" src={user?.avatar} />}
-              label={user?.name}
+              label={user?.name || t("noExistUser")}
               variant="outlined"
             />
           </Box>
@@ -66,7 +66,7 @@ const ItemCard = ({ name, collectionId, user, tags, image, _id }) => {
         </IconButton>
         <IconButton
           aria-label="share"
-          onClick={() => handleCopyUrl(_id, "item")}
+          onClick={() => handleCopyUrl(_id, "item", t("copySuccess"))}
         >
           <ShareIcon />
         </IconButton>

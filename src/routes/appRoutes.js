@@ -74,7 +74,7 @@ const routes = [
     element: <Collections />,
   },
   {
-    path: "/collection/:id",
+    path: "/collections/:id",
     element: <PerCollection />,
   },
   {

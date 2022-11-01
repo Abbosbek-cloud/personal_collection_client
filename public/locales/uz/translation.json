@@ -29,7 +29,7 @@
   "rePassword": "Qayta parol",
   "rePasswordCap": "Parolni qaytadan kiriting",
   "saveBtn": "Saqlash",
-  "noInfo": "Ma'lumotlar mavjud emas",
+  "noInfo": "Ma'lumotlar yo'q",
   "tableImg": "Rasm",
   "tableName": "Nom",
   "tableCollectionName": "To'plam nomi",
@@ -54,10 +54,13 @@
   "editc": "To'plamni tahrirlash!",
   "editi": "Buyumni tahrirlash!",
   "user": "Foydalanuvchi",
-  "noExistUser": "Foydalanuvchi mavjud emas!",
-  "noExistColl": "To'plam mavjud emas!",
-  "noExistItem": "Buyum mavjud emas!",
+  "noExistUser": "Foydalanuvchi yo'q!",
+  "noExistColl": "To'plam yo'q!",
+  "noExistItem": "Buyum yo'q!",
   "copySuccess": "Link muvaffaqiyatli nusxalandi!",
   "parentColl": "Buyum to'plami",
-  "mainP": "Asosiy sahifa"
+  "mainP": "Asosiy sahifa",
+  "itemInone": "Bitta to'plamdagi buyumlar!",
+  "comments": "Fikrlar",
+  "desc": "Haqida"
 }
