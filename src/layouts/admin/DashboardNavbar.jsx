@@ -15,6 +15,7 @@ import AccountPopover from "./popovers/AccountPopover";
 import NotificationsPopover from "./popovers/NoficationPopover";
 import { useNavigate } from "react-router-dom";
 import ChangeLanguage from "../../components/ChangeLanguage";
+import HearderSearch from "../../components/HearderSearch";
 
 const DashboardNavbar = ({ handleDrawerToggle }) => {
   const navigate = useNavigate();
@@ -46,17 +47,7 @@ const DashboardNavbar = ({ handleDrawerToggle }) => {
           <Box flexGrow={1} />
 
           <FlexBox alignItems="center" gap={2}>
-            <StyledInputBase
-              placeholder="Search anything..."
-              startAdornment={
-                <Search
-                  sx={{
-                    color: "grey.500",
-                    mr: 1,
-                  }}
-                />
-              }
-            />
+            <HearderSearch bg="#ddd" />
 
             <ChangeLanguage />
             <AccountPopover />

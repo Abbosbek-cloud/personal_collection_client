@@ -16,11 +16,13 @@ import { useTranslation } from "react-i18next";
 import { center } from "./ItemTable";
 import { Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { deleteUser } from "../../requests/requests";
+import { deleteUser, makeUserAdmin } from "../../requests/requests";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import LockIcon from "@mui/icons-material/Lock";
 import { BASE_URL } from "../../constants/base";
 import axios from "axios";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonIcon from "@mui/icons-material/Person";
 
 function CustomToolbar() {
   return (
@@ -118,6 +120,16 @@ const UserTable = ({ data, callBack }) => {
       renderCell: ({ row }) => {
         return (
           <React.Fragment>
+            <IconButton
+              variant="contained"
+              onClick={() => makeUserAdmin(row?._id, callBack)}
+            >
+              {row?.role === "USER" ? (
+                <AdminPanelSettingsIcon />
+              ) : (
+                <PersonIcon />
+              )}
+            </IconButton>
             <IconButton
               variant="contained"
               onClick={() => navigate(`/admin/users/${row._id}`)}

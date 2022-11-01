@@ -150,6 +150,24 @@ export async function getOneItem(id) {
   }
 }
 
+export async function makeUserAdmin(id, callBack) {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/admin/user/role/${id}`,
+      method: "put",
+      headers: {
+        authorization: `1234567${token}`,
+      },
+    });
+
+    console.log(res);
+
+    callBack();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function createItem(data) {
   try {
     const res = await axios({

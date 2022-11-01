@@ -52,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const HearderSearch = () => {
+const HearderSearch = ({ bg }) => {
   const [searchOpen, setSopen] = React.useState(true);
   const [filteredData, setFP] = React.useState([]);
   const [isLoading, setSL] = React.useState(false);
@@ -78,7 +78,12 @@ const HearderSearch = () => {
   return (
     <ClickAwayListener onClickAway={() => setSopen(false)}>
       <Stack sx={{ position: "relative", width: "max-content", zIndex: 9999 }}>
-        <Search>
+        <Search
+          sx={{
+            backgroundColor: bg ? "#ddd" : "",
+            border: bg ? "1px solid #ddd" : "",
+          }}
+        >
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
