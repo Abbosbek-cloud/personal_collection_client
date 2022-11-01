@@ -33,7 +33,7 @@ export function getUserRoleRouteMenu(role) {
   }
 }
 
-export const handleCopyUrl = (id, name) => {
+export const handleCopyUrl = (id, name, text) => {
   navigator.clipboard.writeText(`${SITE_URL}/${name}/${id}`);
-  toast.success(t("copySuccess"));
+  toast.success(text);
 };
