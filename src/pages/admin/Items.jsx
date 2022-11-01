@@ -32,7 +32,7 @@ const Items = () => {
           sx={{ color: "#fff" }}
           onClick={handler}
         >
-          {t("saveBtn")}
+          {t("create")}
         </Button>
       </Box>
       <Divider />

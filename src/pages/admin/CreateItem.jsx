@@ -16,6 +16,7 @@ import ImageUploader from "../../components/ImageUploader";
 import SectionSubmit from "../../components/SectionSubmit";
 import Tags from "../../components/Tags";
 import {
+  createItem,
   editItem,
   getOneItem,
   getUserCollections,
@@ -92,18 +93,9 @@ const PerItem = () => {
     initialValues,
     onSubmit: (values) => {
       values.tags = tags;
-      editItem(id, values);
+      createItem(values);
     },
   });
-
-  const getPerItems = async () => {
-    const data = await getOneItem(id);
-    setFieldValue("name", data?.name);
-    setFieldValue("collectionId", data?.collectionId);
-    setFieldValue("tags", data?.tags);
-    setFieldValue("image", data?.image);
-    setTags(data?.tags);
-  };
 
   const getAutoCompleteCollections = async () => {
     const list = await getUserCollections();
@@ -112,7 +104,6 @@ const PerItem = () => {
 
   React.useEffect(() => {
     getAutoCompleteCollections();
-    getPerItems();
   }, []);
 
   return (

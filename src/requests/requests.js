@@ -331,7 +331,7 @@ export async function getOneUserById(id) {
       },
     });
 
-    return res.data;
+    return res.data[0];
   } catch (error) {
     console.log(error);
   }

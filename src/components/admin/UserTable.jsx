@@ -17,6 +17,10 @@ import { center } from "./ItemTable";
 import { Edit, Delete } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { deleteUser } from "../../requests/requests";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import LockIcon from "@mui/icons-material/Lock";
+import { BASE_URL } from "../../constants/base";
+import axios from "axios";
 
 function CustomToolbar() {
   return (
@@ -28,9 +32,23 @@ function CustomToolbar() {
 
 const UserTable = ({ data, callBack }) => {
   console.log(data);
+  const token = localStorage.getItem("token");
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const blockUser = async (id) => {
+    try {
+      const res = await axios({
+        url: `${BASE_URL}/admin/block/user/${id}`,
+        method: "put",
+        headers: {
+          authorization: `1234567${token}`,
+        },
+      });
+      callBack();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const columns = [
     {
       field: "avatar",
@@ -105,6 +123,17 @@ const UserTable = ({ data, callBack }) => {
               onClick={() => navigate(`/admin/users/${row._id}`)}
             >
               <Edit />
+            </IconButton>
+            <IconButton
+              variant="contained"
+              sx={{ color: !row.status ? "success" : "error" }}
+              onClick={() => blockUser(row._id)}
+            >
+              {!row?.status ? (
+                <LockIcon />
+              ) : (
+                <LockOpenIcon sx={{ color: "red" }} />
+              )}
             </IconButton>
             <IconButton
               variant="contained"

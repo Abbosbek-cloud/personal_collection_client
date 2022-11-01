@@ -2,26 +2,45 @@ import { Autocomplete, Box, Button, Divider, Grid } from "@mui/material";
 import { useFormik } from "formik";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useParams } from "react-router-dom";
+// import ReactQuill from "react-quill";
+import { useNavigate } from "react-router-dom";
 import CustomTextField from "../../components/CustomTextField";
 import ImageUploader from "../../components/ImageUploader";
 import ReactQuill from "../../components/ReactQuill";
 import cookies from "js-cookie";
-import {
-  editCollection,
-  getAllTopics,
-  getOneCollection,
-} from "../../requests/requests";
+import { createCollection, getAllTopics } from "../../requests/requests";
 import SectionSubmit from "../../components/SectionSubmit";
-import { imageUploadStyles } from "./CreateCollection";
 
-const PerCollection = () => {
-  const { id } = useParams();
+export const imageUploadStyles = {
+  boxSx: {
+    width: "100%",
+    minHeight: "300px",
+    maxHeight: "300px",
+    position: "relative",
+  },
+  imgSx: {
+    width: "100%",
+    minHeight: "300px",
+    maxHeight: "300px",
+    objectFit: "cover",
+    position: "absolute",
+  },
+  buttonSx: {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px",
+    background: "light",
+  },
+};
+const CreateCollection = () => {
   const currentLanguageCode = cookies.get("i18next") || "uz";
   const user = JSON.parse(localStorage.getItem("user"));
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const [description, setDescription] = React.useState({
+    uz: "",
+    en: "",
+  });
   const [topics, setTopics] = React.useState([
     {
       name: { uz: "Boshlangich ma'lumot", en: "Default info" },
@@ -37,8 +56,8 @@ const PerCollection = () => {
     image: "",
     user: user._id,
     description: {
-      uz: "",
-      en: "",
+      uz: description.uz,
+      en: description.en,
     },
     topic: "",
     name: "",
@@ -47,13 +66,12 @@ const PerCollection = () => {
   const { values, handleChange, setFieldValue, handleSubmit } = useFormik({
     initialValues,
     onSubmit: (values) => {
-      console.log(values);
-      editCollection(id, values);
+      values.description = description;
+      createCollection(values);
     },
   });
 
-  React.useEffect(() => {
-    getOneCollection(id, setFieldValue);
+  React.useState(() => {
     getAllTopics(setTopics);
   }, []);
 
@@ -104,14 +122,9 @@ const PerCollection = () => {
                   id="combo-box-demo"
                   options={topics}
                   sx={{ width: "100%" }}
-                  onChange={(event, values) =>
-                    setFieldValue("topic", values._id)
-                  }
+                  onChange={(e, val) => setFieldValue("topic", val._id)}
                   getOptionLabel={(option) =>
                     option?.name[currentLanguageCode]?.toString()
-                  }
-                  getoptionselected={(option) =>
-                    option._id === values?.topic?._id
                   }
                   renderInput={(params) => {
                     return (
@@ -129,26 +142,26 @@ const PerCollection = () => {
               <Grid container spacing={1}>
                 <Grid item xs={12} sm={12} md={6}>
                   <ReactQuill
-                    name="description.uz"
-                    box_height={200}
+                    name="uz"
                     placeholder="To'plam haqida o'zbek tilida yozing!"
                     theme="snow"
-                    value={values.description.uz}
-                    onChange={(e) => {
-                      setFieldValue("description.uz", e);
-                    }}
+                    value={description.uz}
+                    onChange={(data) =>
+                      setDescription({ ...description, uz: data })
+                    }
+                    sx={{ height: 50 }}
                   />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6}>
                   <ReactQuill
-                    name="description.en"
-                    box_height={200}
+                    name="en"
                     placeholder="Write about collection in English!"
                     theme="snow"
-                    value={values.description.en}
-                    onChange={(e) => {
-                      setFieldValue("description.en", e);
-                    }}
+                    value={description.en}
+                    onChange={(data) =>
+                      setDescription({ ...description, en: data })
+                    }
+                    sx={{ height: 50 }}
                   />
                 </Grid>
               </Grid>
@@ -161,4 +174,4 @@ const PerCollection = () => {
   );
 };
 
-export default PerCollection;
+export default CreateCollection;

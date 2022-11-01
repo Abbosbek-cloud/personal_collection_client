@@ -33,7 +33,7 @@ export default function CollectionTable({ data = [], callBack }) {
   const preRouter = getUserRoleRoute(user.role);
   const navigate = useNavigate();
   const currentLanguageCode = cookies.get("i18next") || "uz";
-
+  console.log(data);
   const columns = [
     { field: "_id", headerName: "ID", width: 220 },
     {
@@ -65,16 +65,16 @@ export default function CollectionTable({ data = [], callBack }) {
       field: "topic",
       headerName: t("topic"),
       width: 150,
-      renderCell: ({ rows }) => {
+      renderCell: ({ row }) => {
         return (
           <Chip
             label={
-              rows?.topic?.name
-                ? rows?.topic?.name[currentLanguageCode]
+              row?.topic?.name
+                ? row?.topic?.name[currentLanguageCode]
                 : t("noExistColl")
             }
             variant="outlined"
-            onClick={() => navigate(`/search?id=${rows?.topic?._id}`)}
+            onClick={() => navigate(`/search?id=${row?.topic?._id}`)}
           />
         );
       },
@@ -89,7 +89,7 @@ export default function CollectionTable({ data = [], callBack }) {
             <IconButton
               variant="contained"
               onClick={() =>
-                navigate(`${preRouter}/collections/${data?.rows?._id || 1}`)
+                navigate(`${preRouter}/collections/${data?.row?._id || 1}`)
               }
             >
               <Edit />

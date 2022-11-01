@@ -52,11 +52,12 @@ const PerUser = () => {
   });
 
   const getValuesOfUser = async () => {
-    const userData = await getOneUserById();
+    const userData = await getOneUserById(id);
+    console.log(userData);
     setUser(userData);
-    setFieldValue("avatar", user.avatar);
-    setFieldValue("name", user.name);
-    setFieldValue("email", user.email);
+    setFieldValue("avatar", userData?.avatar);
+    setFieldValue("name", userData?.name);
+    setFieldValue("email", userData?.email);
     setFieldValue("password", "*****");
   };
 

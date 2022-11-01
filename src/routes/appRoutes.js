@@ -22,7 +22,10 @@ const AdminCollections = lazy(() => import("../pages/admin/Collections"));
 const AdminPerUser = lazy(() => import("../pages/admin/PerUser"));
 const AdminPerItem = lazy(() => import("../pages/admin/PerItem"));
 const AdminPerCollection = lazy(() => import("../pages/admin/PerCollection"));
-
+const AdminCreateItem = lazy(() => import("../pages/admin/CreateItem"));
+const AdminCreateCollection = lazy(() =>
+  import("../pages/admin/CreateCollection")
+);
 // moderator routes
 const ModeratorProfile = lazy(() => import("../pages/moderator/Profile"));
 const ModeratorUsers = lazy(() => import("../pages/moderator/Users"));
@@ -113,131 +116,165 @@ const routes = [
   },
   {
     path: "/moderator/users/:id",
-    element: <ProtectedRoutes>
-
-      <ModeratorPerUser />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <ModeratorPerUser />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/moderator/items/:id",
-    element: <ProtectedRoutes>
-
-      <ModeratorPerItem />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <ModeratorPerItem />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/moderator/collections/:id",
-    element: <ProtectedRoutes>
-
-      <ModeratorPerCollection />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <ModeratorPerCollection />,
+      </ProtectedRoutes>
+    ),
   },
   // admin pages
   {
     path: "/admin/dashboard",
-    element: <ProtectedRoutes>
-
-      <AdminDashboard />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminDashboard />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/profile",
-    element: <ProtectedRoutes>
-
-      <EditProfile />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <EditProfile />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/users",
-    element: <ProtectedRoutes>
-
-      <AdminUsers />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminUsers />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/collections",
-    element: <ProtectedRoutes>
-
-      <AdminCollections />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminCollections />,
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/admin/collections/create",
+    element: (
+      <ProtectedRoutes>
+        <AdminCreateCollection />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/collections/:id",
-    element: <ProtectedRoutes>
-
-      <AdminPerCollection />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminPerCollection />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/items",
-    element: <ProtectedRoutes>
-
-      <AdminItems />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminItems />,
+      </ProtectedRoutes>
+    ),
+  },
+  {
+    path: "/admin/items/create",
+    element: (
+      <ProtectedRoutes>
+        <AdminCreateItem />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/users/:id",
-    element: <ProtectedRoutes>
-
-      <AdminPerUser />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminPerUser />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/admin/items/:id",
-    element: <ProtectedRoutes>
-
-      <AdminPerItem />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <AdminPerItem />,
+      </ProtectedRoutes>
+    ),
   },
   // user routes
   {
     path: "/user/profile",
-    element: <ProtectedRoutes>
-
-      <UserProfile />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <UserProfile />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/user/collections",
-    element: <ProtectedRoutes>
-
-      <UserCollections />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <UserCollections />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/user/collections/create",
-    element: <ProtectedRoutes>
-
-      <CreateCollection />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <CreateCollection />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/user/collections/:id",
-    element: <ProtectedRoutes>
-
-      <UserPerCollection />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <UserPerCollection />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/user/items",
-    element: <ProtectedRoutes>
-
-      <UserItems />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <UserItems />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/user/items/create",
-    element: <ProtectedRoutes>
-
-      <CreateItem />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <CreateItem />,
+      </ProtectedRoutes>
+    ),
   },
   {
     path: "/user/items/:id",
-    element: <ProtectedRoutes>
-
-      <UserPerItem />,
-    </ProtectedRoutes>
+    element: (
+      <ProtectedRoutes>
+        <UserPerItem />,
+      </ProtectedRoutes>
+    ),
   },
 ];
 

@@ -2,17 +2,16 @@ import { Box, Button, Chip, Grid, IconButton, Typography } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import CustomTextField from "../../components/CustomTextField";
-import UserSections from "../../components/UserSections";
-import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import SectionSubmit from "../../components/SectionSubmit";
 import { useFormik } from "formik";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { storage } from "../../utils/firebase";
 import { editProfile } from "../../requests/requests";
 import ImageUploader from "../../components/ImageUploader";
-import { FlexBetween } from "../../components/flex-box";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import MakeUser from "../../components/modals/MakeUser";
+import { BASE_URL } from "../../constants/base";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const imageUploadStyles = {
   boxSx: {
     width: "200px",
@@ -38,6 +37,7 @@ const EditProfil = () => {
   const [modal, setModal] = React.useState(false);
   const { t } = useTranslation();
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
 
   const initialValues = {
     avatar: "",
@@ -61,7 +61,22 @@ const EditProfil = () => {
   }, []);
 
   //   admin status functions
-  const makeAdminAsUser = () => {};
+  const makeAdminAsUser = async () => {
+    try {
+      const res = await axios({
+        url: `${BASE_URL}/admin/block/itself`,
+        method: "put",
+        headers: {
+          authorization: `1234567${localStorage.getItem("token")}`,
+        },
+      });
+
+      localStorage.clear();
+      navigate(res.data.route);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleOpen = () => {
     setModal(true);
   };
@@ -140,18 +155,30 @@ const EditProfil = () => {
         </form>
       </Box>
       <Box sx={{ my: 3, background: "#fff", p: 2, borderRadius: "10px" }}>
-        <FlexBetween>
-          <Box sx={{ p: 2, display: "flex", alignItems: "center" }}>
+        <Grid container spacing={2} alignItems="center">
+          <Grid
+            item
+            xs={6}
+            sm={6}
+            md={2}
+            justifyContent="center"
+            sx={{ p: 2, display: "flex", alignItems: "center" }}
+          >
             <AdminPanelSettingsIcon />
             <Typography sx={{ fontSize: "20px", fontWeight: 600 }}>
               Status
             </Typography>
-          </Box>
-          <Box sx={{ p: 2 }}>
+          </Grid>
+          <Grid item xs={6} sm={6} md={7} sx={{ p: 2 }}>
             <Chip variant="outlined" label="ADMIN" sx={{ fontSize: "20px" }} />
-          </Box>
-          <Box sx={{ p: 2 }}>
-            <Button variant="contained" color="error" onClick={handleOpen}>
+          </Grid>
+          <Grid item xs={12} sm={12} md={3} sx={{ p: 2 }}>
+            <Button
+              variant="contained"
+              fullWidth
+              color="error"
+              onClick={handleOpen}
+            >
               Make myself USER
             </Button>
             <MakeUser
@@ -159,8 +186,8 @@ const EditProfil = () => {
               handleClose={handleClose}
               onSuccess={makeAdminAsUser}
             />
-          </Box>
-        </FlexBetween>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );
