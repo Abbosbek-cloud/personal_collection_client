@@ -107,7 +107,29 @@ const HearderSearch = () => {
                   <CircularProgress size={30} color="primary" />
                 </Stack>
               ) : undefined}
-              {filteredData?.map((item) => (
+              {filteredData?.collections?.map((item) => (
+                <Stack
+                  onClick={() => navigate(`/collections/${item?._id}`)}
+                  direction="row"
+                  key={item?._id}
+                  alignItems="center"
+                  mt={0.5}
+                  sx={{ p: 0.5, cursor: "pointer" }}
+                >
+                  <Avatar src={item?.image} />
+                  <Stack ml={1}>
+                    <Typography sx={{ color: "#000000", fontSize: "12px" }}>
+                      {item?.name}
+                    </Typography>
+                    <Typography
+                      sx={{ mt: 0.5, color: "#ddd", fontSize: "12px" }}
+                    >
+                      {_id}
+                    </Typography>
+                  </Stack>
+                </Stack>
+              ))}
+              {filteredData?.items?.map((item) => (
                 <Stack
                   onClick={() => navigate(`/items/${item?._id}`)}
                   direction="row"
@@ -122,9 +144,9 @@ const HearderSearch = () => {
                       {item?.name}
                     </Typography>
                     <Typography
-                      sx={{ mt: 0.5, color: "#000000", fontSize: "12px" }}
+                      sx={{ mt: 0.5, color: "#ddd", fontSize: "12px" }}
                     >
-                      {item?.price?.toLocaleString()} so'm
+                      {_id}
                     </Typography>
                   </Stack>
                 </Stack>
