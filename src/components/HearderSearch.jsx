@@ -77,7 +77,7 @@ const HearderSearch = () => {
 
   return (
     <ClickAwayListener onClickAway={() => setSopen(false)}>
-      <Stack sx={{ position: "relative", width: "max-content" }}>
+      <Stack sx={{ position: "relative", width: "max-content", zIndex: 9999 }}>
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
