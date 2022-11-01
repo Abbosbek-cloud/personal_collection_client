@@ -27,6 +27,7 @@
     "node-sass": "^7.0.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-click-away-listener": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.6",
     "react-quill": "^2.0.0",

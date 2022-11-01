@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import ChangeLanguage from "../../components/ChangeLanguage";
 import MenuWithUser from "../../components/MenuWithUser";
 import MenuWithOutUser from "../../components/MenuWithOut";
+import HearderSearch from "../../components/HearderSearch";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -124,16 +125,7 @@ const Navbar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
-            <Search sx={{ marginRight: "10px" }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder={t("search")}
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-
+            <HearderSearch />
             {user ? <MenuWithUser /> : <MenuWithOutUser />}
           </Box>
         </Toolbar>

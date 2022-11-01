@@ -1,5 +1,12 @@
-import { ClickAwayListener, Collapse, Stack } from "@mui/material";
-import React from "react";
+import * as React from "react";
+import { styled, alpha } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import { Avatar, Collapse, Stack } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+import ClickAwayListener from "react-click-away-listener";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constants/base";
 
@@ -127,7 +134,7 @@ const HearderSearch = () => {
                     <Typography
                       sx={{ mt: 0.5, color: "#ddd", fontSize: "12px" }}
                     >
-                      {_id}
+                      {item?._id}
                     </Typography>
                   </Stack>
                 </Stack>
@@ -149,7 +156,7 @@ const HearderSearch = () => {
                     <Typography
                       sx={{ mt: 0.5, color: "#ddd", fontSize: "12px" }}
                     >
-                      {_id}
+                      {item?._id}
                     </Typography>
                   </Stack>
                 </Stack>
