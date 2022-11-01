@@ -7,15 +7,17 @@ import { useParams } from "react-router-dom";
 import { getOneItem } from "../requests/requests";
 import { useTranslation } from "react-i18next";
 import cookies from "js-cookie";
+import Loader from "../components/loader";
 
 const PerItem = () => {
   const { t } = useTranslation();
   const { id } = useParams();
-  const [item, setItem] = React.useState({});
+  const [item, setItem] = React.useState(null);
   const currentLanguageCode = cookies.get("i18next") || "uz";
   const getData = async () => {
     const data = await getOneItem(id);
     setItem(data);
+    console.log(data);
   };
 
   React.useEffect(() => {
@@ -31,32 +33,7 @@ const PerItem = () => {
         <Grid item xs={12} sm={6}>
           <Box>
             <Typography variant="h4">{item?.name}</Typography>
-            <Typography variant="h5">{t("parentColl")}</Typography>
-            <Box sx={{ height: "100px", my: 2 }}>
-              <Grid container spacing={1} sx={{ height: "100%" }}>
-                <Grid item xs={3} sm={2} md={1}>
-                  <img
-                    src={item?.collectionId?.image}
-                    alt={item?.collectionId?.name}
-                    style={{ width: "100%" }}
-                  />
-                </Grid>
-                <Grid item xs={9} sm={10} md={11}>
-                  <Box
-                    component="div"
-                    sx={{
-                      height: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Typography sx={{ fontSize: "14px", fontWeight: 700 }}>
-                      {item?.collectionId?.name}
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Box>
+
             <Typography variant="h5">{t("tag")}</Typography>
             <Tags data={item?.tags} />
             <Box component="div" sx={{ display: "flex", alignItems: "center" }}>
@@ -72,7 +49,11 @@ const PerItem = () => {
           </Box>
         </Grid>
       </Grid>
-      <CustomTab item collectionId={item?.collectionId} />
+      {item ? (
+        <CustomTab item collectionId={item?.collectionId?._id} />
+      ) : (
+        <Loader size={40} height="40vh" />
+      )}
     </Container>
   );
 };

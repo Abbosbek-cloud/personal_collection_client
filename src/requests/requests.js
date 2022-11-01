@@ -4,14 +4,33 @@ import { BASE_URL } from "../constants/base";
 
 const token = localStorage.getItem("token");
 
-export async function getLastItems() {
+export async function getLastItems(setLoader) {
+  setLoader(true);
   try {
+    setLoader(false);
     const res = await axios({
       url: `${BASE_URL}/items/latest`,
       method: "get",
     });
     return res.data;
   } catch (error) {
+    setLoader(false);
+    console.log(error);
+  }
+}
+
+export async function getSimilarItems(id, setLoader) {
+  setLoader(true);
+  try {
+    setLoader(false);
+    const res = await axios({
+      url: `${BASE_URL}/items/similar/${id}`,
+      method: "get",
+    });
+
+    return res.data;
+  } catch (error) {
+    setLoader(false);
     console.log(error);
   }
 }
@@ -31,15 +50,18 @@ export async function getAllItems(setLoading) {
   }
 }
 
-export async function getLatestCollections() {
+export async function getLatestCollections(setLoader) {
+  setLoader(true)
   try {
+    setLoader(false)
     const res = await axios({
       url: `${BASE_URL}/collections/latest`,
       method: "get",
     });
-
+    
     return res.data;
   } catch (error) {
+    setLoader(false)
     console.log(error);
   }
 }

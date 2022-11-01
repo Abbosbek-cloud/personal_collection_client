@@ -133,6 +133,7 @@ const Navbar = () => {
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
+
             {user ? <MenuWithUser /> : <MenuWithOutUser />}
           </Box>
         </Toolbar>

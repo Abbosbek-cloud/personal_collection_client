@@ -8,6 +8,8 @@ import ItemWrapper from "../wrappers/ItemWrapper";
 import { Button, TextareaAutosize, Typography } from "@mui/material";
 import Comment from "../comments/Comment";
 import { useTranslation } from "react-i18next";
+import { getSimilarItems } from "../../requests/requests";
+import Loader from "../loader";
 
 function a11yProps(index) {
   return {
@@ -22,14 +24,25 @@ export default function CustomTab({
   data = null,
   comments = null,
   item = false,
-  collection = false,
+  collectionId,
 }) {
   const [value, setValue] = React.useState(0);
+  const [loading, setLoading] = React.useState(false);
+  const [itemsData, setItemsData] = React.useState(null);
   const { t } = useTranslation();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const getSimilars = async () => {
+    const list = await getSimilarItems(collectionId, setLoading);
+    setItemsData(list);
+  };
+
+  React.useEffect(() => {
+    getSimilars();
+  }, []);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -39,13 +52,20 @@ export default function CustomTab({
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label={item ? "Items in one collection!" : "Items"} {...a11yProps(0)} />
+          <Tab
+            label={item ? "Items in one collection!" : "Items"}
+            {...a11yProps(0)}
+          />
           <Tab label="Comments" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
         <SectionCreator title={t("collItems")}>
-          <ItemWrapper data={arrData} />
+          {loading ? (
+            <Loader size={40} height="50vh" />
+          ) : (
+            <ItemWrapper data={itemsData} />
+          )}
         </SectionCreator>
       </TabPanel>
       <TabPanel value={value} index={1}>
