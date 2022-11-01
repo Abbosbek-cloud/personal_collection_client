@@ -3,6 +3,8 @@ import React from "react";
 import cookies from "js-cookie";
 import { FlexRowCenter } from "../../components/flex-box";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { getUserRoleRoute } from "../../utils/functions";
 
 const HeaderWrapper = styled(Box)({
   width: "100%",
@@ -37,6 +39,17 @@ const HeaderWrapper = styled(Box)({
 const Header = () => {
   const currLang = cookies.get("i18next") || "en";
   const { t } = useTranslation();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+
+  const handleCreate = () => {
+    const location = getUserRoleRoute(user.role);
+    if (user) {
+      navigate(`${location}/collections/create`);
+    } else {
+      navigate("/signin");
+    }
+  };
   return (
     <HeaderWrapper
       sx={{ backgroundImage: `url('/assets/images/banner1_${currLang}.png')` }}
@@ -49,6 +62,7 @@ const Header = () => {
             variant="contained"
             color="error"
             sx={{ margin: "0 10px 0 0" }}
+            onClick={handleCreate}
           >
             {t("create")}
           </Button>

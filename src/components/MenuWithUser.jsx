@@ -28,13 +28,15 @@ export default function MenuWithUser() {
     setAnchorEl(null);
   };
 
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleCloseProfile = () => {
     localStorage.clear();
     setAnchorEl(null);
     navigate("/");
   };
+
+  const navigation = getUserRoleRouteMenu(user.role);
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
@@ -88,15 +90,15 @@ export default function MenuWithUser() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem
-          onClick={() => navigate(`${getUserRoleRouteMenu(user.role)}`)}
-        >
-          <Link to={getUserRoleRouteMenu(user.role)} sx={{ p: 1 }}>
-            <Avatar /> {t("profile")}
+        <MenuItem sx={{ p: 0 }}>
+          <Link to={navigation} style={{ width: "100%" }}>
+            <ListItemButton>
+              <Avatar sx={{ width: "25px", height: "25px" }} /> {t("profile")}
+            </ListItemButton>
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Link to={getUserRoleRouteMenu(user.role) + "/collections"}>
+        <MenuItem sx={{ p: 0 }}>
+          <Link to={navigation + "/collections"} style={{ width: "100%" }}>
             <ListItemButton>
               <ListItemIcon>
                 <CollectionsIcon fontSize="small" />
@@ -105,8 +107,8 @@ export default function MenuWithUser() {
             </ListItemButton>
           </Link>
         </MenuItem>
-        <MenuItem>
-          <Link to={getUserRoleRouteMenu(user.role) + "/collections"}>
+        <MenuItem sx={{ p: 0 }}>
+          <Link to={navigation + "/items"} style={{ width: "100%" }}>
             <ListItemButton>
               <ListItemIcon>
                 <CategoryIcon fontSize="small" />
@@ -116,7 +118,7 @@ export default function MenuWithUser() {
           </Link>
         </MenuItem>
         <Divider />
-        <MenuItem>
+        <MenuItem sx={{ p: 0 }}>
           <ListItemButton onClick={handleCloseProfile}>
             <ListItemIcon>
               <Logout fontSize="small" />

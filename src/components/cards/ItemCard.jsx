@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { SITE_URL } from "../../constants/base";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import { handleCopyUrl } from "../../utils/functions";
 
 const useStyles = makeStyles({
   root: {
@@ -32,10 +33,7 @@ const ItemCard = ({ name, collectionId, user, tags, image, _id }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const classesOfCard = useStyles();
-  const handleCopyUrl = () => {
-    navigator.clipboard.writeText(`${SITE_URL}/items/${_id}`);
-    toast.success(t("copySuccess"));
-  };
+
   return (
     <Card className={classesOfCard}>
       <CardHeader
@@ -66,7 +64,10 @@ const ItemCard = ({ name, collectionId, user, tags, image, _id }) => {
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share" onClick={handleCopyUrl}>
+        <IconButton
+          aria-label="share"
+          onClick={() => handleCopyUrl(_id, "item")}
+        >
           <ShareIcon />
         </IconButton>
         <IconButton onClick={() => navigate(`/items/${_id}`)}>

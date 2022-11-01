@@ -15,7 +15,7 @@ import PermMediaIcon from "@mui/icons-material/PermMedia";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import ChangeLanguage from "../../components/ChangeLanguage";
+import HomeIcon from "@mui/icons-material/Home";
 
 const StyledH3 = styled("h3")({
   fontWeight: 700,
@@ -52,6 +52,20 @@ const DrawerComponent = ({ open, toggleDrawer, pages }) => {
         </ListItem>
       </List>
       <Divider />
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("mainP")} />
+          </ListItemButton>
+        </ListItem>
+      </List>
       <List>
         {pages.map(({ name, url, id }) => (
           <ListItem key={id} disablePadding>

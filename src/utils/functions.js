@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import { SITE_URL } from "../constants/base";
+
 export function getUserRoleRoute(role) {
   switch (role) {
     case "USER":
@@ -29,3 +32,8 @@ export function getUserRoleRouteMenu(role) {
       return "";
   }
 }
+
+export const handleCopyUrl = (id, name) => {
+  navigator.clipboard.writeText(`${SITE_URL}/${name}/${id}`);
+  toast.success(t("copySuccess"));
+};

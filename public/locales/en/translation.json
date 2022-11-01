@@ -58,5 +58,6 @@
   "noExistColl": "Collection is not exist!",
   "noExistItem": "Item is not exist!",
   "copySuccess": "Copied to clipboard successfully!",
-  "parentColl": "Item's collection"
+  "parentColl": "Item's collection",
+  "mainP": "Main page"
 }

@@ -11,37 +11,42 @@ import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { useTranslation } from "react-i18next";
+import cookies from "js-cookie";
+import { handleCopyUrl } from "../../utils/functions";
 
-function CollectionCard() {
+function CollectionCard({ image, name, topic, user, _id }) {
+  const currentLanguageCode = cookies.get("i18next") || "uz";
+  const { t } = useTranslation();
   return (
     <Card sx={{ maxWidth: "100%" }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar
+            src={user?.avatar}
+            sx={{ bgcolor: red[500] }}
+            aria-label="recipe"
+          >
             R
           </Avatar>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={user?.name || t("noExistUser")}
+        subheader={user?.email || "example@gmail.com"}
       />
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://images.pexels.com/photos/15286/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        alt="Paella dish"
-      />
+      <CardMedia component="img" height="194" image={image} alt={name} />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {t("topic")} : {topic?.name[currentLanguageCode]}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        <IconButton
+          aria-label="share"
+          onClick={() => handleCopyUrl(_id, "collections")}
+        >
           <ShareIcon />
         </IconButton>
         <IconButton>

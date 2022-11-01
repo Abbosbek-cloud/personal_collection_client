@@ -19,7 +19,6 @@ export default function MenuWithOutUser() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const user = localStorage.getItem("user");
 
   return (
     <React.Fragment>

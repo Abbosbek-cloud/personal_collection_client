@@ -16,6 +16,35 @@ export async function getLastItems() {
   }
 }
 
+export async function getLatestCollections() {
+  try {
+    const res = await axios({
+      url: `${BASE_URL}/collections/latest`,
+      method: "get",
+    });
+
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getAllCollections(setLoading) {
+  setLoading(true);
+  try {
+    setLoading(false);
+    const res = await axios({
+      url: `${BASE_URL}/collections`,
+      method: "get",
+    });
+
+    return res.data;
+  } catch (error) {
+    setLoading(false);
+    console.log(error);
+  }
+}
+
 export async function editProfile(data, message) {
   try {
     const res = await axios({

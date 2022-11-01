@@ -4,17 +4,20 @@ import SectionCreator from "../components/SectionCreator";
 import CollectionWrapper from "../components/wrappers/CollectionWrapper";
 import ItemWrapper from "../components/wrappers/ItemWrapper";
 import Header from "../layouts/app/Header";
-import { getLastItems } from "../requests/requests";
+import { getLastItems, getLatestCollections } from "../requests/requests";
 
 const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const Main = () => {
   const { t } = useTranslation();
   const [items, setItems] = React.useState([]);
+  const [collections, setCollections] = React.useState([]);
   const getData = async () => {
     const latesItems = await getLastItems();
-    const collections = [];
+    const collections = await getLatestCollections();
+    console.log(collections);
     setItems(latesItems);
+    setCollections(collections);
   };
 
   React.useEffect(() => {
@@ -24,7 +27,7 @@ const Main = () => {
     <Fragment>
       <Header />
       <SectionCreator title={t("collections")}>
-        <CollectionWrapper data={arr.slice(0, 8)} />
+        <CollectionWrapper data={collections} />
       </SectionCreator>
       <SectionCreator title="Items">
         <ItemWrapper data={items} />
