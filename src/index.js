@@ -36,7 +36,7 @@ i18next
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <Suspense fallback={<Loader />}>
+  <Suspense fallback={<Loader siz={100} height="100vh" />}>
     <React.StrictMode>
       <BrowserRouter>
         <ReduxProvider store={store}>

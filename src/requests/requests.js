@@ -16,6 +16,21 @@ export async function getLastItems() {
   }
 }
 
+export async function getAllItems(setLoading) {
+  setLoading(true);
+  try {
+    setLoading(false);
+    const res = await axios({
+      url: `${BASE_URL}/items`,
+      method: "get",
+    });
+    return res.data;
+  } catch (error) {
+    setLoading(false);
+    console.log(error);
+  }
+}
+
 export async function getLatestCollections() {
   try {
     const res = await axios({
