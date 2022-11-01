@@ -59,12 +59,15 @@ const HearderSearch = () => {
         url: `${BASE_URL}/search/global?filter=${e.target.value}`,
       });
       setSL(false);
-      setFP(result?.data?.list);
+      if (!result?.data?.items?.length && !result?.data?.collections?.length) {
+        setSopen(false);
+      }
+      setFP(result?.data);
     } catch (error) {
       setSL(false);
-      toast.error("Xatolik yuz  berdi!");
     }
   };
+
   return (
     <ClickAwayListener onClickAway={() => setSopen(false)}>
       <Stack sx={{ position: "relative", width: "max-content" }}>

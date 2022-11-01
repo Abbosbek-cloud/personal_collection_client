@@ -17,13 +17,11 @@ const PerItem = () => {
   const getData = async () => {
     const data = await getOneItem(id);
     setItem(data);
-    console.log(data);
   };
 
   React.useEffect(() => {
     getData();
-  }, []);
-  console.log(id);
+  }, [id]);
   return (
     <Container>
       <Grid container spacing={3} sx={{ my: 1 }}>
